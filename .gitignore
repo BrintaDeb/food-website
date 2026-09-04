@@ -1,0 +1,26 @@
+# Operating System Files
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
+*.stackdump
+[Dd]esktop.ini
+.DS_Store
+.Spotlight-V100
+.Trashes
+
+# Editor & IDE Files
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+*.swp
+*.swo
+
+# High-resolution design mockups & raw exports (not needed for production)
+MacBook Pro 16_ - 2.jpg
+Rose Gold Feminine Calligraphy Monogram Logo(73) 1.png
+
+# Logs and scratch files
+*.log
+scratch/
