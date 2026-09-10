@@ -1,71 +1,110 @@
-# 🍔 Burgers That Love the Earth — Food Website
+# 🍔 Burgers That Love the Earth — Food Website & Multi-Portal Ordering Platform
 
-A modern, responsive, and appetizing food restaurant landing page built with pure HTML5, CSS3, and modern Vanilla JavaScript.
+A modern, responsive, and appetizing food restaurant platform built with pure HTML5, CSS3, modern Vanilla JavaScript, and Vercel Serverless Functions.
 
-[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/BrintaDeb/food-website)
-
----
-
-## ✨ Features
-
-- **Dynamic Hero Section**: Vibrant organic fluid curve backdrop, floating rating card (4.5★ from 5k reviews), and double burger platter presentation.
-- **Hot Items Interactive Carousel**:
-  - Smooth slider navigation with previous/next buttons and active pagination dots.
-  - Interactive item cards: Veg Crispy, Hot Crispy, Veg Vegy, and Classic burgers.
-  - Instant **Add to Bag** actions with animated counter badges and toast notifications.
-- **Promotional Banner**: High-impact "Up to 50% Off On Your Two Orders" combo meal showcase.
-- **Who We Are**: Community-focused brand pillars with 3D chef character graphics.
-- **How It Works**: 3-step intuitive visual ordering flow (Choose Meals ➔ Track Order ➔ Collect Order).
-- **Interactive Testimonials**: Customer review slider with dynamic content switching.
-- **Interactive Modals & Drawer**:
-  - **Slide-out Cart Drawer**: Live subtotal calculation, quantity indicators, and checkout simulation.
-  - **Live Search Modal**: Real-time filtering across menu items with quick add-to-cart.
-  - **Video Demo Modal**: Modal player for culinary showcase.
-  - **Toast Alerts**: Micro-interaction feedback for user actions.
-- **Zero-Dependency**: Fast loading times and no heavy JS frameworks needed.
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2FBrintaDeb%2Ffood-website)
 
 ---
 
-## 🚀 Live Deployment on Render
+## ✨ Highlights & Features
 
-This project includes [`render.yaml`](./render.yaml) for instant 1-click deployment on [Render Static Sites](https://render.com):
+- **Storefront & Menu Experience (`index.html`)**:
+  - Dynamic hero section with floating rating card and double burger platter presentation.
+  - Hot items interactive carousel with touch swipe gestures and instant add-to-bag actions.
+  - Slide-out cart drawer with live subtotal, discount promo code (`EARTH50`), and GST calculations.
+  - Checkout modal with address and contact fields generating digital receipts with order IDs (`BGR-XXXXX`).
+  - Real-time search modal and culinary demo modal.
+- **Customer Portal (`customer.html`)**:
+  - Browse menu categories (Burgers, Platters, Combos).
+  - Live order tracking with 4-stage visual progress tracker (Confirmed ➔ Preparing ➔ Out for Delivery ➔ Delivered).
+  - Phone number lookup for quick re-ordering and order history.
+  - Address book management for fast checkout.
+- **Admin Kitchen & Analytics Dashboard (`admin.html`)**:
+  - Live order dispatcher with 1-click status advancement (Confirmed, Preparing, Out for Delivery, Delivered).
+  - Menu manager: create, update, price, and delete burgers with real-time stock toggling.
+  - KPI cards: Total Revenue, Today's Sales, Active Orders, and Deliveries.
+- **Vercel Serverless Architecture (`api/index.js`)**:
+  - Zero-cold-start REST API endpoints for `/api/menu`, `/api/orders`, `/api/customer/*`, and `/api/admin/*`.
+  - Global Edge CDN delivery for static assets with clean URLs (`cleanUrls: true`).
+  - Resilient storage abstraction with seed fallbacks and non-blocking in-memory persistence.
 
-1. Click the **Deploy to Render** button above or visit:
-   `https://render.com/deploy?repo=https://github.com/BrintaDeb/food-website`
-2. Connect your GitHub account and select your repository.
-3. Render automatically provisions the global CDN with free SSL encryption.
+---
+
+## 🚀 Live Deployment on Vercel
+
+This repository is pre-configured with [`vercel.json`](./vercel.json) and [`api/index.js`](./api/index.js) for instant deployment on Vercel.
+
+### Option 1: 1-Click Dashboard Deployment (Recommended)
+
+1. Click the **Deploy with Vercel** button above or navigate to:
+   **[https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2FBrintaDeb%2Ffood-website](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2FBrintaDeb%2Ffood-website)**
+2. Select your GitHub account and import the repository.
+3. Keep the default settings (Framework Preset: **Other**, Root Directory: `./`).
+4. Click **Deploy**. Vercel will build and deploy both your static pages and serverless API in seconds with free SSL!
+
+### Option 2: Deploy Using Vercel CLI
+
+If you prefer deploying directly from your terminal:
+
+```bash
+# 1. Install Vercel CLI globally (if not already installed)
+npm install -g vercel
+
+# 2. Login to Vercel
+vercel login
+
+# 3. Deploy to production
+vercel --prod
+```
 
 ---
 
 ## 💻 Local Development
 
-Run the website locally using any simple HTTP server:
+Run the full platform locally with the built-in Node.js server:
 
 ```bash
-# Using Python 3
-python -m http.server 3000
-
-# Or using npx serve
-npx serve .
+# Start server (runs storefront, customer portal, admin dashboard & API)
+npm start
+# or: node server.js
 ```
 
-Then open `http://localhost:3000` in your web browser.
+Then visit:
+
+- **Storefront**: `http://localhost:3000/`
+- **Customer Portal**: `http://localhost:3000/customer.html`
+- **Admin Dashboard**: `http://localhost:3000/admin.html`
+- **API Health Check**: `http://localhost:3000/api/health`
 
 ---
 
 ## 📁 Project Structure
 
 ```
-food website/
-├── .gitignore               # Ignored files (OS files, raw mockups)
-├── render.yaml              # Render Static Site Blueprint configuration
+food-website/
+├── vercel.json              # Vercel configuration (clean URLs, rewrites & headers)
+├── package.json             # ES module configuration and npm scripts
 ├── README.md                # Project documentation & deployment guide
-├── index.html               # Main semantic HTML structure
+├── .gitignore               # Git ignore rules (includes .vercel/ and node_modules/)
+├── index.html               # Main storefront and ordering experience
+├── customer.html            # Customer order tracking & profile portal
+├── admin.html               # Kitchen management & analytics dashboard
+├── server.js                # Standalone Node.js server for local development
+├── api/
+│   └── index.js             # Vercel Serverless Function handling all /api/* routes
+├── data/
+│   ├── menu.json            # Initial burger menu seed data
+│   ├── orders.json          # Initial orders data
+│   └── customers.json       # Customer profiles seed data
 ├── css/
-│   └── style.css            # Responsive styles, design system & animations
+│   ├── style.css            # Storefront styles and animations
+│   ├── customer.css         # Customer portal styling
+│   └── admin.css            # Admin dashboard styling
 ├── js/
-│   └── app.js               # Cart state, carousels, search & modal handlers
-└── images/                  # Production web assets and burger cutouts
+│   ├── app.js               # Storefront cart, carousels, search & checkout
+│   ├── customer.js          # Customer tracking & lookup interactions
+│   └── admin.js             # Kitchen dispatch & menu management logic
+└── images/                  # Burger photography and web asset graphics
 ```
 
 ---

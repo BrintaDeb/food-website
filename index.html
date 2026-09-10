@@ -1,697 +1,1540 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Burger - Burgers That Love the Earth!</title>
-  <meta name="description" content="Crispy, crunchy, veggie deliciousness! Locally sourced, organic ingredients for a fresh and eco-friendly burger experience.">
-  
-  <!-- Google Fonts: Outfit & Plus Jakarta Sans -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  
-  <!-- Stylesheet -->
-  <link rel="stylesheet" href="css/style.css">
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="theme-color" content="#FF5E00" />
+    <title>CurryCraft — Royal Indian Cuisine & Dum Biryani | Order Online</title>
+    <meta
+      name="description"
+      content="Authentic royal Indian cuisine, slow-simmered handi dum biryani, rich paneer curries, and tandoor-fresh naan. Order online for live GPS delivery!"
+    />
 
-  <!-- =========================================================================
+    <!-- OpenGraph Tags -->
+    <meta property="og:title" content="CurryCraft — Royal Indian Cuisine & Dum Biryani" />
+    <meta
+      property="og:description"
+      content="Authentic royal Indian cuisine, slow-simmered handi dum biryani, rich paneer curries, and tandoor-fresh naan. Order online for live GPS delivery!"
+    />
+    <meta property="og:type" content="website" />
+
+    <!-- Google Fonts: Outfit & Plus Jakarta Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="css/style.css?v=3.0" />
+  </head>
+  <body>
+    <!-- =========================================================================
        1. NAVIGATION HEADER
        ========================================================================= -->
-  <header class="site-header" id="siteHeader">
-    <div class="container nav-wrapper">
-      <!-- Brand Logo -->
-      <a href="#" class="brand-logo" id="brandLogo">
-        <span class="burger-svg-icon">
-          <svg viewBox="0 0 38 38" fill="currentColor">
-            <!-- Top Bun with sesame seeds -->
-            <path d="M6 16.5C6 10.15 11.82 5 19 5C26.18 5 32 10.15 32 16.5H6Z" />
-            <circle cx="13" cy="10.5" r="1" fill="#FF8516" />
-            <circle cx="19" cy="9" r="1" fill="#FF8516" />
-            <circle cx="25" cy="11" r="1" fill="#FF8516" />
-            <circle cx="16" cy="13" r="1" fill="#FF8516" />
-            <circle cx="22" cy="13.5" r="1" fill="#FF8516" />
-            <!-- Patty / filling layers -->
-            <rect x="5" y="19" width="28" height="3" rx="1.5" />
-            <path d="M4 24C4 23.45 4.45 23 5 23H33C33.55 23 34 23.45 34 24C34 24.55 33.55 25 33 25H5C4.45 25 4 24.55 4 24Z" />
-            <!-- Bottom Bun -->
-            <path d="M6.5 27.5H31.5C31.5 30.5 25.9 33 19 33C12.1 33 6.5 30.5 6.5 27.5Z" />
-          </svg>
-        </span>
-        <span>Burger</span>
-      </a>
+    <header class="site-header" id="siteHeader">
+      <div class="container nav-wrapper">
+        <!-- Brand Logo -->
+        <a
+          href="#heroSection"
+          class="brand-logo"
+          id="brandLogo"
+          aria-label="CurryCraft Home"
+        >
+          <span class="burger-svg-icon" style="font-size: 24px; display: flex; align-items: center; justify-content: center;">
+            🍛
+          </span>
+          <span>CurryCraft</span>
+        </a>
 
-      <!-- Nav Links -->
-      <nav>
-        <ul class="nav-links">
-          <li><a href="#heroSection" class="active">Home</a></li>
-          <li><a href="#hotItemsSection">Shop</a></li>
-          <li><a href="#promoSection">Manuel</a></li>
-          <li><a href="#hotItemsSection">Order</a></li>
-        </ul>
-      </nav>
+        <!-- Desktop Nav Links -->
+        <nav class="desktop-nav" aria-label="Main Navigation">
+          <ul class="nav-links">
+            <li><a href="#heroSection" class="active">Home</a></li>
+            <li><a href="#hotItemsSection">Shop & Menu</a></li>
+            <li><a href="#promoSection">Special Offers</a></li>
+            <li><a href="#whoWeAreSection">About Us</a></li>
+            <li>
+              <a
+                href="customer.html"
+                class="nav-portal-pill"
+                title="Order Food & Live Order Tracking"
+                >👤 Customer Portal</a
+              >
+            </li>
+            <li>
+              <a href="admin.html" class="nav-admin-pill" title="Kitchen & Live Orders Dashboard"
+                >🛠️ Admin Panel</a
+              >
+            </li>
+          </ul>
+        </nav>
 
-      <!-- Nav Actions -->
-      <div class="nav-actions">
-        <!-- Search Button -->
-        <button class="action-btn" id="navSearchBtn" aria-label="Search menu">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="11" cy="11" r="8"></circle>
-            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-          </svg>
+        <!-- Nav Actions -->
+        <div class="nav-actions">
+          <!-- Search Button -->
+          <button class="action-btn" id="navSearchBtn" aria-label="Search menu items">
+            <svg
+              width="22"
+              height="22"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.3"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+          </button>
+
+          <!-- Shopping Cart Bag Button -->
+          <button
+            class="action-btn cart-btn"
+            id="navCartBtn"
+            aria-label="View shopping bag"
+            aria-haspopup="dialog"
+          >
+            <svg
+              width="22"
+              height="22"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.3"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+              <line x1="3" y1="6" x2="21" y2="6"></line>
+              <path d="M16 10a4 4 0 0 1-8 0"></path>
+            </svg>
+            <span class="badge-count cart-badge" id="navCartBadge">0</span>
+          </button>
+
+          <!-- Hamburger Toggle for Mobile/Tablet -->
+          <button
+            class="menu-toggle"
+            id="menuToggle"
+            aria-label="Toggle navigation menu"
+            aria-expanded="false"
+            aria-controls="mobileNavDrawer"
+          >
+            <span class="bar bar-1"></span>
+            <span class="bar bar-2"></span>
+            <span class="bar bar-3"></span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- =========================================================================
+       MOBILE NAVIGATION DRAWER & BACKDROP
+       ========================================================================= -->
+    <div class="mobile-nav-overlay" id="mobileNavOverlay" style="display: none"></div>
+    <aside
+      class="mobile-nav-drawer"
+      id="mobileNavDrawer"
+      style="display: none"
+      aria-label="Mobile Navigation Menu"
+      aria-hidden="true"
+    >
+      <div class="mobile-nav-header">
+        <div class="brand-logo">
+          <span class="burger-svg-icon" style="font-size: 24px; display: flex; align-items: center; justify-content: center;">
+            🍛
+          </span>
+          <span>CurryCraft</span>
+        </div>
+        <button
+          class="btn-close-mobile-nav"
+          id="btnCloseMobileNav"
+          aria-label="Close navigation menu"
+        >
+          &times;
         </button>
+      </div>
 
-        <!-- Shopping Cart Bag -->
-        <button class="action-btn cart-btn" id="navCartBtn" aria-label="Shopping bag">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+      <ul class="mobile-nav-links">
+        <li><a href="#heroSection" class="mobile-nav-link active">Home</a></li>
+        <li><a href="#hotItemsSection" class="mobile-nav-link">Shop & Menu</a></li>
+        <li><a href="#promoSection" class="mobile-nav-link">Special Offers (50% Off)</a></li>
+        <li><a href="#whoWeAreSection" class="mobile-nav-link">Who We Are</a></li>
+        <li><a href="#howItWorksSection" class="mobile-nav-link">How It Works</a></li>
+        <li><a href="#testimonialsSection" class="mobile-nav-link">Customer Reviews</a></li>
+        <li style="margin: 8px 0; border-top: 1px dashed rgba(255, 255, 255, 0.15)"></li>
+        <li>
+          <a href="customer.html" class="mobile-nav-link" style="color: #ff8516; font-weight: 700"
+            >👤 Customer Portal (Order & Track)</a
+          >
+        </li>
+        <li>
+          <a href="admin.html" class="mobile-nav-link" style="color: #4ade80; font-weight: 700"
+            >🛠️ Admin Panel (Manage & Kitchen)</a
+          >
+        </li>
+      </ul>
+
+      <div class="mobile-nav-footer">
+        <button class="btn-mobile-order" id="btnMobileOrderNow">
+          <svg
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.2"
+          >
             <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
             <line x1="3" y1="6" x2="21" y2="6"></line>
             <path d="M16 10a4 4 0 0 1-8 0"></path>
           </svg>
-          <span class="badge-count cart-badge">0</span>
+          <span>View Bag & Order</span>
         </button>
 
-        <!-- Hamburger Toggle -->
-        <div class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
-          <span style="width: 26px;"></span>
-          <span style="width: 18px; margin-left: auto;"></span>
+        <div class="mobile-nav-contact">
+          <a href="tel:+919876543210" class="mobile-contact-pill">
+            <svg
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.2"
+            >
+              <path
+                d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"
+              ></path>
+            </svg>
+            <span>Call: +91 9876543210</span>
+          </a>
+          <a href="mailto:mail@burger.com" class="mobile-contact-pill">
+            <svg
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.2"
+            >
+              <path
+                d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"
+              ></path>
+              <polyline points="22,6 12,13 2,6"></polyline>
+            </svg>
+            <span>mail@burger.com</span>
+          </a>
         </div>
       </div>
-    </div>
-  </header>
+    </aside>
 
-  <!-- =========================================================================
+    <!-- =========================================================================
        2. HERO SECTION
        ========================================================================= -->
-  <section class="hero-section" id="heroSection">
-    <!-- Big Organic Fluid Shape on Top Right -->
-    <div class="hero-backdrop-shape" aria-hidden="true">
-      <svg viewBox="0 0 900 980" preserveAspectRatio="none" fill="none">
-        <path d="M 320 0 
+    <section class="hero-section" id="heroSection">
+      <!-- Big Organic Fluid Shape on Top Right -->
+      <div class="hero-backdrop-shape" aria-hidden="true">
+        <svg viewBox="0 0 900 980" preserveAspectRatio="none" fill="none">
+          <path
+            d="M 320 0 
                  C 250 120 180 260 210 400 
                  C 250 580 420 720 480 820 
                  C 550 940 700 1020 900 980 
-                 L 900 0 Z" 
-              fill="#FF5E00" />
-      </svg>
-    </div>
-
-    <div class="container hero-grid">
-      <!-- Left Column: Typography & CTAs -->
-      <div class="hero-content">
-        <!-- Floating Rating Card -->
-        <div class="hero-rating-card" id="heroRatingCard">
-          <div class="rating-top">
-            <div class="stars-row">
-              <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
-            </div>
-            <span class="rating-number">4.5</span>
-          </div>
-          <div class="rating-text">5k Happy review</div>
-        </div>
-
-        <p class="hero-subtitle">Crispy, Crunchy, Veggie Deliciousness!</p>
-        <h1 class="hero-title">Burgers That<br>Love the Earth!</h1>
-
-        <div class="hero-actions">
-          <button class="btn-explore" id="btnExplore">Explore</button>
-          <button class="btn-play-demo" id="btnPlayDemo">
-            <span class="play-icon-circle">
-              <svg viewBox="0 0 24 24">
-                <polygon points="5 3 19 12 5 21 5 3"></polygon>
-              </svg>
-            </span>
-            <span>Play Demo...</span>
-          </button>
-        </div>
-      </div>
-
-      <!-- Right Column: Hero Visuals & Badges -->
-      <div class="hero-visuals">
-        <!-- Dotted curved trail line -->
-        <svg class="flight-arc-doodle" viewBox="0 0 220 180" fill="none">
-          <path d="M 20 160 C 20 50 140 10 200 40" 
-                stroke="#FFFFFF" stroke-width="2.5" stroke-dasharray="6 7" stroke-linecap="round" />
-          <polygon points="208,42 195,33 201,48" fill="#FFFFFF" />
+                 L 900 0 Z"
+            fill="#FF5E00"
+          />
         </svg>
+      </div>
 
-        <!-- 75% OFF Wavy Starburst Badge -->
-        <div class="discount-badge-75" id="discountBadge">
-          <div class="badge-cloud-shape">
-            <span class="off-number">75%</span>
-            <span class="off-text">OFF</span>
+      <div class="container hero-grid">
+        <!-- Left Column: Typography & CTAs -->
+        <div class="hero-content">
+          <!-- Floating Rating Card -->
+          <div class="hero-rating-card" id="heroRatingCard">
+            <div class="rating-top">
+              <div class="stars-row">
+                <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+              </div>
+              <span class="rating-number">4.5</span>
+            </div>
+            <div class="rating-text">5k Happy reviews</div>
+          </div>
+
+          <p class="hero-subtitle">Authentic Royal Indian Cuisine</p>
+          <h1 class="hero-title">Dum Biryani &amp;<br />Royal Curries!</h1>
+
+          <div class="hero-actions">
+            <button class="btn-explore" id="btnExplore">Explore Menu</button>
+            <button class="btn-play-demo" id="btnPlayDemo">
+              <span class="play-icon-circle">
+                <svg viewBox="0 0 24 24">
+                  <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                </svg>
+              </span>
+              <span>Play Demo</span>
+            </button>
           </div>
         </div>
 
-        <!-- Rays Doodles above burgers -->
-        <div class="hero-rays-doodle">
-          <svg width="60" height="70" viewBox="0 0 60 70" fill="none">
-            <line x1="20" y1="65" x2="35" y2="10" stroke="#FFFFFF" stroke-width="2.5" stroke-linecap="round"/>
-            <line x1="38" y1="65" x2="52" y2="25" stroke="#FFFFFF" stroke-width="2.5" stroke-linecap="round"/>
+        <!-- Right Column: Hero Visuals & Badges -->
+        <div class="hero-visuals">
+          <!-- Dotted curved trail line -->
+          <svg class="flight-arc-doodle" viewBox="0 0 220 180" fill="none" aria-hidden="true">
+            <path
+              d="M 20 160 C 20 50 140 10 200 40"
+              stroke="#FFFFFF"
+              stroke-width="2.5"
+              stroke-dasharray="6 7"
+              stroke-linecap="round"
+            />
+            <polygon points="208,42 195,33 201,48" fill="#FFFFFF" />
           </svg>
-        </div>
 
-        <!-- Main Hero Burger Cutout on Wooden Board -->
-        <div class="hero-burger-image-wrap">
-          <img src="images/hero-burgers.png" alt="Burgers That Love the Earth gourmet double burgers on wood board">
+          <!-- 75% OFF Wavy Starburst Badge -->
+          <div class="discount-badge-75" id="discountBadge">
+            <div class="badge-cloud-shape">
+              <span class="off-number">50%</span>
+              <span class="off-text">OFF</span>
+            </div>
+          </div>
+
+          <!-- Rays Doodles above burgers -->
+          <div class="hero-rays-doodle" aria-hidden="true">
+            <svg width="60" height="70" viewBox="0 0 60 70" fill="none">
+              <line
+                x1="20"
+                y1="65"
+                x2="35"
+                y2="10"
+                stroke="#FFFFFF"
+                stroke-width="2.5"
+                stroke-linecap="round"
+              />
+              <line
+                x1="38"
+                y1="65"
+                x2="52"
+                y2="25"
+                stroke="#FFFFFF"
+                stroke-width="2.5"
+                stroke-linecap="round"
+              />
+            </svg>
+          </div>
+
+          <!-- Main Hero Indian Feast Spread (LCP image with high fetch priority) -->
+          <div class="hero-burger-image-wrap">
+            <img
+              src="images/hero-indian-feast.jpg"
+              alt="CurryCraft authentic royal Indian feast featuring Kolkata dum biryani, tandoor garlic naan, and rich curries"
+              fetchpriority="high"
+              width="680"
+              height="420"
+              style="border-radius: 24px; object-fit: cover; max-height: 420px; width: 100%; box-shadow: 0 20px 40px rgba(0,0,0,0.18);"
+            />
+          </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- =========================================================================
+    <!-- =========================================================================
        3. HOT ITEMS SECTION
        ========================================================================= -->
-  <section class="hot-items-section" id="hotItemsSection">
-    <div class="container">
-      <div class="section-tag">HOT ITEMS</div>
-      <p class="section-subtitle">LOCALLY SOURCED, ORGANIC INGREDIENTS FOR A FRESH AND ECO-FRIENDLY EXPERIENCE</p>
+    <section class="hot-items-section" id="hotItemsSection">
+      <div class="container">
+        <div class="section-tag">HOT ITEMS</div>
+        <p class="section-subtitle">
+          LOCALLY SOURCED, ORGANIC INGREDIENTS FOR A FRESH AND ECO-FRIENDLY EXPERIENCE
+        </p>
 
-      <div class="hot-items-carousel-container">
-        <!-- Prev Button -->
-        <button class="carousel-nav-btn prev-btn" id="prevHotBtn" aria-label="Previous burger">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-            <line x1="19" y1="12" x2="5" y2="12"></line>
-            <polyline points="12 19 5 12 12 5"></polyline>
-          </svg>
-        </button>
+        <div class="hot-items-carousel-container" id="hotItemsContainer">
+          <!-- Prev Button -->
+          <button class="carousel-nav-btn prev-btn" id="prevHotBtn" aria-label="Previous burger">
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <line x1="19" y1="12" x2="5" y2="12"></line>
+              <polyline points="12 19 5 12 12 5"></polyline>
+            </svg>
+          </button>
 
-        <!-- Carousel Track Wrapper -->
-        <div class="hot-items-track-wrapper">
-          <div class="hot-items-track" id="hotItemsTrack">
-            
-            <!-- Card 1: Veg Crispy Burger -->
-            <div class="hot-item-card" data-item-id="veg-crispy">
-              <div class="card-top-bar">
-                <button class="btn-favorite" aria-label="Add to favorites">
-                  <svg viewBox="0 0 24 24">
-                    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+          <!-- Carousel Track Wrapper with Touch Gesture Support -->
+          <div class="hot-items-track-wrapper" id="hotItemsTrackWrapper">
+            <div class="hot-items-track" id="hotItemsTrack">
+              <!-- Card 1: Veg Crispy Burger -->
+              <div class="hot-item-card" data-item-id="veg-crispy">
+                <div class="card-top-bar">
+                  <button class="btn-favorite" aria-label="Add Veg Crispy Burger to favorites">
+                    <svg viewBox="0 0 24 24">
+                      <path
+                        d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"
+                      ></path>
+                    </svg>
+                  </button>
+                </div>
+                <div class="card-burger-img">
+                  <img
+                    src="images/burger-1.png"
+                    alt="Veg Crispy Burger"
+                    loading="lazy"
+                    width="220"
+                    height="180"
+                  />
+                </div>
+                <h3 class="card-title">Veg Crispy Burger</h3>
+                <div class="card-bottom-row">
+                  <span class="card-price">₹250.00</span>
+                  <button
+                    class="btn-add-cart-icon"
+                    data-action="add-to-cart"
+                    data-item-id="veg-crispy"
+                    aria-label="Add Veg Crispy Burger to bag"
+                  >
+                    <svg viewBox="0 0 24 24">
+                      <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+                      <line x1="3" y1="6" x2="21" y2="6"></line>
+                      <path d="M16 10a4 4 0 0 1-8 0"></path>
+                    </svg>
+                  </button>
+                </div>
+                <div
+                  class="card-arrow-notch"
+                  data-action="add-to-cart"
+                  data-item-id="veg-crispy"
+                  aria-label="Order Veg Crispy Burger"
+                >
+                  <svg viewBox="0 0 24 24" fill="none">
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                    <polyline points="12 5 19 12 12 19"></polyline>
                   </svg>
-                </button>
+                </div>
               </div>
-              <div class="card-burger-img">
-                <img src="images/burger-1.png" alt="Veg Crispy Burger">
-              </div>
-              <h3 class="card-title">Veg Crispy Burger</h3>
-              <div class="card-bottom-row">
-                <span class="card-price">₹250.00</span>
-                <button class="btn-add-cart-icon" data-action="add-to-cart" data-item-id="veg-crispy" aria-label="Add Veg Crispy Burger to bag">
-                  <svg viewBox="0 0 24 24">
-                    <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
-                    <line x1="3" y1="6" x2="21" y2="6"></line>
-                    <path d="M16 10a4 4 0 0 1-8 0"></path>
+
+              <!-- Card 2: Hot Crispy Burger -->
+              <div class="hot-item-card" data-item-id="hot-crispy">
+                <div class="card-top-bar">
+                  <button class="btn-favorite" aria-label="Add Hot Crispy Burger to favorites">
+                    <svg viewBox="0 0 24 24">
+                      <path
+                        d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"
+                      ></path>
+                    </svg>
+                  </button>
+                </div>
+                <div class="card-burger-img">
+                  <img
+                    src="images/burger-2.png"
+                    alt="Hot Crispy Burger"
+                    loading="lazy"
+                    width="220"
+                    height="180"
+                  />
+                </div>
+                <h3 class="card-title">Hot Crispy Burger</h3>
+                <div class="card-bottom-row">
+                  <span class="card-price">₹250.00</span>
+                  <button
+                    class="btn-add-cart-icon"
+                    data-action="add-to-cart"
+                    data-item-id="hot-crispy"
+                    aria-label="Add Hot Crispy Burger to bag"
+                  >
+                    <svg viewBox="0 0 24 24">
+                      <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+                      <line x1="3" y1="6" x2="21" y2="6"></line>
+                      <path d="M16 10a4 4 0 0 1-8 0"></path>
+                    </svg>
+                  </button>
+                </div>
+                <div
+                  class="card-arrow-notch"
+                  data-action="add-to-cart"
+                  data-item-id="hot-crispy"
+                  aria-label="Order Hot Crispy Burger"
+                >
+                  <svg viewBox="0 0 24 24" fill="none">
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                    <polyline points="12 5 19 12 12 19"></polyline>
                   </svg>
-                </button>
+                </div>
               </div>
-              <div class="card-arrow-notch" data-action="add-to-cart" data-item-id="veg-crispy" aria-label="Order Veg Crispy Burger">
-                <svg viewBox="0 0 24 24" fill="none">
-                  <line x1="5" y1="12" x2="19" y2="12"></line>
-                  <polyline points="12 5 19 12 12 19"></polyline>
-                </svg>
+
+              <!-- Card 3: Veg Vegy Burger -->
+              <div class="hot-item-card" data-item-id="veg-vegy">
+                <div class="card-top-bar">
+                  <button class="btn-favorite" aria-label="Add Veg Vegy Burger to favorites">
+                    <svg viewBox="0 0 24 24">
+                      <path
+                        d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"
+                      ></path>
+                    </svg>
+                  </button>
+                </div>
+                <div class="card-burger-img">
+                  <img
+                    src="images/burger-3.png"
+                    alt="Veg Vegy Burger"
+                    loading="lazy"
+                    width="220"
+                    height="180"
+                  />
+                </div>
+                <h3 class="card-title">Veg Vegy Burger</h3>
+                <div class="card-bottom-row">
+                  <span class="card-price">₹250.00</span>
+                  <button
+                    class="btn-add-cart-icon"
+                    data-action="add-to-cart"
+                    data-item-id="veg-vegy"
+                    aria-label="Add Veg Vegy Burger to bag"
+                  >
+                    <svg viewBox="0 0 24 24">
+                      <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+                      <line x1="3" y1="6" x2="21" y2="6"></line>
+                      <path d="M16 10a4 4 0 0 1-8 0"></path>
+                    </svg>
+                  </button>
+                </div>
+                <div
+                  class="card-arrow-notch"
+                  data-action="add-to-cart"
+                  data-item-id="veg-vegy"
+                  aria-label="Order Veg Vegy Burger"
+                >
+                  <svg viewBox="0 0 24 24" fill="none">
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                    <polyline points="12 5 19 12 12 19"></polyline>
+                  </svg>
+                </div>
+              </div>
+
+              <!-- Card 4: Veg Crispy Burger (Classic) -->
+              <div class="hot-item-card" data-item-id="veg-crispy-classic">
+                <div class="card-top-bar">
+                  <button
+                    class="btn-favorite"
+                    aria-label="Add Veg Crispy Burger Classic to favorites"
+                  >
+                    <svg viewBox="0 0 24 24">
+                      <path
+                        d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"
+                      ></path>
+                    </svg>
+                  </button>
+                </div>
+                <div class="card-burger-img">
+                  <img
+                    src="images/burger-4.png"
+                    alt="Veg Crispy Burger Classic"
+                    loading="lazy"
+                    width="220"
+                    height="180"
+                  />
+                </div>
+                <h3 class="card-title">Veg Crispy Classic</h3>
+                <div class="card-bottom-row">
+                  <span class="card-price">₹250.00</span>
+                  <button
+                    class="btn-add-cart-icon"
+                    data-action="add-to-cart"
+                    data-item-id="veg-crispy-classic"
+                    aria-label="Add Veg Crispy Classic to bag"
+                  >
+                    <svg viewBox="0 0 24 24">
+                      <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+                      <line x1="3" y1="6" x2="21" y2="6"></line>
+                      <path d="M16 10a4 4 0 0 1-8 0"></path>
+                    </svg>
+                  </button>
+                </div>
+                <div
+                  class="card-arrow-notch"
+                  data-action="add-to-cart"
+                  data-item-id="veg-crispy-classic"
+                  aria-label="Order Veg Crispy Burger Classic"
+                >
+                  <svg viewBox="0 0 24 24" fill="none">
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                    <polyline points="12 5 19 12 12 19"></polyline>
+                  </svg>
+                </div>
               </div>
             </div>
-
-            <!-- Card 2: Hot Crispy Burger -->
-            <div class="hot-item-card" data-item-id="hot-crispy">
-              <div class="card-top-bar">
-                <button class="btn-favorite" aria-label="Add to favorites">
-                  <svg viewBox="0 0 24 24">
-                    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
-                  </svg>
-                </button>
-              </div>
-              <div class="card-burger-img">
-                <img src="images/burger-2.png" alt="Hot Crispy Burger">
-              </div>
-              <h3 class="card-title">Hot Crispy Burger</h3>
-              <div class="card-bottom-row">
-                <span class="card-price">₹250.00</span>
-                <button class="btn-add-cart-icon" data-action="add-to-cart" data-item-id="hot-crispy" aria-label="Add Hot Crispy Burger to bag">
-                  <svg viewBox="0 0 24 24">
-                    <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
-                    <line x1="3" y1="6" x2="21" y2="6"></line>
-                    <path d="M16 10a4 4 0 0 1-8 0"></path>
-                  </svg>
-                </button>
-              </div>
-              <div class="card-arrow-notch" data-action="add-to-cart" data-item-id="hot-crispy" aria-label="Order Hot Crispy Burger">
-                <svg viewBox="0 0 24 24" fill="none">
-                  <line x1="5" y1="12" x2="19" y2="12"></line>
-                  <polyline points="12 5 19 12 12 19"></polyline>
-                </svg>
-              </div>
-            </div>
-
-            <!-- Card 3: Veg Vegy Burger -->
-            <div class="hot-item-card" data-item-id="veg-vegy">
-              <div class="card-top-bar">
-                <button class="btn-favorite" aria-label="Add to favorites">
-                  <svg viewBox="0 0 24 24">
-                    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
-                  </svg>
-                </button>
-              </div>
-              <div class="card-burger-img">
-                <img src="images/burger-3.png" alt="Veg Vegy Burger">
-              </div>
-              <h3 class="card-title">Veg Vegy Burger</h3>
-              <div class="card-bottom-row">
-                <span class="card-price">₹250.00</span>
-                <button class="btn-add-cart-icon" data-action="add-to-cart" data-item-id="veg-vegy" aria-label="Add Veg Vegy Burger to bag">
-                  <svg viewBox="0 0 24 24">
-                    <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
-                    <line x1="3" y1="6" x2="21" y2="6"></line>
-                    <path d="M16 10a4 4 0 0 1-8 0"></path>
-                  </svg>
-                </button>
-              </div>
-              <div class="card-arrow-notch" data-action="add-to-cart" data-item-id="veg-vegy" aria-label="Order Veg Vegy Burger">
-                <svg viewBox="0 0 24 24" fill="none">
-                  <line x1="5" y1="12" x2="19" y2="12"></line>
-                  <polyline points="12 5 19 12 12 19"></polyline>
-                </svg>
-              </div>
-            </div>
-
-            <!-- Card 4: Veg Crispy Burger (Classic) -->
-            <div class="hot-item-card" data-item-id="veg-crispy-classic">
-              <div class="card-top-bar">
-                <button class="btn-favorite" aria-label="Add to favorites">
-                  <svg viewBox="0 0 24 24">
-                    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
-                  </svg>
-                </button>
-              </div>
-              <div class="card-burger-img">
-                <img src="images/burger-4.png" alt="Veg Crispy Burger Classic">
-              </div>
-              <h3 class="card-title">Veg Crispy Burger</h3>
-              <div class="card-bottom-row">
-                <span class="card-price">₹250.00</span>
-                <button class="btn-add-cart-icon" data-action="add-to-cart" data-item-id="veg-crispy-classic" aria-label="Add Veg Crispy Burger Classic to bag">
-                  <svg viewBox="0 0 24 24">
-                    <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
-                    <line x1="3" y1="6" x2="21" y2="6"></line>
-                    <path d="M16 10a4 4 0 0 1-8 0"></path>
-                  </svg>
-                </button>
-              </div>
-              <div class="card-arrow-notch" data-action="add-to-cart" data-item-id="veg-crispy-classic" aria-label="Order Veg Crispy Burger Classic">
-                <svg viewBox="0 0 24 24" fill="none">
-                  <line x1="5" y1="12" x2="19" y2="12"></line>
-                  <polyline points="12 5 19 12 12 19"></polyline>
-                </svg>
-              </div>
-            </div>
-
           </div>
+
+          <!-- Next Button -->
+          <button class="carousel-nav-btn next-btn" id="nextHotBtn" aria-label="Next burger">
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+              <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+          </button>
         </div>
 
-        <!-- Next Button -->
-        <button class="carousel-nav-btn next-btn" id="nextHotBtn" aria-label="Next burger">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-            <line x1="5" y1="12" x2="19" y2="12"></line>
-            <polyline points="12 5 19 12 12 19"></polyline>
-          </svg>
-        </button>
+        <!-- Pagination Dots & Swipe Tip -->
+        <div class="carousel-dots" id="hotItemsDots">
+          <span class="dot hot-dot active" data-index="0" aria-label="Item 1"></span>
+          <span class="dot hot-dot" data-index="1" aria-label="Item 2"></span>
+          <span class="dot hot-dot" data-index="2" aria-label="Item 3"></span>
+          <span class="dot hot-dot" data-index="3" aria-label="Item 4"></span>
+        </div>
+        <p class="mobile-swipe-hint">👈 Swipe on mobile to browse burgers 👉</p>
       </div>
+    </section>
 
-      <!-- Pagination Dots -->
-      <div class="carousel-dots" id="hotItemsDots">
-        <span class="dot hot-dot active" data-index="0"></span>
-        <span class="dot hot-dot" data-index="1"></span>
-        <span class="dot hot-dot" data-index="2"></span>
-        <span class="dot hot-dot" data-index="3"></span>
-      </div>
-    </div>
-  </section>
-
-  <!-- =========================================================================
+    <!-- =========================================================================
        4. PROMO BANNER SECTION
        ========================================================================= -->
-  <section class="promo-section" id="promoSection">
-    <div class="container">
-      <div class="promo-banner">
-        <!-- Dotted Flight Arc -->
-        <svg class="promo-doodle-arc" width="180" height="120" viewBox="0 0 180 120" fill="none">
-          <path d="M 10 110 C 20 20 130 10 160 50" stroke="#FFFFFF" stroke-width="2.5" stroke-dasharray="6 7" stroke-linecap="round" />
-          <polygon points="168,52 154,43 162,59" fill="#FFFFFF" />
-        </svg>
+    <section class="promo-section" id="promoSection">
+      <div class="container">
+        <div class="promo-banner">
+          <!-- Dotted Flight Arc -->
+          <svg
+            class="promo-doodle-arc"
+            width="180"
+            height="120"
+            viewBox="0 0 180 120"
+            fill="none"
+            aria-hidden="true"
+          >
+            <path
+              d="M 10 110 C 20 20 130 10 160 50"
+              stroke="#FFFFFF"
+              stroke-width="2.5"
+              stroke-dasharray="6 7"
+              stroke-linecap="round"
+            />
+            <polygon points="168,52 154,43 162,59" fill="#FFFFFF" />
+          </svg>
 
-        <!-- Promo Content -->
-        <div class="promo-content">
-          <div class="promo-tagline">Get Up To</div>
-          <div class="promo-title">50% Off</div>
-          <div class="promo-condition">On Your Two Order's</div>
-          <button class="btn-order-now" id="promoOrderBtn">Order Now</button>
-        </div>
+          <!-- Promo Content -->
+          <div class="promo-content">
+            <div class="promo-tagline">Get Up To</div>
+            <div class="promo-title">50% Off</div>
+            <div class="promo-condition">On Your Two Order's & Combos!</div>
+            <button class="btn-order-now" id="promoOrderBtn">Order Combo Deal</button>
+          </div>
 
-        <!-- Promo Graphic Spread -->
-        <div class="promo-graphic-wrap">
-          <img src="images/promo-combo.png" alt="Two gourmet burgers with french fries and soda combo">
+          <!-- Promo Graphic Spread -->
+          <div class="promo-graphic-wrap">
+            <img
+              src="images/promo-combo.png"
+              alt="Two gourmet burgers with french fries and soda combo"
+              loading="lazy"
+              width="680"
+              height="380"
+            />
+          </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- =========================================================================
+    <!-- =========================================================================
        5. WHO WE ARE SECTION
        ========================================================================= -->
-  <section class="who-we-are-section" id="whoWeAreSection">
-    <div class="container">
-      <div class="section-tag">WHO WE ARE</div>
-      <div style="height: 40px;"></div>
+    <section class="who-we-are-section" id="whoWeAreSection">
+      <div class="container">
+        <div class="section-tag">WHO WE ARE</div>
+        <div class="section-spacer"></div>
 
-      <div class="who-we-are-grid">
-        <!-- Left Feature List -->
-        <div class="who-content-list">
-          <p class="who-feature-item">
-            Community-Focused Initiatives Such As Partnerships With Local Farms Or Environmental Organizations.
-          </p>
-          <p class="who-feature-item">
-            Social Media Integration For Sharing Photos, Reviews, And Engaging With The Veggie Burger Community.
-          </p>
-          <div class="who-divider"></div>
-          <p class="who-feature-item">
-            Nutritional Information Provided For Each Menu Item, Catering To Health-Conscious Customers.
-          </p>
-          <p class="who-feature-item">
-            Wide Range Of Veggie Burger Options Including Classic, Gourmet, And Customizable Choices.
-          </p>
+        <div class="who-we-are-grid">
+          <!-- Left Feature List -->
+          <div class="who-content-list">
+            <p class="who-feature-item">
+              Community-Focused Initiatives Such As Partnerships With Local Farms Or Environmental
+              Organizations.
+            </p>
+            <p class="who-feature-item">
+              Social Media Integration For Sharing Photos, Reviews, And Engaging With The Veggie
+              Burger Community.
+            </p>
+            <div class="who-divider"></div>
+            <p class="who-feature-item">
+              Nutritional Information Provided For Each Menu Item, Catering To Health-Conscious
+              Customers.
+            </p>
+            <p class="who-feature-item">
+              Wide Range Of Veggie Burger Options Including Classic, Gourmet, And Customizable
+              Choices.
+            </p>
 
-          <!-- Share Button -->
-          <div class="who-share-btn" id="whoShareBtn">
-            <svg viewBox="0 0 24 24">
-              <line x1="22" y1="2" x2="11" y2="13"></line>
-              <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
-            </svg>
-            <span>Share</span>
+            <!-- Share Button -->
+            <button class="who-share-btn" id="whoShareBtn" aria-label="Share this website">
+              <svg viewBox="0 0 24 24">
+                <line x1="22" y1="2" x2="11" y2="13"></line>
+                <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+              </svg>
+              <span>Share With Friends</span>
+            </button>
+          </div>
+
+          <!-- Right 3D Character Card -->
+          <div class="who-character-wrap">
+            <img
+              src="images/chef-card.png"
+              alt="Friendly smiling cartoon chef presenting a fresh juicy burger"
+              loading="lazy"
+              width="580"
+              height="580"
+            />
           </div>
         </div>
-
-        <!-- Right 3D Character Card -->
-        <div class="who-character-wrap">
-          <img src="images/chef-card.png" alt="Friendly smiling cartoon chef presenting a fresh juicy burger">
-        </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- =========================================================================
+    <!-- =========================================================================
        6. HOW DOES IT WORKS SECTION
        ========================================================================= -->
-  <section class="how-it-works-section" id="howItWorksSection">
-    <div class="container">
-      <div class="section-tag">HOW DOES IT WORKS</div>
-      <div style="height: 60px;"></div>
+    <section class="how-it-works-section" id="howItWorksSection">
+      <div class="container">
+        <div class="section-tag">HOW DOES IT WORKS</div>
+        <div class="section-spacer"></div>
 
-      <div class="how-cards-grid">
-        <!-- Step 1: Choose Your Meals -->
-        <div class="how-step-card">
-          <div class="how-icon-badge">
-            <svg viewBox="0 0 24 24">
-              <!-- Plate + Cutlery SVG -->
-              <circle cx="12" cy="12" r="5" stroke="currentColor" stroke-width="1.8" fill="none" />
-              <circle cx="12" cy="12" r="2.5" fill="currentColor" />
-              <!-- Fork on left -->
-              <path d="M5 6v6m0 0v6m-2-12h4v3a2 2 0 0 1-2 2 2 2 0 0 1-2-2V6z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none" />
-              <!-- Knife on right -->
-              <path d="M19 6v12m0-12a2 2 0 0 0-2 2v4a2 2 0 0 0 2 2z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none" />
-            </svg>
-          </div>
-          <h3 class="how-card-title">Choose Your Meals</h3>
-          <p class="how-card-desc">Lorem Ipsum Dolor Sit Amet, Consectetur Adipiscing Elit, Sed Do Eiusmod Tempor</p>
-          <div class="how-card-arrow">
-            <svg viewBox="0 0 24 24" fill="none">
-              <line x1="5" y1="12" x2="19" y2="12"></line>
-              <polyline points="12 5 19 12 12 19"></polyline>
-            </svg>
-          </div>
-        </div>
-
-        <!-- Step 2: Track Order -->
-        <div class="how-step-card">
-          <div class="how-icon-badge">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-              <!-- Delivery Van with Map Pin -->
-              <rect x="1" y="8" width="14" height="9" rx="2" fill="currentColor" opacity="0.3"></rect>
-              <path d="M15 11h4l3 3v3h-7v-6z" fill="currentColor"></path>
-              <circle cx="6" cy="18" r="2.5" fill="currentColor"></circle>
-              <circle cx="18" cy="18" r="2.5" fill="currentColor"></circle>
-              <!-- Location pin on top of van -->
-              <path d="M8 4a2.5 2.5 0 0 1 2.5 2.5c0 1.8-2.5 4.5-2.5 4.5s-2.5-2.7-2.5-4.5A2.5 2.5 0 0 1 8 4z" fill="#FFFFFF"></path>
-            </svg>
-          </div>
-          <h3 class="how-card-title">Track Order</h3>
-          <p class="how-card-desc">Lorem Ipsum Dolor Sit Amet, Consectetur Adipiscing Elit, Sed Do Eiusmod Tempor</p>
-          <div class="how-card-arrow">
-            <svg viewBox="0 0 24 24" fill="none">
-              <line x1="5" y1="12" x2="19" y2="12"></line>
-              <polyline points="12 5 19 12 12 19"></polyline>
-            </svg>
-          </div>
-        </div>
-
-        <!-- Step 3: Collect Order -->
-        <div class="how-step-card">
-          <div class="how-icon-badge">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-              <!-- Hand holding parcel box -->
-              <rect x="7" y="4" width="10" height="7" rx="1.5" fill="currentColor"></rect>
-              <path d="M12 4v7M7 7.5h10" stroke="#FF8516" stroke-width="1.5"></path>
-              <!-- Supporting hand below -->
-              <path d="M2 14h6l3 2h5a2 2 0 0 1 2 2v1a2 2 0 0 1-2 2H5l-3-4z" fill="currentColor"></path>
-            </svg>
-          </div>
-          <h3 class="how-card-title">Collect Order</h3>
-          <p class="how-card-desc">Lorem Ipsum Dolor Sit Amet, Consectetur Adipiscing Elit, Sed Do Eiusmod Tempor</p>
-          <div class="how-card-arrow">
-            <svg viewBox="0 0 24 24" fill="none">
-              <line x1="5" y1="12" x2="19" y2="12"></line>
-              <polyline points="12 5 19 12 12 19"></polyline>
-            </svg>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- =========================================================================
-       7. TESTIMONIALS SECTION ("WHAT OUR CUSTOMER SAYS")
-       ========================================================================= -->
-  <section class="testimonials-section" id="testimonialsSection">
-    <div class="container">
-      <div class="section-tag">WHAT OUR CUSTOMER SAYS</div>
-      <div style="height: 60px;"></div>
-
-      <div class="testimonials-carousel-viewport">
-        <div class="testimonials-track">
-          <!-- Left Partial Card (Decorative perspective) -->
-          <div class="testimonial-card side-card" aria-hidden="true">
-            <p class="testimonial-text">Lorem Ipsum Dolor Sit Amet, Consectetur Adipiscing Elit, Sed Do Eiusmod Tempor Incididunt...</p>
-            <div class="testimonial-stars">★★★★★</div>
-            <div class="testimonial-author">Vikram Sen</div>
-            <div class="testimonial-role">Eco Enthusiast</div>
-          </div>
-
-          <!-- Active Center Card -->
-          <div class="testimonial-card active-card" id="activeTestimonialCard">
-            <!-- Quote circular badge at top -->
-            <div class="quote-icon-badge">
+        <div class="how-cards-grid">
+          <!-- Step 1: Choose Your Meals -->
+          <div class="how-step-card">
+            <div class="how-icon-badge">
               <svg viewBox="0 0 24 24">
-                <path d="M6 17h3l2-4V7H5v6h3l-2 4zm8 0h3l2-4V7h-6v6h3l-2 4z"/>
+                <circle
+                  cx="12"
+                  cy="12"
+                  r="5"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  fill="none"
+                />
+                <circle cx="12" cy="12" r="2.5" fill="currentColor" />
+                <path
+                  d="M5 6v6m0 0v6m-2-12h4v3a2 2 0 0 1-2 2 2 2 0 0 1-2-2V6z"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  fill="none"
+                />
+                <path
+                  d="M19 6v12m0-12a2 2 0 0 0-2 2v4a2 2 0 0 0 2 2z"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  fill="none"
+                />
               </svg>
             </div>
-            
-            <p class="testimonial-text" id="testimonialQuote">
-              Lorem Ipsum Dolor Sit Amet, Consectetur Adipiscing Elit, Sed Do Eiusmod Tempor Incididunt Ut Labore Et Dolore Magna Aliqua
+            <h3 class="how-card-title">Choose Your Meals</h3>
+            <p class="how-card-desc">
+              Browse our gourmet burgers, customize toppings, and add your favorite sides to bag.
             </p>
-            
-            <div class="testimonial-stars">
-              <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
-            </div>
-            
-            <div class="testimonial-author" id="testimonialAuthor">Merian Maheta</div>
-            <div class="testimonial-role" id="testimonialRole">Owner Of Xyz Company</div>
-          </div>
-
-          <!-- Right Partial Card (Decorative perspective) -->
-          <div class="testimonial-card side-card" aria-hidden="true">
-            <p class="testimonial-text">Sed Do Eiusmod Tempor Incididunt Ut Labore Et Dolore Magna Aliqua Consectetur Adipiscing Elit...</p>
-            <div class="testimonial-stars">★★★★★</div>
-            <div class="testimonial-author">Rohan Kapoor</div>
-            <div class="testimonial-role">Founder at GreenBite</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Testimonial Controls Below -->
-      <div class="testimonials-controls">
-        <button class="testimonial-btn prev" id="prevTestBtn" aria-label="Previous testimonial">
-          <svg viewBox="0 0 24 24" fill="none">
-            <line x1="19" y1="12" x2="5" y2="12"></line>
-            <polyline points="12 19 5 12 12 5"></polyline>
-          </svg>
-        </button>
-        <button class="testimonial-btn next" id="nextTestBtn" aria-label="Next testimonial">
-          <svg viewBox="0 0 24 24" fill="none">
-            <line x1="5" y1="12" x2="19" y2="12"></line>
-            <polyline points="12 5 19 12 12 19"></polyline>
-          </svg>
-        </button>
-      </div>
-    </div>
-  </section>
-
-  <!-- =========================================================================
-       8. FOOTER
-       ========================================================================= -->
-  <footer class="site-footer" id="siteFooter">
-    <div class="container">
-      <div class="footer-grid">
-        <!-- Col 1: Brand & Contact Info -->
-        <div class="footer-brand">
-          <a href="#" class="brand-logo">
-            <span class="burger-svg-icon">
-              <svg viewBox="0 0 38 38" fill="currentColor">
-                <path d="M6 16.5C6 10.15 11.82 5 19 5C26.18 5 32 10.15 32 16.5H6Z" />
-                <circle cx="13" cy="10.5" r="1" fill="#FF5232" />
-                <circle cx="19" cy="9" r="1" fill="#FF5232" />
-                <circle cx="25" cy="11" r="1" fill="#FF5232" />
-                <rect x="5" y="19" width="28" height="3" rx="1.5" />
-                <path d="M4 24C4 23.45 4.45 23 5 23H33C33.55 23 34 23.45 34 24C34 24.55 33.55 25 33 25H5C4.45 25 4 24.55 4 24Z" />
-                <path d="M6.5 27.5H31.5C31.5 30.5 25.9 33 19 33C12.1 33 6.5 30.5 6.5 27.5Z" />
-              </svg>
-            </span>
-            <span>Burger</span>
-          </a>
-          <p class="footer-bio">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-          </p>
-          <div class="footer-contact">
-            <div>+91 9876543210</div>
-            <div>Mail@gmail.com</div>
-            <div>Xyz, any warw rode, location</div>
-          </div>
-        </div>
-
-        <!-- Col 2: Service -->
-        <div class="footer-col">
-          <h4 class="footer-col-title">Service</h4>
-          <ul class="footer-links">
-            <li><a href="#hotItemsSection">Burger</a></li>
-            <li><a href="#hotItemsSection">Menu</a></li>
-            <li><a href="#hotItemsSection">Hot Item's</a></li>
-            <li><a href="#howItWorksSection">Services</a></li>
-            <li><a href="#whoWeAreSection">About</a></li>
-          </ul>
-        </div>
-
-        <!-- Col 3: Follow Us -->
-        <div class="footer-col">
-          <h4 class="footer-col-title">Follow Us</h4>
-          <ul class="footer-links">
-            <li><a href="#">Facebook</a></li>
-            <li><a href="#">Instagram</a></li>
-            <li><a href="#">Tweeter</a></li>
-            <li><a href="#">Linked In</a></li>
-          </ul>
-        </div>
-
-        <!-- Col 4: Subscribe For Updates -->
-        <div class="footer-col">
-          <h4 class="footer-col-title">Subscribe For Updates</h4>
-          <form class="subscribe-form" id="subscribeForm">
-            <input type="email" placeholder="Enter Email..." required aria-label="Email for updates">
-            <span class="subscribe-divider">|</span>
-            <button type="submit" class="btn-subscribe-arrow" aria-label="Subscribe">
+            <div class="how-card-arrow">
               <svg viewBox="0 0 24 24" fill="none">
                 <line x1="5" y1="12" x2="19" y2="12"></line>
                 <polyline points="12 5 19 12 12 19"></polyline>
               </svg>
-            </button>
-          </form>
+            </div>
+          </div>
+
+          <!-- Step 2: Track Order -->
+          <div class="how-step-card">
+            <div class="how-icon-badge">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                <rect
+                  x="1"
+                  y="8"
+                  width="14"
+                  height="9"
+                  rx="2"
+                  fill="currentColor"
+                  opacity="0.3"
+                ></rect>
+                <path d="M15 11h4l3 3v3h-7v-6z" fill="currentColor"></path>
+                <circle cx="6" cy="18" r="2.5" fill="currentColor"></circle>
+                <circle cx="18" cy="18" r="2.5" fill="currentColor"></circle>
+                <path
+                  d="M8 4a2.5 2.5 0 0 1 2.5 2.5c0 1.8-2.5 4.5-2.5 4.5s-2.5-2.7-2.5-4.5A2.5 2.5 0 0 1 8 4z"
+                  fill="#FFFFFF"
+                ></path>
+              </svg>
+            </div>
+            <h3 class="how-card-title">Track Order</h3>
+            <p class="how-card-desc">
+              Receive real-time receipt and watch your meal progress from our kitchen to your
+              doorstep.
+            </p>
+            <div class="how-card-arrow">
+              <svg viewBox="0 0 24 24" fill="none">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
+            </div>
+          </div>
+
+          <!-- Step 3: Collect Order -->
+          <div class="how-step-card">
+            <div class="how-icon-badge">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                <rect x="7" y="4" width="10" height="7" rx="1.5" fill="currentColor"></rect>
+                <path d="M12 4v7M7 7.5h10" stroke="#FF8516" stroke-width="1.5"></path>
+                <path
+                  d="M2 14h6l3 2h5a2 2 0 0 1 2 2v1a2 2 0 0 1-2 2H5l-3-4z"
+                  fill="currentColor"
+                ></path>
+              </svg>
+            </div>
+            <h3 class="how-card-title">Collect Order</h3>
+            <p class="how-card-desc">
+              Hot, aromatic, eco-packaged burgers delivered fast for an irresistible culinary
+              experience.
+            </p>
+            <div class="how-card-arrow">
+              <svg viewBox="0 0 24 24" fill="none">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
+            </div>
+          </div>
         </div>
       </div>
+    </section>
 
-      <!-- Bottom Bar -->
-      <div class="footer-bottom">
-        <div class="footer-divider-bar"></div>
-        <div class="copyright-text">Burger.Com©Allrightreserve</div>
+    <!-- =========================================================================
+       7. TESTIMONIALS SECTION ("WHAT OUR CUSTOMER SAYS")
+       ========================================================================= -->
+    <section class="testimonials-section" id="testimonialsSection">
+      <div class="container">
+        <div class="section-tag">WHAT OUR CUSTOMER SAYS</div>
+        <div class="section-spacer"></div>
+
+        <div class="testimonials-carousel-viewport" id="testimonialsViewport">
+          <div class="testimonials-track">
+            <!-- Left Partial Card -->
+            <div class="testimonial-card side-card" aria-hidden="true">
+              <p class="testimonial-text">
+                Fresh, organic, and truly mouthwatering. Every single bite feels guilt-free and
+                delicious!
+              </p>
+              <div class="testimonial-stars">★★★★★</div>
+              <div class="testimonial-author">Vikram Sen</div>
+              <div class="testimonial-role">Eco Enthusiast</div>
+            </div>
+
+            <!-- Active Center Card -->
+            <div class="testimonial-card active-card" id="activeTestimonialCard">
+              <!-- Quote circular badge at top -->
+              <div class="quote-icon-badge">
+                <svg viewBox="0 0 24 24">
+                  <path d="M6 17h3l2-4V7H5v6h3l-2 4zm8 0h3l2-4V7h-6v6h3l-2 4z" />
+                </svg>
+              </div>
+
+              <p class="testimonial-text" id="testimonialQuote">
+                The crispiest, freshest burgers I have ever tasted! The locally sourced organic
+                ingredients really make a world of difference.
+              </p>
+
+              <div class="testimonial-stars">
+                <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+              </div>
+
+              <div class="testimonial-author" id="testimonialAuthor">Merian Maheta</div>
+              <div class="testimonial-role" id="testimonialRole">Owner Of Organic Greens</div>
+            </div>
+
+            <!-- Right Partial Card -->
+            <div class="testimonial-card side-card" aria-hidden="true">
+              <p class="testimonial-text">
+                Lightning-fast delivery and the packaging was completely biodegradable. 10/10
+                recommendation!
+              </p>
+              <div class="testimonial-stars">★★★★★</div>
+              <div class="testimonial-author">Rohan Kapoor</div>
+              <div class="testimonial-role">Founder at GreenBite</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Testimonial Controls Below -->
+        <div class="testimonials-controls">
+          <button class="testimonial-btn prev" id="prevTestBtn" aria-label="Previous testimonial">
+            <svg viewBox="0 0 24 24" fill="none">
+              <line x1="19" y1="12" x2="5" y2="12"></line>
+              <polyline points="12 19 5 12 12 5"></polyline>
+            </svg>
+          </button>
+          <button class="testimonial-btn next" id="nextTestBtn" aria-label="Next testimonial">
+            <svg viewBox="0 0 24 24" fill="none">
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+              <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+          </button>
+        </div>
       </div>
-    </div>
-  </footer>
+    </section>
 
-  <!-- =========================================================================
+    <!-- =========================================================================
+       8. FOOTER
+       ========================================================================= -->
+    <footer class="site-footer" id="siteFooter">
+      <div class="container">
+        <div class="footer-grid">
+          <!-- Col 1: Brand & Contact Info -->
+          <div class="footer-brand">
+            <a href="#heroSection" class="brand-logo" aria-label="Burger Home">
+              <span class="burger-svg-icon">
+                <svg viewBox="0 0 38 38" fill="currentColor">
+                  <path d="M6 16.5C6 10.15 11.82 5 19 5C26.18 5 32 10.15 32 16.5H6Z" />
+                  <circle cx="13" cy="10.5" r="1" fill="#FF5232" />
+                  <circle cx="19" cy="9" r="1" fill="#FF5232" />
+                  <circle cx="25" cy="11" r="1" fill="#FF5232" />
+                  <rect x="5" y="19" width="28" height="3" rx="1.5" />
+                  <path
+                    d="M4 24C4 23.45 4.45 23 5 23H33C33.55 23 34 23.45 34 24C34 24.55 33.55 25 33 25H5C4.45 25 4 24.55 4 24Z"
+                  />
+                  <path d="M6.5 27.5H31.5C31.5 30.5 25.9 33 19 33C12.1 33 6.5 30.5 6.5 27.5Z" />
+                </svg>
+              </span>
+              <span>Burger</span>
+            </a>
+            <p class="footer-bio">
+              Crafting pure plant-based burgers with locally sourced, organic veggies for a
+              delicious, earth-loving meal experience.
+            </p>
+            <div class="footer-contact">
+              <a href="tel:+919876543210" class="footer-contact-link">
+                <svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <path
+                    d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"
+                  ></path>
+                </svg>
+                <span>+91 9876543210</span>
+              </a>
+              <a href="mailto:mail@burger.com" class="footer-contact-link">
+                <svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <path
+                    d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"
+                  ></path>
+                  <polyline points="22,6 12,13 2,6"></polyline>
+                </svg>
+                <span>mail@burger.com</span>
+              </a>
+              <div class="footer-contact-link">
+                <svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                  <circle cx="12" cy="10" r="3"></circle>
+                </svg>
+                <span>Green Park Avenue, Indiranagar, Bengaluru</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Col 2: Service -->
+          <div class="footer-col">
+            <h4 class="footer-col-title">Service</h4>
+            <ul class="footer-links">
+              <li><a href="#hotItemsSection">Veggie Burgers</a></li>
+              <li><a href="#hotItemsSection">Gourmet Menu</a></li>
+              <li><a href="#promoSection">Meal Combos</a></li>
+              <li><a href="#howItWorksSection">Delivery Services</a></li>
+              <li><a href="#whoWeAreSection">About Us</a></li>
+            </ul>
+          </div>
+
+          <!-- Col 3: Follow Us -->
+          <div class="footer-col">
+            <h4 class="footer-col-title">Follow Us</h4>
+            <ul class="footer-links">
+              <li><a href="#" target="_blank" rel="noopener">Facebook</a></li>
+              <li><a href="#" target="_blank" rel="noopener">Instagram</a></li>
+              <li><a href="#" target="_blank" rel="noopener">Twitter (X)</a></li>
+              <li><a href="#" target="_blank" rel="noopener">LinkedIn</a></li>
+            </ul>
+          </div>
+
+          <!-- Col 4: Subscribe For Updates -->
+          <div class="footer-col">
+            <h4 class="footer-col-title">Subscribe For Updates</h4>
+            <form class="subscribe-form" id="subscribeForm">
+              <input
+                type="email"
+                placeholder="Enter Email..."
+                required
+                aria-label="Email for newsletter updates"
+              />
+              <span class="subscribe-divider">|</span>
+              <button type="submit" class="btn-subscribe-arrow" aria-label="Subscribe">
+                <svg viewBox="0 0 24 24" fill="none">
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                  <polyline points="12 5 19 12 12 19"></polyline>
+                </svg>
+              </button>
+            </form>
+          </div>
+        </div>
+
+        <!-- Bottom Bar -->
+        <div class="footer-bottom">
+          <div class="footer-divider-bar"></div>
+          <div class="copyright-text">
+            Burger.com © All Rights Reserved | Handcrafted With Fresh Veggies
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- =========================================================================
        9. INTERACTIVE MODALS & CART DRAWER
        ========================================================================= -->
-  <!-- Cart Drawer Overlay -->
-  <div class="cart-drawer-overlay" id="cartDrawerOverlay"></div>
-  
-  <!-- Slide-out Cart Drawer -->
-  <aside class="cart-drawer" id="cartDrawer" aria-label="Shopping Bag">
-    <div class="cart-header">
-      <h3>Your Bag (<span class="cart-badge">0</span>)</h3>
-      <button class="btn-close-cart" id="btnCloseCart" aria-label="Close cart">&times;</button>
-    </div>
-    <div class="cart-items-list" id="cartItemsList">
-      <!-- Injected via JavaScript -->
-    </div>
-    <div class="cart-footer">
-      <div class="cart-subtotal-row">
-        <span>Subtotal</span>
-        <span id="cartSubtotal">₹0.00</span>
-      </div>
-      <button class="btn-checkout" id="btnCheckout">Proceed to Checkout</button>
-    </div>
-  </aside>
+    <!-- Cart Drawer Overlay -->
+    <div class="cart-drawer-overlay" id="cartDrawerOverlay"></div>
 
-  <!-- Video Demo Modal -->
-  <div class="modal-overlay" id="demoModal" role="dialog" aria-modal="true">
-    <div class="modal-content">
-      <button class="modal-close-btn" id="btnCloseModal" aria-label="Close demo modal">&times;</button>
-      <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
-        <iframe 
-          src="https://www.youtube-nocookie.com/embed/dQw4w9WgXcQ?autoplay=0" 
-          title="Culinary Burger Demo" 
-          style="position: absolute; top:0; left: 0; width: 100%; height: 100%; border:0;"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-          allowfullscreen>
-        </iframe>
+    <!-- Slide-out Cart Drawer -->
+    <aside
+      class="cart-drawer"
+      id="cartDrawer"
+      aria-label="Shopping Bag"
+      role="dialog"
+      aria-modal="true"
+    >
+      <div class="cart-header">
+        <h3>Your Bag (<span class="cart-badge">0</span>)</h3>
+        <button class="btn-close-cart" id="btnCloseCart" aria-label="Close cart">&times;</button>
+      </div>
+      <div class="cart-items-list" id="cartItemsList">
+        <!-- Injected via JavaScript -->
+      </div>
+      <div class="cart-footer">
+        <div class="cart-subtotal-row">
+          <span>Items Subtotal</span>
+          <span id="cartSubtotal">₹0.00</span>
+        </div>
+        <button class="btn-checkout" id="btnCheckout">Proceed to Checkout</button>
+      </div>
+    </aside>
+
+    <!-- Video Demo Modal -->
+    <div
+      class="modal-overlay"
+      id="demoModal"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="demoModalTitle"
+    >
+      <div class="modal-content">
+        <button class="modal-close-btn" id="btnCloseModal" aria-label="Close demo video modal">
+          &times;
+        </button>
+        <div class="video-iframe-wrap">
+          <iframe
+            src="https://www.youtube-nocookie.com/embed/dQw4w9WgXcQ?autoplay=0"
+            title="Culinary Burger Demo"
+            allow="
+              accelerometer;
+              autoplay;
+              clipboard-write;
+              encrypted-media;
+              gyroscope;
+              picture-in-picture;
+            "
+            allowfullscreen
+          >
+          </iframe>
+        </div>
       </div>
     </div>
-  </div>
 
-  <!-- Search Modal Overlay -->
-  <div class="search-modal-overlay" id="searchModal" role="dialog" aria-modal="true">
-    <div class="search-modal-box">
-      <div class="search-input-wrap">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--primary-orange)" stroke-width="2.5">
-          <circle cx="11" cy="11" r="8"></circle>
-          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+    <!-- Search Modal Overlay -->
+    <div
+      class="search-modal-overlay"
+      id="searchModal"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="searchInput"
+    >
+      <div class="search-modal-box">
+        <div class="search-input-wrap">
+          <svg
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="var(--primary-orange)"
+            stroke-width="2.5"
+          >
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+          <input
+            type="text"
+            id="searchInput"
+            placeholder="Search menu (e.g. Crispy, Vegy, Combo)..."
+            autocomplete="off"
+            aria-label="Search burger menu"
+          />
+          <button id="btnCloseSearch" aria-label="Close search" class="btn-close-search">
+            &times;
+          </button>
+        </div>
+        <div class="search-results-list" id="searchResults">
+          <!-- Results populated via JS -->
+        </div>
+      </div>
+    </div>
+
+    <!-- =========================================================================
+       10. CHECKOUT MODAL (ORDERING SYSTEM)
+       ========================================================================= -->
+    <div
+      class="modal-overlay checkout-modal-overlay"
+      id="checkoutModal"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="checkoutModalTitle"
+    >
+      <div class="modal-content checkout-modal-content">
+        <button class="modal-close-btn" id="btnCloseCheckout" aria-label="Close checkout modal">
+          &times;
+        </button>
+        <div class="checkout-header">
+          <span class="checkout-icon">🍔</span>
+          <div>
+            <h3 id="checkoutModalTitle">Complete Your Burger Order</h3>
+            <p class="checkout-subtitle">Freshly cooked with love & eco-friendly packaging</p>
+          </div>
+        </div>
+
+        <form id="checkoutForm" class="checkout-form">
+          <!-- Contact Information -->
+          <div class="form-row">
+            <div class="form-group">
+              <label for="customerName">Full Name *</label>
+              <input
+                type="text"
+                id="customerName"
+                name="name"
+                placeholder="e.g. Rahul Sharma"
+                required
+                autocomplete="name"
+              />
+            </div>
+            <div class="form-group">
+              <label for="customerPhone">Phone Number *</label>
+              <input
+                type="tel"
+                id="customerPhone"
+                name="phone"
+                placeholder="e.g. 9876543210"
+                required
+                autocomplete="tel"
+                pattern="[0-9]{10}"
+                title="Please enter a 10-digit mobile number"
+              />
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="customerAltPhone">Alternate Phone (Optional)</label>
+              <input
+                type="tel"
+                id="customerAltPhone"
+                name="alternatePhone"
+                placeholder="Backup 10-digit number"
+                pattern="[0-9]{10}"
+              />
+            </div>
+            <div class="form-group">
+              <label for="customerEmail">Email Address (Optional)</label>
+              <input
+                type="email"
+                id="customerEmail"
+                name="email"
+                placeholder="e.g. rahul@example.com"
+                autocomplete="email"
+              />
+            </div>
+          </div>
+
+          <!-- Delivery Mode -->
+          <div class="form-group">
+            <label class="section-form-label">Order Type</label>
+            <div class="delivery-options-grid">
+              <label class="delivery-option-card">
+                <input type="radio" name="deliveryType" value="Home Delivery" checked />
+                <span class="option-content">
+                  <span class="option-icon">🛵</span>
+                  <span class="option-name">Home Delivery</span>
+                  <span class="option-tag">₹30 (Free &gt; ₹500)</span>
+                </span>
+              </label>
+              <label class="delivery-option-card">
+                <input type="radio" name="deliveryType" value="Takeaway" />
+                <span class="option-content">
+                  <span class="option-icon">🥡</span>
+                  <span class="option-name">Self Takeaway</span>
+                  <span class="option-tag">Free</span>
+                </span>
+              </label>
+              <label class="delivery-option-card">
+                <input type="radio" name="deliveryType" value="Dine-in" />
+                <span class="option-content">
+                  <span class="option-icon">🍽️</span>
+                  <span class="option-name">Dine-in</span>
+                  <span class="option-tag">Table Service</span>
+                </span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Detailed Address Fields for Delivery -->
+          <div id="deliveryAddressBlock">
+            <div class="form-row">
+              <div class="form-group">
+                <label for="custFlat">Flat / House No. / Building *</label>
+                <input
+                  type="text"
+                  id="custFlat"
+                  name="flat"
+                  placeholder="e.g. Flat 302, Palm Heights"
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <label for="custStreet">Street / Area Name *</label>
+                <input
+                  type="text"
+                  id="custStreet"
+                  name="street"
+                  placeholder="e.g. 12th Main, 4th Cross"
+                  required
+                />
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="custLandmark">Landmark (Optional)</label>
+                <input
+                  type="text"
+                  id="custLandmark"
+                  name="landmark"
+                  placeholder="e.g. Near Metro / HDFC Bank"
+                />
+              </div>
+              <div class="form-group">
+                <label for="custCity">City *</label>
+                <input type="text" id="custCity" name="city" value="Bengaluru" required />
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="custPincode">Postal PIN Code *</label>
+              <input
+                type="text"
+                id="custPincode"
+                name="pincode"
+                placeholder="e.g. 560038"
+                pattern="[0-9]{6}"
+                required
+              />
+            </div>
+          </div>
+
+          <!-- Table or Takeaway Note (Hidden when delivery) -->
+          <div class="form-group" id="tableOrNoteGroup" style="display: none">
+            <label for="tableOrNoteInput" id="tableOrNoteLabel">Table Number / Pickup Note *</label>
+            <input
+              type="text"
+              id="tableOrNoteInput"
+              name="tableOrNote"
+              placeholder="e.g. Table 4 or Pick at 7:30 PM"
+            />
+          </div>
+
+          <!-- Payment Method -->
+          <div class="form-group">
+            <label class="section-form-label">Payment Option</label>
+            <div class="payment-options-grid">
+              <label class="payment-option-pill">
+                <input type="radio" name="paymentMethod" value="Cash on Delivery" checked />
+                <span>💵 Cash on Delivery (COD)</span>
+              </label>
+              <label class="payment-option-pill">
+                <input type="radio" name="paymentMethod" value="UPI / QR" />
+                <span>📱 UPI / QR Code / NetBanking</span>
+              </label>
+              <label class="payment-option-pill">
+                <input type="radio" name="paymentMethod" value="Card Payment" />
+                <span>💳 Credit / Debit Card</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Promo Code Field -->
+          <div class="form-group">
+            <label for="promoCodeInput">Apply Promo Voucher</label>
+            <div class="promo-code-wrap">
+              <input
+                type="text"
+                id="promoCodeInput"
+                placeholder="Try code: EARTH50"
+                style="text-transform: uppercase"
+              />
+              <button type="button" id="btnApplyPromo" class="btn-apply-promo">Apply</button>
+            </div>
+            <span id="promoStatusMessage" class="promo-status"></span>
+          </div>
+
+          <!-- Live Price Calculation -->
+          <div class="checkout-summary-box">
+            <div class="summary-line">
+              <span>Items (<span id="checkoutItemsCount">0</span>)</span>
+              <span id="checkoutSubtotal">₹0.00</span>
+            </div>
+            <div class="summary-line discount-line" id="checkoutDiscountRow" style="display: none">
+              <span id="checkoutDiscountLabel">Special Discount</span>
+              <span id="checkoutDiscountValue">-₹0.00</span>
+            </div>
+            <div class="summary-line">
+              <span>Restaurant GST (5%)</span>
+              <span id="checkoutGst">₹0.00</span>
+            </div>
+            <div class="summary-line">
+              <span>Delivery Charge</span>
+              <span id="checkoutDeliveryFee">₹30.00</span>
+            </div>
+            <div class="summary-line grand-total-line">
+              <span>Estimated Grand Total</span>
+              <span id="checkoutGrandTotal">₹0.00</span>
+            </div>
+          </div>
+
+          <div class="checkout-actions">
+            <button type="submit" class="btn-submit-order" id="btnSubmitOrder">
+              <span id="btnSubmitText">Place Order & View Receipt</span>
+              <span class="btn-spinner" id="btnSubmitSpinner" style="display: none"></span>
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- =========================================================================
+       11. DIGITAL & PRINTABLE ORDER RECEIPT MODAL
+       ========================================================================= -->
+    <div
+      class="modal-overlay receipt-modal-overlay"
+      id="receiptModal"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="receiptModalTitle"
+    >
+      <div class="modal-content receipt-modal-content">
+        <button
+          class="modal-close-btn no-print"
+          id="btnCloseReceipt"
+          aria-label="Close receipt modal"
+        >
+          &times;
+        </button>
+
+        <!-- Authentic Restaurant Digital Ticket -->
+        <div class="receipt-card" id="printableReceipt">
+          <div class="receipt-header">
+            <div class="receipt-brand">
+              <span class="receipt-burger-icon">🍔</span>
+              <h2 id="receiptModalTitle">Burger</h2>
+              <span class="receipt-sub">Burgers That Love The Earth</span>
+            </div>
+            <div class="receipt-badge-status">
+              <span class="status-dot"></span>
+              <span id="receiptStatusText">Order Confirmed</span>
+            </div>
+          </div>
+
+          <!-- Live Delivery Tracker Bar -->
+          <div class="order-tracker-bar no-print">
+            <div class="track-step active">
+              <span class="track-dot">✓</span>
+              <span class="track-label">Confirmed</span>
+            </div>
+            <div class="track-line active"></div>
+            <div class="track-step active" id="trackStepKitchen">
+              <span class="track-dot">🔥</span>
+              <span class="track-label">Kitchen</span>
+            </div>
+            <div class="track-line" id="trackLineDelivery"></div>
+            <div class="track-step" id="trackStepDelivery">
+              <span class="track-dot">🛵</span>
+              <span class="track-label">Delivery</span>
+            </div>
+          </div>
+
+          <!-- Receipt Metadata Grid -->
+          <div class="receipt-meta-grid">
+            <div>
+              <span class="meta-label">RECEIPT #</span>
+              <span class="meta-val" id="receiptOrderId">#BGR-00000</span>
+            </div>
+            <div>
+              <span class="meta-label">DATE & TIME</span>
+              <span class="meta-val" id="receiptDateTime">—</span>
+            </div>
+            <div>
+              <span class="meta-label">CUSTOMER</span>
+              <span class="meta-val" id="receiptCustomerName">—</span>
+            </div>
+            <div>
+              <span class="meta-label">PHONE</span>
+              <span class="meta-val" id="receiptCustomerPhone">—</span>
+            </div>
+            <div class="meta-full">
+              <span class="meta-label">DELIVERY DESTINATION</span>
+              <span class="meta-val" id="receiptDeliveryAddress">—</span>
+            </div>
+            <div>
+              <span class="meta-label">PAYMENT METHOD</span>
+              <span class="meta-val" id="receiptPaymentMethod">—</span>
+            </div>
+            <div>
+              <span class="meta-label">ESTIMATED TIME</span>
+              <span class="meta-val" id="receiptEstTime">25 - 35 mins</span>
+            </div>
+          </div>
+
+          <div class="receipt-divider-dashed"></div>
+
+          <!-- Itemized Order Table -->
+          <div class="receipt-items-table">
+            <div class="receipt-table-head">
+              <span>ITEM</span>
+              <span style="text-align: center">QTY</span>
+              <span style="text-align: right">RATE</span>
+              <span style="text-align: right">AMOUNT</span>
+            </div>
+            <div class="receipt-items-body" id="receiptItemsBody">
+              <!-- Dynamic rows -->
+            </div>
+          </div>
+
+          <div class="receipt-divider-dashed"></div>
+
+          <!-- Financial Breakdown -->
+          <div class="receipt-totals-box">
+            <div class="receipt-totals-row">
+              <span>Items Subtotal</span>
+              <span id="receiptSubtotal">₹0.00</span>
+            </div>
+            <div
+              class="receipt-totals-row discount-row"
+              id="receiptDiscountRow"
+              style="display: none"
+            >
+              <span id="receiptDiscountLabel">Special Discount</span>
+              <span id="receiptDiscount">-₹0.00</span>
+            </div>
+            <div class="receipt-totals-row">
+              <span>Restaurant GST (5%)</span>
+              <span id="receiptGst">₹0.00</span>
+            </div>
+            <div class="receipt-totals-row">
+              <span>Delivery Fee</span>
+              <span id="receiptDelivery">₹0.00</span>
+            </div>
+            <div class="receipt-totals-row grand-total-row">
+              <span>PAID / TOTAL AMOUNT</span>
+              <span id="receiptGrandTotal">₹0.00</span>
+            </div>
+          </div>
+
+          <div class="receipt-barcode-wrap">
+            <div class="receipt-barcode-lines"></div>
+            <span class="receipt-barcode-number" id="receiptBarcodeNumber">BGR-00000-RECEIPT</span>
+            <p class="receipt-thank-you">🌱 Thank you for eating eco-friendly with Burger!</p>
+          </div>
+        </div>
+
+        <!-- Action Buttons (Hidden on Print) -->
+        <div class="receipt-actions no-print">
+          <button class="btn-print-receipt" id="btnPrintReceipt">
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.2"
+            >
+              <polyline points="6 9 6 2 18 2 18 9"></polyline>
+              <path
+                d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"
+              ></path>
+              <rect x="6" y="14" width="12" height="8"></rect>
+            </svg>
+            <span>Print / Save Receipt</span>
+          </button>
+          <button class="btn-new-order" id="btnNewOrder">Order More Food</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div class="toast-notification" id="toastNotification" role="status" aria-live="polite">
+      <span class="toast-icon">
+        <svg
+          width="20"
+          height="20"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2.5"
+        >
+          <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+          <polyline points="22 4 12 14.01 9 11.01"></polyline>
         </svg>
-        <input type="text" id="searchInput" placeholder="Search menu (e.g. Crispy, Vegy, Combo)..." autocomplete="off">
-        <button id="btnCloseSearch" style="font-size: 1.5rem; color: #888;">&times;</button>
-      </div>
-      <div class="search-results-list" id="searchResults">
-        <!-- Results populated via JS -->
-      </div>
+      </span>
+      <span id="toastMessage">Item added to bag!</span>
     </div>
-  </div>
 
-  <!-- Toast Notification -->
-  <div class="toast-notification" id="toastNotification" role="status" aria-live="polite">
-    <span class="toast-icon">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-        <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
-        <polyline points="22 4 12 14.01 9 11.01"></polyline>
-      </svg>
-    </span>
-    <span id="toastMessage">Item added to bag!</span>
-  </div>
-
-  <!-- Application Script -->
-  <script src="js/app.js"></script>
-</body>
+    <!-- Application Script -->
+    <script src="js/app.js?v=3.0"></script>
+  </body>
 </html>

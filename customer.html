@@ -1,0 +1,620 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="theme-color" content="#FF5E00" />
+    <title>Customer Portal & Order Tracking | CurryCraft Royal Indian Cuisine</title>
+
+    <!-- Fonts: Outfit & Plus Jakarta Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Customer Portal Stylesheet -->
+    <link rel="stylesheet" href="css/customer.css" />
+  </head>
+  <body>
+    <!-- Top Customer Navigation Header -->
+    <header class="cust-navbar">
+      <div class="cust-nav-container">
+        <a href="index.html" class="cust-brand">
+          <span class="cust-logo-icon">🍛</span>
+          <div>
+            <span class="brand-title">CurryCraft Portal</span>
+            <span class="brand-sub">Royal Dum Biryani &amp; Curries</span>
+          </div>
+        </a>
+
+        <!-- Portal Tabs -->
+        <nav class="cust-nav-tabs">
+          <button class="cust-tab active" data-tab="orderTab">
+            <span class="tab-icon">🍛</span>
+            <span>Order Food</span>
+          </button>
+          <button class="cust-tab" data-tab="myOrdersTab">
+            <span class="tab-icon">📦</span>
+            <span>My Orders & Tracking</span>
+            <span class="cust-orders-count-badge" id="myOrdersBadge" style="display: none">0</span>
+          </button>
+          <button class="cust-tab" data-tab="addressesTab">
+            <span class="tab-icon">📍</span>
+            <span>Saved Addresses</span>
+          </button>
+        </nav>
+
+        <!-- Cart Button & Quick Links -->
+        <div class="cust-nav-actions">
+          <a href="index.html" class="nav-ghost-link">Storefront</a>
+          <a href="admin.html" class="nav-ghost-link admin-pill">Admin</a>
+
+          <button class="cust-cart-btn" id="openCartBtn" aria-label="View shopping bag">
+            <svg
+              width="22"
+              height="22"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.3"
+            >
+              <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+              <line x1="3" y1="6" x2="21" y2="6"></line>
+              <path d="M16 10a4 4 0 0 1-8 0"></path>
+            </svg>
+            <span class="cust-cart-badge" id="custCartBadge">0</span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Portal Content -->
+    <main class="cust-main">
+      <div class="container">
+        <!-- =========================================================================
+           TAB 1: ORDER FOOD & MENU CATALOG
+           ========================================================================= -->
+        <section class="cust-tab-content active" id="orderTab">
+          <!-- Hero Banner in Portal -->
+          <div class="cust-hero-banner">
+            <div class="cust-banner-text">
+              <span class="badge-fresh">👑 Handcrafted Clay Handi Dum Cuisine</span>
+              <h1>Royal Indian Feast, Delivered With Care</h1>
+              <p>
+                Select your favorite dum biryani, rich curries, and tandoori breads. Use promo code
+                <strong>ROYAL50</strong> for 50% off!
+              </p>
+            </div>
+            <div class="cust-banner-chips">
+              <div class="chip-item">⚡ 25-35 Min Delivery</div>
+              <div class="chip-item">🏺 Clay Handi Sealed</div>
+              <div class="chip-item">⭐ 4.9 Rated</div>
+            </div>
+          </div>
+
+          <!-- Menu Category Navigation & Search -->
+          <div class="menu-filter-bar">
+            <div class="category-pills">
+              <button class="cat-pill active" data-category="All">All Menu</button>
+              <button class="cat-pill" data-category="Biryani">Biryani</button>
+              <button class="cat-pill" data-category="Curries">Curries</button>
+              <button class="cat-pill" data-category="Breads">Breads</button>
+              <button class="cat-pill" data-category="Desserts & Beverages">Desserts & Chai</button>
+            </div>
+
+            <div class="menu-search-wrap">
+              <svg
+                width="18"
+                height="18"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+              </svg>
+              <input type="text" id="custMenuSearch" placeholder="Search burgers, combos..." />
+            </div>
+          </div>
+
+          <!-- Menu Catalog Grid -->
+          <div class="cust-menu-grid" id="custMenuGrid">
+            <div class="cust-loading">Loading fresh menu...</div>
+          </div>
+        </section>
+
+        <!-- =========================================================================
+           TAB 2: MY ORDERS & LIVE TRACKING
+           ========================================================================= -->
+        <section class="cust-tab-content" id="myOrdersTab">
+          <div class="orders-lookup-box">
+            <div class="lookup-header">
+              <h2>Track & View Your Orders</h2>
+              <p>
+                Enter your 10-digit phone number used during checkout to see all active orders, live
+                kitchen status, and past receipts.
+              </p>
+            </div>
+
+            <form id="orderLookupForm" class="lookup-form">
+              <div class="lookup-input-wrap">
+                <span class="country-prefix">+91</span>
+                <input
+                  type="tel"
+                  id="lookupPhoneInput"
+                  placeholder="Enter 10-digit mobile number"
+                  pattern="[0-9]{10}"
+                  required
+                />
+              </div>
+              <button type="submit" class="btn-lookup">
+                <span>Find My Orders</span>
+              </button>
+            </form>
+          </div>
+
+          <!-- Orders Results Feed -->
+          <div class="customer-orders-feed" id="customerOrdersFeed">
+            <div class="cust-empty-orders">
+              <span style="font-size: 3rem; display: block; margin-bottom: 10px">📦</span>
+              <h3>No phone number entered yet</h3>
+              <p>
+                Enter your mobile number above to fetch your order history and live delivery
+                tracking.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <!-- =========================================================================
+           TAB 3: SAVED ADDRESSES
+           ========================================================================= -->
+        <section class="cust-tab-content" id="addressesTab">
+          <div class="addresses-header">
+            <div>
+              <h2>My Delivery Addresses</h2>
+              <p>Save multiple delivery locations for fast 1-click checkout.</p>
+            </div>
+            <button class="btn-add-address" id="btnOpenAddressModal">+ Add New Address</button>
+          </div>
+
+          <div class="saved-addresses-grid" id="savedAddressesGrid">
+            <!-- Populated by JS -->
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <!-- =========================================================================
+       CART & CHECKOUT SLIDE-OUT DRAWER
+       ========================================================================= -->
+    <div class="cust-drawer-overlay" id="cartOverlay"></div>
+    <aside class="cust-cart-drawer" id="cartDrawer">
+      <div class="drawer-header">
+        <h3>Your Bag (<span class="cust-cart-count">0</span> items)</h3>
+        <button class="btn-close-drawer" id="btnCloseCartDrawer">&times;</button>
+      </div>
+
+      <div class="drawer-body" id="drawerCartItems">
+        <!-- Injected by JS -->
+      </div>
+
+      <div class="drawer-footer">
+        <div class="cart-totals-summary">
+          <div class="sum-row">
+            <span>Items Subtotal</span>
+            <span id="drawerSubtotal">₹0.00</span>
+          </div>
+          <div class="sum-row delivery-row">
+            <span>Delivery Charge</span>
+            <span id="drawerDelivery">₹30.00</span>
+          </div>
+          <div class="sum-row total-row">
+            <span>Estimated Total</span>
+            <span id="drawerGrandTotal">₹0.00</span>
+          </div>
+        </div>
+        <button class="btn-checkout-now" id="btnProceedCheckout">Proceed to Checkout</button>
+      </div>
+    </aside>
+
+    <!-- =========================================================================
+       FULL ADDRESS CHECKOUT MODAL
+       ========================================================================= -->
+    <div class="cust-modal-overlay" id="checkoutModal">
+      <div class="cust-modal-box checkout-box">
+        <div class="modal-header">
+          <div>
+            <h3>Checkout & Delivery Details</h3>
+            <p>Please enter your exact location and contact details for prompt delivery.</p>
+          </div>
+          <button class="btn-close-modal" id="btnCloseCheckout">&times;</button>
+        </div>
+
+        <form id="customerCheckoutForm" class="cust-checkout-form">
+          <!-- Contact Information -->
+          <div class="form-section-title">1. Contact Information</div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="custName">Full Name *</label>
+              <input
+                type="text"
+                id="custName"
+                name="name"
+                required
+                placeholder="e.g. Vikram Sharma"
+                autocomplete="name"
+              />
+            </div>
+            <div class="form-group">
+              <label for="custPhone">Mobile Phone Number *</label>
+              <input
+                type="tel"
+                id="custPhone"
+                name="phone"
+                required
+                placeholder="10-digit number"
+                pattern="[0-9]{10}"
+                autocomplete="tel"
+              />
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="custAltPhone">Alternate Contact Phone (Optional)</label>
+              <input
+                type="tel"
+                id="custAltPhone"
+                name="alternatePhone"
+                placeholder="Backup phone number"
+                pattern="[0-9]{10}"
+              />
+            </div>
+            <div class="form-group">
+              <label for="custEmail">Email Address (Optional)</label>
+              <input
+                type="email"
+                id="custEmail"
+                name="email"
+                placeholder="For receipt copy"
+                autocomplete="email"
+              />
+            </div>
+          </div>
+
+          <!-- Delivery Address Details -->
+          <div class="form-section-title">2. Delivery Location & Address</div>
+
+          <!-- Saved Address Quick Selector -->
+          <div
+            class="saved-address-selector-row"
+            id="savedAddressSelectorRow"
+            style="display: none"
+          >
+            <label>Use Saved Address:</label>
+            <select id="savedAddressDropdown">
+              <option value="">-- Choose saved address --</option>
+            </select>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="custFlat">Flat / House No. / Building *</label>
+              <input
+                type="text"
+                id="custFlat"
+                name="flat"
+                required
+                placeholder="e.g. Flat 302, Palm Heights"
+              />
+            </div>
+            <div class="form-group">
+              <label for="custStreet">Street / Area Name *</label>
+              <input
+                type="text"
+                id="custStreet"
+                name="street"
+                required
+                placeholder="e.g. 12th Main, 4th Cross"
+              />
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="custLandmark">Landmark (Optional)</label>
+              <input
+                type="text"
+                id="custLandmark"
+                name="landmark"
+                placeholder="e.g. Near Metro Station / HDFC Bank"
+              />
+            </div>
+            <div class="form-group">
+              <label for="custCity">City *</label>
+              <input type="text" id="custCity" name="city" required value="Bengaluru" />
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="custPincode">Postal PIN Code *</label>
+              <input
+                type="text"
+                id="custPincode"
+                name="pincode"
+                required
+                placeholder="e.g. 560038"
+                pattern="[0-9]{6}"
+              />
+            </div>
+            <div class="form-group">
+              <label for="custDeliveryType">Delivery Mode</label>
+              <select id="custDeliveryType" name="deliveryType">
+                <option value="Home Delivery">🛵 Home Delivery (₹30, Free > ₹500)</option>
+                <option value="Takeaway">🥡 Takeaway (Self Pickup - Free)</option>
+                <option value="Dine-in">🍽️ Dine-in (Table Service)</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="custNotes">Special Delivery Notes</label>
+            <input
+              type="text"
+              id="custNotes"
+              name="notes"
+              placeholder="e.g. Ring the doorbell twice, please keep extra napkins"
+            />
+          </div>
+
+          <!-- Payment Method -->
+          <div class="form-section-title">3. Payment Method</div>
+          <div class="payment-method-radios">
+            <label class="pay-radio-card">
+              <input type="radio" name="paymentMethod" value="Cash on Delivery" checked />
+              <span>💵 Cash on Delivery</span>
+            </label>
+            <label class="pay-radio-card">
+              <input type="radio" name="paymentMethod" value="UPI / Online" />
+              <span>📱 UPI / QR Code</span>
+            </label>
+            <label class="pay-radio-card">
+              <input type="radio" name="paymentMethod" value="Credit / Debit Card" />
+              <span>💳 Card Payment</span>
+            </label>
+          </div>
+
+          <!-- Voucher Code -->
+          <div class="form-section-title">4. Voucher Voucher</div>
+          <div class="promo-input-row">
+            <input
+              type="text"
+              id="portalPromoInput"
+              placeholder="Try code: EARTH50"
+              style="text-transform: uppercase"
+            />
+            <button type="button" id="btnApplyPortalPromo" class="btn-promo-apply">Apply</button>
+          </div>
+          <span id="portalPromoStatus" class="promo-status-msg"></span>
+
+          <!-- Live Price Summary -->
+          <div class="checkout-review-card">
+            <div class="rev-line">
+              <span>Items Subtotal (<span id="revItemsCount">0</span> items)</span>
+              <span id="revSubtotal">₹0.00</span>
+            </div>
+            <div class="rev-line discount-rev-line" id="revDiscountRow" style="display: none">
+              <span id="revDiscountLabel">Voucher Discount</span>
+              <span id="revDiscountValue">-₹0.00</span>
+            </div>
+            <div class="rev-line">
+              <span>Restaurant GST (5%)</span>
+              <span id="revGst">₹0.00</span>
+            </div>
+            <div class="rev-line">
+              <span>Delivery Fee</span>
+              <span id="revDelivery">₹30.00</span>
+            </div>
+            <div class="rev-line rev-total-line">
+              <span>Grand Total</span>
+              <span id="revGrandTotal">₹0.00</span>
+            </div>
+          </div>
+
+          <div class="checkout-submit-actions">
+            <button type="submit" class="btn-submit-order-portal" id="btnSubmitPortalOrder">
+              <span id="portalSubmitText">Confirm Order & Generate Receipt</span>
+              <span class="portal-spinner" id="portalSubmitSpinner" style="display: none"></span>
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- =========================================================================
+       PRINTABLE ORDER RECEIPT MODAL
+       ========================================================================= -->
+    <div class="cust-modal-overlay" id="portalReceiptModal">
+      <div class="cust-modal-box receipt-box">
+        <button class="btn-close-modal no-print" id="btnClosePortalReceipt">&times;</button>
+
+        <div class="customer-receipt-card" id="printableCustomerReceipt">
+          <div class="receipt-brand-header">
+            <span class="receipt-burger-emoji">🍔</span>
+            <h2>Burger</h2>
+            <p>Burgers That Love The Earth</p>
+          </div>
+
+          <div class="receipt-status-pill" id="portalReceiptStatus">
+            <span class="status-pulse"></span>
+            <span id="portalReceiptStatusText">Order Confirmed</span>
+          </div>
+
+          <!-- Live Step Bar -->
+          <div class="live-tracker-flow no-print">
+            <div class="tracker-node active">
+              <span>✓</span>
+              <label>Confirmed</label>
+            </div>
+            <div class="tracker-connector active"></div>
+            <div class="tracker-node active" id="portalTrackerKitchen">
+              <span>🔥</span>
+              <label>Kitchen</label>
+            </div>
+            <div class="tracker-connector" id="portalTrackerDeliveryLine"></div>
+            <div class="tracker-node" id="portalTrackerDelivery">
+              <span>🛵</span>
+              <label>Delivery</label>
+            </div>
+            <div class="tracker-connector" id="portalTrackerDoneLine"></div>
+            <div class="tracker-node" id="portalTrackerDone">
+              <span>✅</span>
+              <label>Delivered</label>
+            </div>
+          </div>
+
+          <div class="receipt-info-grid">
+            <div>
+              <span class="info-tag">ORDER RECEIPT #</span>
+              <strong id="receiptCode">#BGR-00000</strong>
+            </div>
+            <div>
+              <span class="info-tag">ORDER TIME</span>
+              <strong id="receiptTime">—</strong>
+            </div>
+            <div>
+              <span class="info-tag">CUSTOMER</span>
+              <strong id="receiptCustName">—</strong>
+            </div>
+            <div>
+              <span class="info-tag">PHONE</span>
+              <strong id="receiptCustPhone">—</strong>
+            </div>
+            <div class="grid-full">
+              <span class="info-tag">DELIVERY DESTINATION</span>
+              <strong id="receiptCustAddress">—</strong>
+            </div>
+            <div>
+              <span class="info-tag">PAYMENT MODE</span>
+              <strong id="receiptCustPay">—</strong>
+            </div>
+            <div>
+              <span class="info-tag">EST. ARRIVAL</span>
+              <strong id="receiptEstArrival">25 - 35 mins</strong>
+            </div>
+          </div>
+
+          <div class="dashed-divider"></div>
+
+          <div class="receipt-items-breakdown" id="receiptItemsTable">
+            <!-- Populated by JS -->
+          </div>
+
+          <div class="dashed-divider"></div>
+
+          <div class="receipt-totals-section">
+            <div class="receipt-tot-row">
+              <span>Subtotal</span>
+              <span id="rSubtotal">₹0.00</span>
+            </div>
+            <div class="receipt-tot-row" id="rDiscountRow" style="display: none; color: #10b981">
+              <span id="rDiscountLabel">Discount</span>
+              <span id="rDiscountValue">-₹0.00</span>
+            </div>
+            <div class="receipt-tot-row">
+              <span>Restaurant GST (5%)</span>
+              <span id="rGst">₹0.00</span>
+            </div>
+            <div class="receipt-tot-row">
+              <span>Delivery Fee</span>
+              <span id="rDelivery">₹0.00</span>
+            </div>
+            <div class="receipt-tot-row grand-tot-row">
+              <span>AMOUNT PAID / TOTAL</span>
+              <span id="rGrandTotal">₹0.00</span>
+            </div>
+          </div>
+
+          <div class="receipt-barcode-footer">
+            <div class="barcode-graphic"></div>
+            <span class="barcode-text" id="rBarcode">BGR-00000-RECEIPT</span>
+            <p class="eco-thank-you">🌱 Thank you for enjoying eco-friendly gourmet food!</p>
+          </div>
+        </div>
+
+        <div class="receipt-modal-actions no-print">
+          <button class="btn-print-receipt" id="btnPrintCustomerReceipt">
+            <svg
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <polyline points="6 9 6 2 18 2 18 9"></polyline>
+              <path
+                d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"
+              ></path>
+              <rect x="6" y="14" width="12" height="8"></rect>
+            </svg>
+            <span>Print / Save Receipt</span>
+          </button>
+          <button class="btn-order-again" id="btnOrderAgain">Order More Food</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Add New Address Modal -->
+    <div class="cust-modal-overlay" id="newAddressModal">
+      <div class="cust-modal-box">
+        <div class="modal-header">
+          <h3>Save New Delivery Address</h3>
+          <button class="btn-close-modal" id="btnCloseAddressModal">&times;</button>
+        </div>
+        <form id="saveAddressForm" class="cust-checkout-form">
+          <div class="form-group">
+            <label for="addrPhone">Your Phone Number (10 digits) *</label>
+            <input
+              type="tel"
+              id="addrPhone"
+              required
+              placeholder="9876543210"
+              pattern="[0-9]{10}"
+            />
+          </div>
+          <div class="form-group">
+            <label for="addrTitle">Address Label *</label>
+            <input
+              type="text"
+              id="addrTitle"
+              required
+              placeholder="e.g. Home, Office, Friend's House"
+            />
+          </div>
+          <div class="form-group">
+            <label for="addrDetails">Full Address Details *</label>
+            <textarea
+              id="addrDetails"
+              rows="3"
+              required
+              placeholder="Flat/House No, Building, Street, Landmark, City, PIN"
+            ></textarea>
+          </div>
+          <button type="submit" class="btn-submit-order-portal">Save Address</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div class="portal-toast" id="portalToast">Message</div>
+
+    <!-- Customer Portal JavaScript -->
+    <script src="js/customer.js"></script>
+  </body>
+</html>

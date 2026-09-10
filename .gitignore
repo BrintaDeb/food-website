@@ -24,3 +24,13 @@ Rose Gold Feminine Calligraphy Monogram Logo(73) 1.png
 # Logs and scratch files
 *.log
 scratch/
+
+# Next.js & Build
+.next/
+out/
+next-env.d.ts
+*.tsbuildinfo
+
+# Vercel & Node
+.vercel/
+node_modules/

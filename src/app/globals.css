@@ -1,0 +1,118 @@
+@import 'tailwindcss';
+
+@layer base {
+  :root {
+    --brand-orange: #ff5e00;
+    --brand-orange-hover: #e05200;
+    --brand-amber: #ff8516;
+    --brand-dark: #1a1311;
+    --brand-dark-card: #251c1a;
+    --brand-cream: #fffdf9;
+    --brand-border: #e8e5e0;
+    --brand-green: #10b981;
+    --brand-gold: #ffb800;
+  }
+
+  body {
+    background-color: #fffdf9;
+    color: #1a1311;
+    font-family:
+      var(--font-jakarta),
+      system-ui,
+      -apple-system,
+      sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family:
+      var(--font-outfit),
+      system-ui,
+      -apple-system,
+      sans-serif;
+  }
+}
+
+@keyframes floatBurger {
+  0%,
+  100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-10px) rotate(1deg);
+  }
+}
+
+@keyframes pulseGlow {
+  0%,
+  100% {
+    box-shadow: 0 0 20px rgba(255, 94, 0, 0.2);
+  }
+  50% {
+    box-shadow: 0 0 35px rgba(255, 94, 0, 0.45);
+  }
+}
+
+@keyframes badgeSpin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-float-burger {
+  animation: floatBurger 4s ease-in-out infinite;
+}
+
+.animate-pulse-glow {
+  animation: pulseGlow 3s ease-in-out infinite;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #f1ede8;
+}
+::-webkit-scrollbar-thumb {
+  background: #d8d2cb;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #ff8516;
+}
+
+/* Print layout for receipt */
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  #printableReceipt,
+  #printableReceipt * {
+    visibility: visible;
+  }
+  #printableReceipt {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    margin: 0;
+    padding: 20px;
+    box-shadow: none;
+    border: none;
+  }
+  .no-print {
+    display: none !important;
+  }
+}

@@ -1,0 +1,9 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --primary: #FF5E00;
+  --curry-charcoal: #1A1311;
+  --curry-cream: #FFFDF9;
+}

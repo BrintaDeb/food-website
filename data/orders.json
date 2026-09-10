@@ -1,0 +1,344 @@
+[
+  {
+    "id": "CC-54095",
+    "orderId": "CC-54095",
+    "createdAt": "2026-09-10T22:50:16.933Z",
+    "formattedDate": "11 Sept 2026",
+    "formattedTime": "04:20 am",
+    "status": "Confirmed",
+    "statusStep": 1,
+    "estimatedTime": "25 - 35 mins",
+    "customer": {
+      "name": "CurryCraft VIP",
+      "phone": "9845012345",
+      "alternatePhone": "",
+      "email": "",
+      "flat": "Penthouse 12",
+      "street": "Kolkata Park Street",
+      "landmark": "",
+      "city": "Kolkata",
+      "pincode": "700016",
+      "address": "Flat/House: Penthouse 12, Street/Building: Kolkata Park Street, Kolkata, PIN: 700016",
+      "deliveryType": "Home Delivery",
+      "paymentMethod": "Cash on Delivery",
+      "notes": ""
+    },
+    "items": [
+      {
+        "id": "awadhi-mutton-biryani",
+        "name": "Awadhi Dum Mutton Biryani",
+        "price": 490,
+        "quantity": 1,
+        "image": "/images/awadhi-mutton-biryani.jpg",
+        "lineTotal": 490
+      }
+    ],
+    "pricing": {
+      "itemsSubtotal": 490,
+      "discount": 245,
+      "discountLabel": "50% Royal Special (ROYAL50)",
+      "taxableAmount": 245,
+      "gst": 12.25,
+      "deliveryFee": 30,
+      "grandTotal": 287.25
+    }
+  },
+  {
+    "id": "BGR-25240",
+    "orderId": "BGR-25240",
+    "createdAt": "2026-09-10T22:49:22.129Z",
+    "formattedDate": "11 Sept 2026",
+    "formattedTime": "04:19 am",
+    "status": "Confirmed",
+    "statusStep": 1,
+    "estimatedTime": "25 - 35 mins",
+    "customer": {
+      "name": "Shreyam Verification",
+      "phone": "9876543210",
+      "alternatePhone": "",
+      "email": "",
+      "flat": "Suite 101",
+      "street": "Park Street",
+      "landmark": "Near Victoria Memorial",
+      "city": "Kolkata",
+      "pincode": "700016",
+      "address": "Flat/House: Suite 101, Street/Building: Park Street, Landmark: Near Victoria Memorial, Kolkata, PIN: 700016",
+      "deliveryType": "Home Delivery",
+      "paymentMethod": "UPI",
+      "notes": ""
+    },
+    "items": [
+      {
+        "id": "kolkata-chicken-biryani",
+        "name": "Kolkata Chicken Biryani",
+        "price": 380,
+        "quantity": 2,
+        "image": "/images/kolkata-biryani.jpg",
+        "lineTotal": 760
+      }
+    ],
+    "pricing": {
+      "itemsSubtotal": 760,
+      "discount": 380,
+      "discountLabel": "50% Royal Special (ROYAL50)",
+      "taxableAmount": 380,
+      "gst": 19,
+      "deliveryFee": 0,
+      "grandTotal": 399
+    }
+  },
+  {
+    "id": "BGR-91039",
+    "orderId": "BGR-91039",
+    "createdAt": "2026-09-10T22:16:27.024Z",
+    "formattedDate": "11 Sept 2026",
+    "formattedTime": "03:46 am",
+    "status": "Confirmed",
+    "statusStep": 1,
+    "estimatedTime": "25 - 35 mins",
+    "customer": {
+      "name": "Shreyam Test",
+      "phone": "9876543210",
+      "alternatePhone": "",
+      "email": "",
+      "flat": "",
+      "street": "",
+      "landmark": "",
+      "city": "Kolkata",
+      "pincode": "",
+      "address": "Kolkata",
+      "deliveryType": "Home Delivery",
+      "paymentMethod": "Cash on Delivery",
+      "notes": ""
+    },
+    "items": [
+      {
+        "id": "kolkata-chicken-biryani",
+        "name": "Kolkata Chicken Biryani",
+        "price": 380,
+        "quantity": 1,
+        "image": "/images/kolkata-biryani.jpg",
+        "lineTotal": 380
+      }
+    ],
+    "pricing": {
+      "itemsSubtotal": 380,
+      "discount": 190,
+      "discountLabel": "50% Royal Special (ROYAL50)",
+      "taxableAmount": 190,
+      "gst": 9.5,
+      "deliveryFee": 30,
+      "grandTotal": 229.5
+    }
+  },
+  {
+    "id": "ORD-61516",
+    "orderId": "ORD-61516",
+    "createdAt": "2026-09-10T21:08:30.078Z",
+    "formattedDate": "11 Sept 2026",
+    "formattedTime": "02:38 am",
+    "status": "Preparing",
+    "statusStep": 2,
+    "estimatedTime": "25 - 35 mins",
+    "customer": {
+      "name": "Shreyam Mukherjee",
+      "phone": "9988776655",
+      "alternatePhone": "",
+      "email": "shreyam@example.com",
+      "flat": "Flat 101",
+      "street": "Heritage High St",
+      "landmark": "Near Victoria Memorial",
+      "city": "Kolkata",
+      "pincode": "700071",
+      "address": "Flat 101, Heritage High St, Near Victoria Memorial, Kolkata, PIN: 700071",
+      "deliveryType": "Home Delivery",
+      "paymentMethod": "Cash on Delivery",
+      "notes": "Extra caramelized onions and mint chutney"
+    },
+    "items": [
+      {
+        "id": "kolkata-biryani",
+        "name": "Kolkata Chicken Biryani",
+        "price": 340,
+        "quantity": 2,
+        "image": "/images/kolkata-biryani.jpg",
+        "lineTotal": 680
+      },
+      {
+        "id": "gulab-jamun-rabdi",
+        "name": "Gulab Jamun with Kesari Rabdi",
+        "price": 160,
+        "quantity": 1,
+        "image": "/images/gulab-jamun-rabdi.jpg",
+        "lineTotal": 160
+      }
+    ],
+    "pricing": {
+      "itemsSubtotal": 840,
+      "discount": 420,
+      "discountLabel": "50% Royal Special (ROYAL50)",
+      "taxableAmount": 420,
+      "gst": 21,
+      "deliveryFee": 0,
+      "grandTotal": 441
+    },
+    "updatedAt": "2026-09-10T21:08:34.592Z"
+  },
+  {
+    "id": "ORD-58384",
+    "orderId": "ORD-58384",
+    "createdAt": "2026-09-06T00:01:24.708Z",
+    "formattedDate": "06 Sept 2026",
+    "formattedTime": "05:31 am",
+    "status": "Confirmed",
+    "statusStep": 1,
+    "estimatedTime": "25 - 35 mins",
+    "customer": {
+      "name": "Priyanka Roy",
+      "phone": "9876543210",
+      "alternatePhone": "",
+      "email": "priyanka@example.com",
+      "flat": "Apt 204",
+      "street": "Park Street Extension",
+      "landmark": "",
+      "city": "Kolkata",
+      "pincode": "700016",
+      "address": "Apt 204, Park Street Extension, Kolkata, PIN: 700016",
+      "deliveryType": "Home Delivery",
+      "paymentMethod": "Cash on Delivery",
+      "notes": ""
+    },
+    "items": [
+      {
+        "id": "classic-dal-sambar",
+        "name": "Classic Dal Sambar",
+        "price": 180,
+        "quantity": 1,
+        "image": "/images/classic-dal-sambar.jpg",
+        "lineTotal": 180
+      },
+      {
+        "id": "butter-garlic-naan",
+        "name": "Butter Garlic Naan (2 pcs)",
+        "price": 120,
+        "quantity": 1,
+        "image": "/images/butter-garlic-naan.jpg",
+        "lineTotal": 120
+      }
+    ],
+    "pricing": {
+      "itemsSubtotal": 300,
+      "discount": 0,
+      "discountLabel": "",
+      "taxableAmount": 300,
+      "gst": 15,
+      "deliveryFee": 30,
+      "grandTotal": 345
+    }
+  },
+  {
+    "id": "ORD-66240",
+    "orderId": "ORD-66240",
+    "createdAt": "2026-09-05T00:00:52.409Z",
+    "formattedDate": "05 Sept 2026",
+    "formattedTime": "05:30 am",
+    "status": "Confirmed",
+    "statusStep": 1,
+    "estimatedTime": "25 - 35 mins",
+    "customer": {
+      "name": "Rohan Deshmukh",
+      "phone": "9123456780",
+      "alternatePhone": "9876543210",
+      "email": "rohan.d@example.com",
+      "flat": "Villa 14, Palm Grove Estates",
+      "street": "Koramangala 4th Block",
+      "landmark": "Behind Sony Signal",
+      "city": "Bengaluru",
+      "pincode": "560034",
+      "address": "Villa 14, Palm Grove Estates, Koramangala 4th Block, Bengaluru, PIN: 560034",
+      "deliveryType": "Home Delivery",
+      "paymentMethod": "Cash on Delivery",
+      "notes": "Please do not honk near the gate"
+    },
+    "items": [
+      {
+        "id": "paneer-butter-masala",
+        "name": "Paneer Butter Masala",
+        "price": 320,
+        "quantity": 1,
+        "image": "/images/paneer-butter-masala.jpg",
+        "lineTotal": 320
+      },
+      {
+        "id": "butter-garlic-naan",
+        "name": "Butter Garlic Naan (2 pcs)",
+        "price": 120,
+        "quantity": 2,
+        "image": "/images/butter-garlic-naan.jpg",
+        "lineTotal": 240
+      }
+    ],
+    "pricing": {
+      "itemsSubtotal": 560,
+      "discount": 280,
+      "discountLabel": "50% Royal Special (ROYAL50)",
+      "taxableAmount": 280,
+      "gst": 14,
+      "deliveryFee": 0,
+      "grandTotal": 294
+    }
+  },
+  {
+    "id": "ORD-69566",
+    "orderId": "ORD-69566",
+    "createdAt": "2026-09-04T23:59:17.152Z",
+    "formattedDate": "05 Sept 2026",
+    "formattedTime": "05:29 am",
+    "status": "Preparing",
+    "statusStep": 2,
+    "estimatedTime": "25 - 35 mins",
+    "customer": {
+      "name": "Ananya Sengupta",
+      "phone": "9876501234",
+      "alternatePhone": "9876509999",
+      "email": "ananya@test.com",
+      "flat": "Flat 401",
+      "street": "Green Meadows, Indiranagar",
+      "landmark": "Near BDA Complex",
+      "city": "Bengaluru",
+      "pincode": "560038",
+      "address": "Flat 401, Green Meadows, 14th Main, Indiranagar, Bengaluru - 560038",
+      "deliveryType": "Home Delivery",
+      "paymentMethod": "UPI / Online",
+      "notes": "Leave at door"
+    },
+    "items": [
+      {
+        "id": "awadhi-mutton-biryani",
+        "name": "Awadhi Dum Mutton Biryani",
+        "price": 420,
+        "quantity": 1,
+        "image": "/images/awadhi-mutton-biryani.jpg",
+        "lineTotal": 420
+      },
+      {
+        "id": "kolkata-masala-chai",
+        "name": "Kolkata Kulhad Masala Chai",
+        "price": 80,
+        "quantity": 2,
+        "image": "/images/kolkata-masala-chai.jpg",
+        "lineTotal": 160
+      }
+    ],
+    "pricing": {
+      "itemsSubtotal": 580,
+      "discount": 290,
+      "discountLabel": "50% Royal Special (ROYAL50)",
+      "taxableAmount": 290,
+      "gst": 14.5,
+      "deliveryFee": 0,
+      "grandTotal": 304.5
+    },
+    "updatedAt": "2026-09-04T23:59:37.016Z"
+  }
+]

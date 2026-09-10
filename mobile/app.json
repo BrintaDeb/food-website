@@ -1,0 +1,59 @@
+{
+  "expo": {
+    "name": "CurryCraft",
+    "slug": "currycraft",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/images/icon.png",
+    "scheme": "currycraft",
+    "userInterfaceStyle": "light",
+    "ios": {
+      "bundleIdentifier": "com.currycraft.app",
+      "supportsTablet": true,
+      "infoPlist": {
+        "NSLocationWhenInUseUsageDescription": "CurryCraft uses your location to deliver royal dishes directly to your doorstep and track orders in real time.",
+        "NSLocationAlwaysAndWhenInUseUsageDescription": "CurryCraft tracks your courier delivery in real time.",
+        "UIBackgroundModes": ["location", "fetch", "remote-notification"]
+      }
+    },
+    "android": {
+      "package": "com.currycraft.app",
+      "adaptiveIcon": {
+        "backgroundColor": "#FF5E00",
+        "foregroundImage": "./assets/images/android-icon-foreground.png"
+      },
+      "permissions": [
+        "ACCESS_COARSE_LOCATION",
+        "ACCESS_FINE_LOCATION",
+        "ACCESS_BACKGROUND_LOCATION",
+        "POST_NOTIFICATIONS",
+        "VIBRATE"
+      ]
+    },
+    "web": {
+      "output": "static",
+      "favicon": "./assets/images/favicon.png"
+    },
+    "plugins": [
+      "expo-router",
+      "expo-secure-store",
+      [
+        "expo-location",
+        {
+          "locationAlwaysAndWhenInUsePermission": "Allow CurryCraft to access your location to track your food delivery in real-time."
+        }
+      ],
+      [
+        "expo-splash-screen",
+        {
+          "backgroundColor": "#FF5E00",
+          "image": "./assets/images/splash-icon.png",
+          "imageWidth": 120
+        }
+      ]
+    ],
+    "experiments": {
+      "typedRoutes": true
+    }
+  }
+}

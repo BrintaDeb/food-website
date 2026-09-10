@@ -1,0 +1,44 @@
+[
+  {
+    "phone": "9876501234",
+    "name": "Ananya Sengupta",
+    "email": "ananya@test.com",
+    "addresses": [
+      "Flat 401, Green Meadows, 14th Main, Indiranagar, Bengaluru - 560038"
+    ]
+  },
+  {
+    "phone": "9123456780",
+    "name": "Rohan Deshmukh Updated",
+    "email": "rohan.d@example.com",
+    "addresses": [
+      "Flat/House: Villa 14, Palm Grove Estates, Street/Building: Koramangala 4th Block, Landmark: Behind Sony Signal, Bengaluru, PIN: 560034"
+    ]
+  },
+  {
+    "phone": "9876543210",
+    "name": "Shreyam Verification",
+    "email": "",
+    "addresses": [
+      "Bengaluru",
+      "Kolkata",
+      "Flat/House: Suite 101, Street/Building: Park Street, Landmark: Near Victoria Memorial, Kolkata, PIN: 700016"
+    ]
+  },
+  {
+    "phone": "9988776655",
+    "name": "DeepMind Engineer",
+    "email": "",
+    "addresses": [
+      "Flat/House: Flat 101, Street/Building: Silicon High St, Bengaluru, PIN: 560001"
+    ]
+  },
+  {
+    "phone": "9845012345",
+    "name": "CurryCraft VIP",
+    "email": "",
+    "addresses": [
+      "Flat/House: Penthouse 12, Street/Building: Kolkata Park Street, Kolkata, PIN: 700016"
+    ]
+  }
+]
