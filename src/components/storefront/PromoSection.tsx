@@ -50,7 +50,8 @@ export function PromoSection() {
                 50% Off
               </h2>
               <p className="text-lg sm:text-2xl font-bold max-w-lg opacity-95 leading-snug">
-                On Royal Handi Combos! Fragrant Kolkata Dum Biryani, Tandoor Garlic Naan & Chilled Kesari Rabdi.
+                On Royal Handi Combos! Fragrant Kolkata Dum Biryani, Tandoor Garlic Naan & Chilled
+                Kesari Rabdi.
               </p>
               <div className="pt-2">
                 <button

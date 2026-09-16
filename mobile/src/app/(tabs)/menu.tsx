@@ -18,13 +18,7 @@ import { PersistentCartZone } from '@/components/storefront/PersistentCartZone';
 import { COLORS } from '@/constants/theme';
 import type { MenuCategory, MenuItem } from '@/types/menu';
 
-const CATEGORIES: MenuCategory[] = [
-  'All',
-  'Biryani',
-  'Curries',
-  'Breads',
-  'Desserts & Beverages'
-];
+const CATEGORIES: MenuCategory[] = ['All', 'Biryani', 'Curries', 'Breads', 'Desserts & Beverages'];
 
 export default function MenuScreen() {
   const router = useRouter();
@@ -39,8 +33,7 @@ export default function MenuScreen() {
 
   const filteredMenu = useMemo(() => {
     return menu.filter((item) => {
-      const matchesCategory =
-        selectedCategory === 'All' || item.category === selectedCategory;
+      const matchesCategory = selectedCategory === 'All' || item.category === selectedCategory;
       const matchesVeg = !vegOnly || item.isVeg;
       const q = searchQuery.trim().toLowerCase();
       const matchesSearch =
@@ -98,23 +91,14 @@ export default function MenuScreen() {
         onSelectCategory={setSelectedCategory}
       />
 
-      <ScrollView
-        showsVerticalScrollIndicator={false}
-        contentContainerStyle={styles.scrollContent}
-      >
+      <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={styles.scrollContent}>
         <View style={styles.resultsInfoRow}>
-          <Text style={styles.resultsCount}>
-            Showing {filteredMenu.length} delicacies
-          </Text>
+          <Text style={styles.resultsCount}>Showing {filteredMenu.length} delicacies</Text>
         </View>
 
         <View style={styles.cardList}>
           {filteredMenu.map((item) => (
-            <DraggableFoodCard
-              key={item.id}
-              item={item}
-              onPressItem={handlePressDish}
-            />
+            <DraggableFoodCard key={item.id} item={item} onPressItem={handlePressDish} />
           ))}
         </View>
       </ScrollView>

@@ -7,13 +7,13 @@ const SIMULATED_COORDINATES = [
   { lat: 22.5512, lng: 88.3524 }, // Restaurant (Park Street)
   { lat: 22.5531, lng: 88.3538 },
   { lat: 22.5562, lng: 88.3551 },
-  { lat: 22.5595, lng: 88.3570 },
-  { lat: 22.5630, lng: 88.3602 },
+  { lat: 22.5595, lng: 88.357 },
+  { lat: 22.563, lng: 88.3602 },
   { lat: 22.5671, lng: 88.3634 },
-  { lat: 22.5710, lng: 88.3668 },
+  { lat: 22.571, lng: 88.3668 },
   { lat: 22.5742, lng: 88.3705 },
-  { lat: 22.5780, lng: 88.3741 },
-  { lat: 22.5821, lng: 88.3780 }  // Customer Doorstep
+  { lat: 22.578, lng: 88.3741 },
+  { lat: 22.5821, lng: 88.378 } // Customer Doorstep
 ];
 
 function calculateBearing(
@@ -28,9 +28,7 @@ function calculateBearing(
   const dLng = toRad(to.lng - from.lng);
 
   const y = Math.sin(dLng) * Math.cos(lat2);
-  const x =
-    Math.cos(lat1) * Math.sin(lat2) -
-    Math.sin(lat1) * Math.cos(lat2) * Math.cos(dLng);
+  const x = Math.cos(lat1) * Math.sin(lat2) - Math.sin(lat1) * Math.cos(lat2) * Math.cos(dLng);
 
   const brng = (toDeg(Math.atan2(y, x)) + 360) % 360;
   return Math.round(brng);

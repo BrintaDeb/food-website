@@ -4,3 +4,7 @@ dist
 build
 data/*.json
 public
+legacy
+mobile/.expo
+mobile/node_modules
+*.tsbuildinfo

@@ -21,13 +21,7 @@ import { useAuthStore } from '@/store/useAuthStore';
 import { COLORS, SHADOWS } from '@/constants/theme';
 import type { MenuCategory, MenuItem } from '@/types/menu';
 
-const CATEGORIES: MenuCategory[] = [
-  'All',
-  'Biryani',
-  'Curries',
-  'Breads',
-  'Desserts & Beverages'
-];
+const CATEGORIES: MenuCategory[] = ['All', 'Biryani', 'Curries', 'Breads', 'Desserts & Beverages'];
 
 export default function HomeScreen() {
   const router = useRouter();
@@ -36,7 +30,12 @@ export default function HomeScreen() {
   const totalCount = useCartStore((state) => state.totalCount);
   const user = useAuthStore((state) => state.user);
 
-  const { data: menu = [], isLoading, refetch, isRefetching } = useQuery({
+  const {
+    data: menu = [],
+    isLoading,
+    refetch,
+    isRefetching
+  } = useQuery({
     queryKey: ['menu'],
     queryFn: fetchMenu
   });
@@ -53,8 +52,7 @@ export default function HomeScreen() {
     });
   };
 
-  const deliveryAddress =
-    user?.addresses?.[0]?.split(',')?.[0] || '12 Park Street, Kolkata';
+  const deliveryAddress = user?.addresses?.[0]?.split(',')?.[0] || '12 Park Street, Kolkata';
 
   return (
     <SafeAreaView style={styles.safeArea}>
@@ -138,11 +136,7 @@ export default function HomeScreen() {
         {/* Draggable Food Card List */}
         <View style={styles.cardList}>
           {filteredItems.map((item) => (
-            <DraggableFoodCard
-              key={item.id}
-              item={item}
-              onPressItem={handlePressDish}
-            />
+            <DraggableFoodCard key={item.id} item={item} onPressItem={handlePressDish} />
           ))}
         </View>
       </ScrollView>

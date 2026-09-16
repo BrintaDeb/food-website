@@ -202,7 +202,7 @@ export default function AdminDashboardPage() {
             onClick={() => setActiveTab('menu')}
             className={`flex-1 py-3 text-center ${activeTab === 'menu' ? 'text-[#FF5E00] font-black' : 'text-neutral-400'}`}
           >
-            🍔 Menu
+            🍛 Menu
           </button>
           <button
             onClick={() => setActiveTab('analytics')}

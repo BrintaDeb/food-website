@@ -139,16 +139,11 @@ export default function CartScreen() {
                     </TouchableOpacity>
                   </View>
 
-                  <Text style={styles.itemLineTotal}>
-                    {formatINR(it.price * it.quantity)}
-                  </Text>
+                  <Text style={styles.itemLineTotal}>{formatINR(it.price * it.quantity)}</Text>
                 </View>
               </View>
 
-              <TouchableOpacity
-                onPress={() => removeItem(it.id)}
-                style={styles.deleteButton}
-              >
+              <TouchableOpacity onPress={() => removeItem(it.id)} style={styles.deleteButton}>
                 <Trash2 size={16} color={COLORS.muted} />
               </TouchableOpacity>
             </View>

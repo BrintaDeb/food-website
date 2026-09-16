@@ -47,15 +47,16 @@ function calculateDiscount(
   promoCode: string
 ): { discount: number; discountLabel: string } {
   const subtotal = items.reduce((acc, it) => acc + it.price * it.quantity, 0);
+  const code = (promoCode || '').toUpperCase().trim();
 
-  if ((promoCode || '').toUpperCase() === 'EARTH50') {
+  if (code === 'ROYAL50' || code === 'EARTH50') {
     return {
       discount: +(subtotal * 0.5).toFixed(2),
-      discountLabel: '50% Promo Special (EARTH50)'
+      discountLabel: `50% Royal Feast Special (${code})`
     };
   }
 
-  if (items.some((it) => it.id === 'promo-combo')) {
+  if (items.some((it) => it.id === 'promo-combo' || it.id === 'nawabi-feast-combo')) {
     return {
       discount: 50.0,
       discountLabel: 'Combo Special Discount'

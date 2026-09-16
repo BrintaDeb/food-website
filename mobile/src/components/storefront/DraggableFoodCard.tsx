@@ -99,7 +99,9 @@ export function DraggableFoodCard({ item, onPressItem }: DraggableFoodCardProps)
               <View style={styles.metaItem}>
                 <Flame size={11} color={COLORS.primary} />
                 <Text style={styles.spiceText}>
-                  {Array.from({ length: item.spiceLevel }).map(() => '🌶️').join('')}
+                  {Array.from({ length: item.spiceLevel })
+                    .map(() => '🌶️')
+                    .join('')}
                 </Text>
               </View>
             )}

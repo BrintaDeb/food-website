@@ -3,6 +3,8 @@ import { getCustomers, saveCustomers } from '@/lib/db';
 import { customerProfileSchema } from '@/lib/validations';
 import type { CustomerProfile } from '@/types/customer';
 
+export const dynamic = 'force-dynamic';
+
 export async function GET(request: NextRequest) {
   try {
     const { searchParams } = new URL(request.url);

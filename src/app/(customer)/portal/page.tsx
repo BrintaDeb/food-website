@@ -215,7 +215,7 @@ export default function CustomerPortalPage() {
             onClick={() => setActiveTab('order')}
             className={`flex-1 py-3 text-center ${activeTab === 'order' ? 'text-[#FF5E00] font-black' : 'text-neutral-500'}`}
           >
-            🍔 Order Food
+            🍛 Order Food
           </button>
           <button
             onClick={() => setActiveTab('myOrders')}
@@ -265,7 +265,9 @@ export default function CustomerPortalPage() {
             {/* Filter & Search Bar */}
             <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
               <div className="flex items-center gap-2 overflow-x-auto w-full sm:w-auto pb-2 sm:pb-0">
-                {(['All', 'Biryani', 'Curries', 'Breads', 'Desserts & Beverages'] as MenuCategory[]).map((cat) => (
+                {(
+                  ['All', 'Biryani', 'Curries', 'Breads', 'Desserts & Beverages'] as MenuCategory[]
+                ).map((cat) => (
                   <button
                     key={cat}
                     onClick={() => setSelectedCategory(cat)}

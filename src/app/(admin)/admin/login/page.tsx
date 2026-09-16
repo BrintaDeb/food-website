@@ -32,7 +32,7 @@ function AdminLoginForm() {
         email,
         password,
         redirect: false,
-        callbackUrl,
+        callbackUrl
       });
 
       if (res?.error) {
@@ -72,7 +72,8 @@ function AdminLoginForm() {
       </div>
 
       <p className="text-sm text-white/70 mb-6 mt-3 leading-relaxed">
-        Sign in with your executive chef administrator credentials to manage Indian cuisine items, track stock, and control orders.
+        Sign in with your executive chef administrator credentials to manage Indian cuisine items,
+        track stock, and control orders.
       </p>
 
       {errorMessage && (
@@ -87,10 +88,7 @@ function AdminLoginForm() {
             Admin Email
           </label>
           <div className="relative">
-            <Mail
-              size={18}
-              className="absolute left-3.5 top-1/2 -translate-y-1/2 text-white/40"
-            />
+            <Mail size={18} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-white/40" />
             <input
               type="email"
               required
@@ -107,10 +105,7 @@ function AdminLoginForm() {
             Password
           </label>
           <div className="relative">
-            <Lock
-              size={18}
-              className="absolute left-3.5 top-1/2 -translate-y-1/2 text-white/40"
-            />
+            <Lock size={18} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-white/40" />
             <input
               type="password"
               required

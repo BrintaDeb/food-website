@@ -36,16 +36,8 @@ import { COLORS, SHADOWS } from '@/constants/theme';
 export default function CheckoutScreen() {
   const router = useRouter();
   const { user } = useAuthStore();
-  const {
-    items,
-    subtotal,
-    discount,
-    discountLabel,
-    gst,
-    deliveryFee,
-    grandTotal,
-    clearCart
-  } = useCartStore();
+  const { items, subtotal, discount, discountLabel, gst, deliveryFee, grandTotal, clearCart } =
+    useCartStore();
 
   // Form State
   const [name, setName] = useState(user?.name || 'Aarav Sen');
@@ -193,10 +185,7 @@ export default function CheckoutScreen() {
 
               <TouchableOpacity
                 onPress={() => setDeliveryType('Takeaway')}
-                style={[
-                  styles.modeButton,
-                  deliveryType === 'Takeaway' && styles.modeButtonActive
-                ]}
+                style={[styles.modeButton, deliveryType === 'Takeaway' && styles.modeButtonActive]}
               >
                 <Text
                   style={[
@@ -339,10 +328,7 @@ export default function CheckoutScreen() {
 
             <TouchableOpacity
               onPress={() => setPaymentMethod('UPI')}
-              style={[
-                styles.paymentOption,
-                paymentMethod === 'UPI' && styles.paymentOptionActive
-              ]}
+              style={[styles.paymentOption, paymentMethod === 'UPI' && styles.paymentOptionActive]}
             >
               <View style={styles.paymentLeft}>
                 <Sparkles size={20} color={COLORS.primary} />
@@ -365,7 +351,9 @@ export default function CheckoutScreen() {
                 <Banknote size={20} color="#16A34A" />
                 <View>
                   <Text style={styles.paymentName}>Cash on Delivery</Text>
-                  <Text style={styles.paymentSub}>Pay with cash or UPI QR upon courier arrival</Text>
+                  <Text style={styles.paymentSub}>
+                    Pay with cash or UPI QR upon courier arrival
+                  </Text>
                 </View>
               </View>
               {paymentMethod === 'Cash on Delivery' && (
@@ -375,10 +363,7 @@ export default function CheckoutScreen() {
 
             <TouchableOpacity
               onPress={() => setPaymentMethod('Card')}
-              style={[
-                styles.paymentOption,
-                paymentMethod === 'Card' && styles.paymentOptionActive
-              ]}
+              style={[styles.paymentOption, paymentMethod === 'Card' && styles.paymentOptionActive]}
             >
               <View style={styles.paymentLeft}>
                 <CreditCard size={20} color="#2563EB" />

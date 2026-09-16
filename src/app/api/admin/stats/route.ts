@@ -2,6 +2,8 @@ import { NextResponse } from 'next/server';
 import { getOrders, getMenu } from '@/lib/db';
 import type { AdminStats } from '@/types/stats';
 
+export const dynamic = 'force-dynamic';
+
 export async function GET() {
   try {
     const orders = await getOrders();

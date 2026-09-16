@@ -1,12 +1,5 @@
 import React from 'react';
-import {
-  View,
-  Text,
-  StyleSheet,
-  ScrollView,
-  TouchableOpacity,
-  SafeAreaView
-} from 'react-native';
+import { View, Text, StyleSheet, ScrollView, TouchableOpacity, SafeAreaView } from 'react-native';
 import { useRouter } from 'expo-router';
 import { useQuery } from '@tanstack/react-query';
 import { Navigation, Clock, CheckCircle2, ChevronRight, RotateCcw } from 'lucide-react-native';
@@ -120,8 +113,7 @@ export default function OrdersScreen() {
     enabled: !!user?.phone
   });
 
-  const orders: Order[] =
-    serverOrders.length > 0 ? serverOrders : MOCK_FALLBACK_ORDERS;
+  const orders: Order[] = serverOrders.length > 0 ? serverOrders : MOCK_FALLBACK_ORDERS;
 
   const handleTrack = (orderId: string) => {
     try {

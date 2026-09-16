@@ -102,11 +102,7 @@ export function DeliveryMapView({ telemetry }: DeliveryMapViewProps) {
         >
           <View style={styles.riderMarkerOuter}>
             <View style={styles.riderMarkerInner}>
-              <Navigation
-                size={18}
-                color="#FFFFFF"
-                style={{ transform: [{ rotate: '-45deg' }] }}
-              />
+              <Navigation size={18} color="#FFFFFF" style={{ transform: [{ rotate: '-45deg' }] }} />
             </View>
           </View>
         </Marker>

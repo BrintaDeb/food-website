@@ -135,29 +135,31 @@ mobile/
 
 ## 3. Required Native Libraries & Dependency Stack
 
-| Category | Package Name | Purpose / Role |
-| :--- | :--- | :--- |
-| **Core & Routing** | `expo` (~52.0.0)<br>`expo-router` (~4.0.0) | App runtime, native modules, file-based routing with deep linking |
-| **Styling** | `nativewind` (^4.0.1)<br>`tailwindcss` (^3.4.0) | Tailwind CSS compile-time styling optimized for React Native |
-| **Gestures & Motion** | `react-native-reanimated` (~3.16.0)<br>`react-native-gesture-handler` (~2.20.0) | 60fps UI-thread pan gesture for Drag-to-Cart & Shared Element Transitions |
-| **Native Maps** | `react-native-maps` (^1.18.0) | Apple Maps (iOS MKMapView) & Google Maps (Android) with custom marker |
-| **State & Cache** | `zustand` (^5.0.0)<br>`@tanstack/react-query` (^5.60.0)<br>`@react-native-async-storage/async-storage` | Global state + offline data query caching and revalidation |
-| **Security & Auth** | `expo-secure-store` (~14.0.0)<br>`expo-crypto` (~14.0.0) | Encrypted keychain/keystore token storage for JWT sessions |
-| **Notifications & Audio** | `expo-notifications` (~0.29.0)<br>`expo-haptics` (~14.0.0) | Push notification order status alerts & tactile drag/drop feedback |
-| **Hardware & Location**| `expo-location` (~18.0.0) | Foreground device location for delivery address autofill & background GPS |
-| **Build & Release** | `eas-cli`<br>`expo-updates` (~0.26.0) | Cloud binary builds, Over-the-Air runtime updates without store review |
+| Category                  | Package Name                                                                                           | Purpose / Role                                                            |
+| :------------------------ | :----------------------------------------------------------------------------------------------------- | :------------------------------------------------------------------------ |
+| **Core & Routing**        | `expo` (~52.0.0)<br>`expo-router` (~4.0.0)                                                             | App runtime, native modules, file-based routing with deep linking         |
+| **Styling**               | `nativewind` (^4.0.1)<br>`tailwindcss` (^3.4.0)                                                        | Tailwind CSS compile-time styling optimized for React Native              |
+| **Gestures & Motion**     | `react-native-reanimated` (~3.16.0)<br>`react-native-gesture-handler` (~2.20.0)                        | 60fps UI-thread pan gesture for Drag-to-Cart & Shared Element Transitions |
+| **Native Maps**           | `react-native-maps` (^1.18.0)                                                                          | Apple Maps (iOS MKMapView) & Google Maps (Android) with custom marker     |
+| **State & Cache**         | `zustand` (^5.0.0)<br>`@tanstack/react-query` (^5.60.0)<br>`@react-native-async-storage/async-storage` | Global state + offline data query caching and revalidation                |
+| **Security & Auth**       | `expo-secure-store` (~14.0.0)<br>`expo-crypto` (~14.0.0)                                               | Encrypted keychain/keystore token storage for JWT sessions                |
+| **Notifications & Audio** | `expo-notifications` (~0.29.0)<br>`expo-haptics` (~14.0.0)                                             | Push notification order status alerts & tactile drag/drop feedback        |
+| **Hardware & Location**   | `expo-location` (~18.0.0)                                                                              | Foreground device location for delivery address autofill & background GPS |
+| **Build & Release**       | `eas-cli`<br>`expo-updates` (~0.26.0)                                                                  | Cloud binary builds, Over-the-Air runtime updates without store review    |
 
 ---
 
 ## 4. Phase Breakdown & Implementation Steps
 
 ### Phase 1: Native Architecture & Routing
+
 - Initialize the Expo Router template with TypeScript strict mode.
 - Configure `NativeWind` v4 with Tailwind presets matching CurryCraft (`#FF5E00` brand orange, `#1A1311` dark graphite, `#FFFDF9` background).
 - Build the persistent bottom navigation tabs with custom safe-area styling and dynamic badges.
 - Implement the Zustand `useCartStore` with quantity management, `ROYAL50` coupon calculation, and persistence.
 
 ### Phase 2: Fluid Touch UI & Reanimated Gestures
+
 - **Drag-to-Cart Worklet**: Build `DraggableFoodCard` with `Gesture.Pan()`:
   - Long-press activation to prevent conflict with vertical list scrolling.
   - Coordinate translation executed purely on the UI thread via `useAnimatedStyle`.
@@ -168,6 +170,7 @@ mobile/
 - **Shared Element Transitions**: Smooth zoom transition from menu card to full dish detail modal.
 
 ### Phase 3: Live Delivery Tracking (Native Maps)
+
 - Integrate `react-native-maps` with native platform providers:
   - iOS: Native Apple Maps.
   - Android: Google Maps SDK with custom map style JSON.
@@ -177,6 +180,7 @@ mobile/
 - Render dynamic route polylines and estimated arrival times inside an interactive bottom sheet.
 
 ### Phase 4: Backend API & Push Notification Integration
+
 - Configure dynamic API base URL:
   - In development: resolves to local machine IP or tunnel.
   - In production: points to live production deployment.
@@ -184,6 +188,7 @@ mobile/
 - Configure `expo-notifications` for real-time order pipeline alerts (`Confirmed` -> `Preparing` -> `Out for Delivery` -> `Delivered`).
 
 ### Phase 5: Production Builds & Deployment
+
 - Configure `eas.json` for development, preview, and production profiles.
 - Configure `expo-updates` channel for instant Over-The-Air bug fixes and menu adjustments.
 - Complete `app.json` with permissions, splash screens, camera/location strings, and iOS/Android bundle identifiers ready for App Store and Google Play review.

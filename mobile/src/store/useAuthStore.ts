@@ -50,7 +50,12 @@ export const useAuthStore = create<AuthState>((set, get) => ({
           email: 'shreyam@example.com',
           addresses: ['12 Park Street, Heritage Quarter, Kolkata - 700016']
         };
-        set({ token: 'guest-session-token', user: guestUser, isAuthenticated: true, isLoading: false });
+        set({
+          token: 'guest-session-token',
+          user: guestUser,
+          isAuthenticated: true,
+          isLoading: false
+        });
       }
     } catch {
       set({ isLoading: false });

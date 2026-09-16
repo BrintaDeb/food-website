@@ -59,10 +59,7 @@ export function DeliveryStatusSheet({ telemetry }: DeliveryStatusSheetProps) {
       {/* Progress Bar */}
       <View style={styles.progressBarBackground}>
         <View
-          style={[
-            styles.progressBarFill,
-            { width: `${Math.max(5, telemetry.progressPercent)}%` }
-          ]}
+          style={[styles.progressBarFill, { width: `${Math.max(5, telemetry.progressPercent)}%` }]}
         />
       </View>
 
@@ -81,11 +78,7 @@ export function DeliveryStatusSheet({ telemetry }: DeliveryStatusSheetProps) {
           </View>
         </View>
 
-        <TouchableOpacity
-          activeOpacity={0.8}
-          onPress={handleCallRider}
-          style={styles.callButton}
-        >
+        <TouchableOpacity activeOpacity={0.8} onPress={handleCallRider} style={styles.callButton}>
           <Phone size={16} color="#FFFFFF" />
           <Text style={styles.callButtonText}>Call</Text>
         </TouchableOpacity>

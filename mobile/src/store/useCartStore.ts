@@ -123,9 +123,7 @@ export const useCartStore = create<CartState>()(
           return;
         }
 
-        const nextItems = state.items.map((it) =>
-          it.id === id ? { ...it, quantity } : it
-        );
+        const nextItems = state.items.map((it) => (it.id === id ? { ...it, quantity } : it));
         const subtotal = nextItems.reduce((acc, it) => acc + it.price * it.quantity, 0);
 
         let discount = state.discount;

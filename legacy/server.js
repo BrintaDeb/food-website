@@ -14,7 +14,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const PORT = process.env.PORT || 3000;
-const DATA_DIR = path.join(__dirname, 'data');
+const DATA_DIR = path.join(__dirname, '..', 'data');
 const ORDERS_FILE = path.join(DATA_DIR, 'orders.json');
 const MENU_FILE = path.join(DATA_DIR, 'menu.json');
 const CUSTOMERS_FILE = path.join(DATA_DIR, 'customers.json');
@@ -700,7 +700,17 @@ const server = http.createServer(async (req, res) => {
 
   let safePath = pathname === '/' ? '/index.html' : pathname;
   const normalized = path.normalize(safePath).replace(/^(\.\.[\/\\])+/, '');
-  const filePath = path.join(__dirname, normalized);
+  let filePath = path.join(__dirname, normalized);
+
+  if (safePath.startsWith('/images/')) {
+    const publicImgPath = path.join(__dirname, '..', 'public', normalized);
+    const rootImgPath = path.join(__dirname, '..', normalized);
+    if (existsSync(publicImgPath)) {
+      filePath = publicImgPath;
+    } else if (existsSync(rootImgPath)) {
+      filePath = rootImgPath;
+    }
+  }
 
   if (!filePath.startsWith(__dirname)) {
     res.writeHead(403, { 'Content-Type': 'text/plain' });

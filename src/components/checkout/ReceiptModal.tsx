@@ -1,6 +1,7 @@
 'use client';
 
-import { X, Printer, ShoppingBag } from 'lucide-react';
+import Link from 'next/link';
+import { X, Printer, ShoppingBag, Bike } from 'lucide-react';
 import type { Order } from '@/types/order';
 import { formatINR } from '@/lib/utils';
 
@@ -186,7 +187,15 @@ export function ReceiptModal({ order, isOpen, onClose }: ReceiptModalProps) {
         </div>
 
         {/* Action Controls */}
-        <div className="no-print p-6 bg-neutral-50 border-t border-[#E8E5E0] flex gap-3">
+        <div className="no-print p-6 bg-neutral-50 border-t border-[#E8E5E0] flex flex-col sm:flex-row gap-3">
+          <Link
+            href={`/portal/track/${order.orderId}`}
+            onClick={onClose}
+            className="flex-1 flex items-center justify-center gap-2 py-3 px-4 rounded-xl bg-[#1A1311] text-white font-bold text-sm hover:bg-black transition-colors text-center"
+          >
+            <Bike className="w-4 h-4 text-[#FF8516]" />
+            <span>Track Order Live 🛵</span>
+          </Link>
           <button
             onClick={handlePrint}
             className="flex-1 flex items-center justify-center gap-2 py-3 px-4 rounded-xl border border-neutral-300 bg-white text-neutral-700 font-bold text-sm hover:bg-neutral-100 transition-colors"

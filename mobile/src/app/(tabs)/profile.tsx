@@ -82,9 +82,7 @@ export default function ProfileScreen() {
             onPress={() => setIsEditingProfile(!isEditingProfile)}
             style={styles.editButton}
           >
-            <Text style={styles.editButtonText}>
-              {isEditingProfile ? 'Cancel' : 'Edit'}
-            </Text>
+            <Text style={styles.editButtonText}>{isEditingProfile ? 'Cancel' : 'Edit'}</Text>
           </TouchableOpacity>
         </View>
 
@@ -105,10 +103,7 @@ export default function ProfileScreen() {
               onChangeText={setPhoneInput}
               style={[styles.textInput, { marginTop: 8 }]}
             />
-            <TouchableOpacity
-              onPress={handleSaveProfile}
-              style={styles.savePrimaryButton}
-            >
+            <TouchableOpacity onPress={handleSaveProfile} style={styles.savePrimaryButton}>
               <Text style={styles.savePrimaryButtonText}>Save Details</Text>
             </TouchableOpacity>
           </View>
@@ -139,10 +134,7 @@ export default function ProfileScreen() {
                 multiline
                 style={styles.textInputMultiline}
               />
-              <TouchableOpacity
-                onPress={handleSaveAddress}
-                style={styles.savePrimaryButton}
-              >
+              <TouchableOpacity onPress={handleSaveAddress} style={styles.savePrimaryButton}>
                 <Text style={styles.savePrimaryButtonText}>Save Address</Text>
               </TouchableOpacity>
             </View>

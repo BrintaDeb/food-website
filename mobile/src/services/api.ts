@@ -65,7 +65,9 @@ export async function createOrder(payload: {
 
 export async function fetchCustomerOrders(phone: string): Promise<Order[]> {
   try {
-    const res = await fetch(`${API_BASE_URL}/api/customer/orders?phone=${encodeURIComponent(phone)}`);
+    const res = await fetch(
+      `${API_BASE_URL}/api/customer/orders?phone=${encodeURIComponent(phone)}`
+    );
     if (!res.ok) return [];
     const data = await res.json();
     return data.orders || [];

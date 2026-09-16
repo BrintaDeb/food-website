@@ -1,9 +1,5 @@
 export type DeliveryStatus =
-  | 'Confirmed'
-  | 'Preparing'
-  | 'Out for Delivery'
-  | 'Delivered'
-  | 'Cancelled';
+  'Confirmed' | 'Preparing' | 'Out for Delivery' | 'Delivered' | 'Cancelled';
 
 export interface CustomerInfo {
   name: string;

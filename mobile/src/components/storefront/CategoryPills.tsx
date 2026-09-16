@@ -35,10 +35,7 @@ export function CategoryPills({
             key={cat}
             activeOpacity={0.8}
             onPress={() => handleSelect(cat)}
-            style={[
-              styles.pill,
-              isSelected ? styles.pillSelected : styles.pillUnselected
-            ]}
+            style={[styles.pill, isSelected ? styles.pillSelected : styles.pillUnselected]}
           >
             <Text
               style={[

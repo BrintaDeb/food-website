@@ -6,6 +6,8 @@ import {
 } from '@/lib/tracking-utils';
 import type { DeliveryTelemetry } from '@/types/tracking';
 
+export const dynamic = 'force-dynamic';
+
 export async function GET(
   request: NextRequest,
   { params }: { params: Promise<{ orderId: string }> }
