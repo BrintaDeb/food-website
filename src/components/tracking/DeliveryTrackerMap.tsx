@@ -38,12 +38,12 @@ export default function DeliveryTrackerMap({ telemetry, routeWaypoints }: Delive
   const destinationIcon = createDestinationIcon();
 
   return (
-    <div className="relative w-full h-full min-h-[420px] rounded-3xl overflow-hidden border border-stone-200 shadow-inner z-0">
+    <div className="relative w-full h-[320px] sm:h-[420px] lg:h-[480px] min-h-[300px] rounded-3xl overflow-hidden border border-stone-200 shadow-inner z-0">
       <MapContainer
         center={center}
         zoom={14}
         scrollWheelZoom={false}
-        className="w-full h-full min-h-[420px]"
+        className="w-full h-full min-h-[300px]"
       >
         {/* OpenStreetMap Tile Layer with clean Carto Voyager styling */}
         <TileLayer

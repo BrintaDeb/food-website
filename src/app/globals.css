@@ -11,6 +11,19 @@
     --brand-border: #e8e5e0;
     --brand-green: #10b981;
     --brand-gold: #ffb800;
+
+    /* Safe Area Insets for iOS & Android */
+    --sat: env(safe-area-inset-top, 0px);
+    --sab: env(safe-area-inset-bottom, 0px);
+    --sal: env(safe-area-inset-left, 0px);
+    --sar: env(safe-area-inset-right, 0px);
+  }
+
+  /* Prevent horizontal bounce on mobile browsers */
+  html {
+    overflow-x: hidden;
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
   }
 
   body {
@@ -24,6 +37,24 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     overflow-x: hidden;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  /* Prevent iOS Safari auto-zoom when focusing inputs (< 16px triggers zoom) */
+  @media screen and (max-width: 768px) {
+    input,
+    select,
+    textarea {
+      font-size: 16px !important;
+    }
+  }
+
+  button,
+  a,
+  input,
+  select,
+  textarea {
+    touch-action: manipulation;
   }
 
   h1,
@@ -38,6 +69,35 @@
       -apple-system,
       sans-serif;
   }
+}
+
+/* Safe area utility classes */
+.pt-safe {
+  padding-top: max(1rem, env(safe-area-inset-top, 0px));
+}
+.pb-safe {
+  padding-bottom: max(1rem, env(safe-area-inset-bottom, 0px));
+}
+.mb-safe {
+  margin-bottom: env(safe-area-inset-bottom, 0px);
+}
+.safe-bottom-floating {
+  bottom: max(1.5rem, calc(1rem + env(safe-area-inset-bottom, 0px)));
+}
+
+/* Touch momentum scrolling */
+.touch-scroll {
+  -webkit-overflow-scrolling: touch;
+  scroll-behavior: smooth;
+}
+
+/* Hide scrollbars but allow scrolling */
+.scrollbar-none {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
 }
 
 @keyframes floatBurger {

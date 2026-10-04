@@ -56,6 +56,56 @@ export default function CustomerPortalPage() {
       .finally(() => setLoadingMenu(false));
   }, []);
 
+  // Real-time live status updates for viewed orders via SSE
+  useEffect(() => {
+    let eventSource: EventSource | null = null;
+    try {
+      eventSource = new EventSource('/api/orders/stream');
+
+      eventSource.addEventListener('order_updated', (e) => {
+        try {
+          const payload = JSON.parse(e.data) as {
+            orderId: string;
+            status: Order['status'];
+            statusStep: number;
+            updatedAt: string;
+          };
+
+          setCustomerOrders((prev) => {
+            const hasOrder = prev.some(
+              (o) => o.orderId.toLowerCase() === payload.orderId.toLowerCase()
+            );
+            if (!hasOrder) return prev;
+
+            toast.show(
+              `Order #${payload.orderId} status updated: ${payload.status}!`,
+              'info'
+            );
+
+            return prev.map((o) =>
+              o.orderId.toLowerCase() === payload.orderId.toLowerCase()
+                ? {
+                    ...o,
+                    status: payload.status,
+                    statusStep: payload.statusStep,
+                    updatedAt: payload.updatedAt
+                  }
+                : o
+            );
+          });
+        } catch {
+          // ignore parse errors
+        }
+      });
+    } catch {
+      // EventSource may not be supported in some environments
+    }
+
+    return () => {
+      eventSource?.close();
+    };
+  }, []);
+
   const handleLookupOrders = async (e: React.FormEvent) => {
     e.preventDefault();
     const cleanP = lookupPhone.replace(/\D/g, '');
@@ -122,16 +172,16 @@ export default function CustomerPortalPage() {
   return (
     <div className="min-h-screen bg-[#FFFDF9] flex flex-col">
       {/* Top Portal Navigation Header */}
-      <header className="sticky top-0 z-40 bg-white border-b border-[#E8E5E0] shadow-xs">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+      <header className="sticky top-0 z-40 bg-white border-b border-[#E8E5E0] shadow-xs pt-[env(safe-area-inset-top,0px)]">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-18 sm:h-20 flex items-center justify-between">
           {/* Brand */}
-          <Link href="/" className="flex items-center gap-2.5">
-            <span className="text-3xl">🍛</span>
-            <div>
-              <span className="font-outfit font-black text-xl text-[#1A1311] block leading-none">
+          <Link href="/" className="flex items-center gap-2.5 min-w-0">
+            <span className="text-2xl sm:text-3xl shrink-0">🍛</span>
+            <div className="min-w-0">
+              <span className="font-outfit font-black text-lg sm:text-xl text-[#1A1311] block leading-none truncate">
                 CurryCraft Portal
               </span>
-              <span className="text-xs text-neutral-500 font-medium">
+              <span className="text-[11px] sm:text-xs text-neutral-500 font-medium truncate hidden xs:block">
                 Authentic Indian Online Ordering & Tracking
               </span>
             </div>
@@ -141,7 +191,7 @@ export default function CustomerPortalPage() {
           <div className="hidden md:flex items-center gap-2 bg-[#FFFDF9] p-1.5 rounded-2xl border border-[#E8E5E0]">
             <button
               onClick={() => setActiveTab('order')}
-              className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-extrabold transition-all ${
+              className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-extrabold transition-all cursor-pointer ${
                 activeTab === 'order'
                   ? 'bg-[#FF5E00] text-white shadow-badge'
                   : 'text-neutral-600 hover:text-black'
@@ -152,7 +202,7 @@ export default function CustomerPortalPage() {
             </button>
             <button
               onClick={() => setActiveTab('myOrders')}
-              className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-extrabold transition-all ${
+              className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-extrabold transition-all cursor-pointer ${
                 activeTab === 'myOrders'
                   ? 'bg-[#FF5E00] text-white shadow-badge'
                   : 'text-neutral-600 hover:text-black'
@@ -168,7 +218,7 @@ export default function CustomerPortalPage() {
             </button>
             <button
               onClick={() => setActiveTab('addresses')}
-              className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-extrabold transition-all ${
+              className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-extrabold transition-all cursor-pointer ${
                 activeTab === 'addresses'
                   ? 'bg-[#FF5E00] text-white shadow-badge'
                   : 'text-neutral-600 hover:text-black'
@@ -180,23 +230,23 @@ export default function CustomerPortalPage() {
           </div>
 
           {/* Quick Actions */}
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2 sm:gap-3">
             <Link
               href="/"
-              className="hidden sm:inline-flex text-xs font-bold text-neutral-600 hover:text-[#FF5E00] transition-colors"
+              className="hidden sm:inline-flex text-xs font-bold text-neutral-600 hover:text-[#FF5E00] transition-colors p-2"
             >
               Storefront
             </Link>
             <Link
               href="/admin"
-              className="text-xs font-bold px-3 py-1.5 rounded-full bg-emerald-500/10 text-emerald-700 hover:bg-emerald-500/20 transition-colors"
+              className="text-xs font-bold px-3 py-2 rounded-full bg-emerald-500/10 text-emerald-700 hover:bg-emerald-500/20 transition-colors min-h-[36px] flex items-center"
             >
               Admin Panel
             </Link>
 
             <button
               onClick={toggleCart}
-              className="relative p-2.5 rounded-full text-[#1A1311] hover:bg-neutral-100 transition-colors"
+              className="relative p-2.5 rounded-full text-[#1A1311] hover:bg-neutral-100 transition-colors min-w-[44px] min-h-[44px] flex items-center justify-center cursor-pointer"
               aria-label="View shopping bag"
             >
               <ShoppingBag className="w-5 h-5" />
@@ -213,65 +263,85 @@ export default function CustomerPortalPage() {
         <div className="md:hidden flex border-t border-[#E8E5E0] bg-[#FFFDF9] text-xs font-bold divide-x divide-[#E8E5E0]">
           <button
             onClick={() => setActiveTab('order')}
-            className={`flex-1 py-3 text-center ${activeTab === 'order' ? 'text-[#FF5E00] font-black' : 'text-neutral-500'}`}
+            className={`flex-1 min-h-[48px] py-3 text-center flex items-center justify-center gap-1.5 transition-colors cursor-pointer ${
+              activeTab === 'order'
+                ? 'text-[#FF5E00] font-black bg-[#FF5E00]/5 border-b-2 border-[#FF5E00]'
+                : 'text-neutral-600 hover:text-neutral-900'
+            }`}
           >
-            🍛 Order Food
+            <span>🍛</span>
+            <span>Order</span>
           </button>
           <button
             onClick={() => setActiveTab('myOrders')}
-            className={`flex-1 py-3 text-center ${activeTab === 'myOrders' ? 'text-[#FF5E00] font-black' : 'text-neutral-500'}`}
+            className={`flex-1 min-h-[48px] py-3 text-center flex items-center justify-center gap-1.5 transition-colors cursor-pointer ${
+              activeTab === 'myOrders'
+                ? 'text-[#FF5E00] font-black bg-[#FF5E00]/5 border-b-2 border-[#FF5E00]'
+                : 'text-neutral-600 hover:text-neutral-900'
+            }`}
           >
-            📦 My Orders
+            <span>📦</span>
+            <span>Orders</span>
+            {customerOrders.length > 0 && (
+              <span className="px-1.5 py-0.5 rounded-full bg-[#FF5E00] text-white text-[10px] font-bold">
+                {customerOrders.length}
+              </span>
+            )}
           </button>
           <button
             onClick={() => setActiveTab('addresses')}
-            className={`flex-1 py-3 text-center ${activeTab === 'addresses' ? 'text-[#FF5E00] font-black' : 'text-neutral-500'}`}
+            className={`flex-1 min-h-[48px] py-3 text-center flex items-center justify-center gap-1.5 transition-colors cursor-pointer ${
+              activeTab === 'addresses'
+                ? 'text-[#FF5E00] font-black bg-[#FF5E00]/5 border-b-2 border-[#FF5E00]'
+                : 'text-neutral-600 hover:text-neutral-900'
+            }`}
           >
-            📍 Addresses
+            <span>📍</span>
+            <span>Addresses</span>
           </button>
         </div>
       </header>
 
       {/* Main Content */}
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 flex-1 w-full">
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 flex-1 w-full pb-32 sm:pb-12">
         {/* =========================================================================
             TAB 1: ORDER FOOD
             ========================================================================= */}
         {activeTab === 'order' && (
           <div className="space-y-8">
             {/* Hero Banner inside Portal */}
-            <div className="rounded-3xl bg-linear-to-r from-[#1A1311] to-[#251C1A] text-white p-8 sm:p-10 shadow-float relative overflow-hidden">
+            <div className="rounded-3xl bg-linear-to-r from-[#1A1311] to-[#251C1A] text-white p-6 sm:p-10 shadow-float relative overflow-hidden">
               <div className="max-w-xl space-y-3 relative z-10">
                 <span className="inline-block px-3 py-1 rounded-full bg-[#FF5E00]/20 text-[#FF8516] text-xs font-bold uppercase tracking-wider">
                   ✨ Authentic Dum-Pukht & Royal Heritage
                 </span>
-                <h1 className="text-3xl sm:text-5xl font-outfit font-black tracking-tight leading-tight">
+                <h1 className="text-2xl sm:text-4xl lg:text-5xl font-outfit font-black tracking-tight leading-tight">
                   Royal Flavors, Delivered Fresh to Your Doorstep
                 </h1>
-                <p className="text-sm text-neutral-300">
+                <p className="text-xs sm:text-sm text-neutral-300">
                   Select your favorite dum biryanis, dal sambar, and tandoori breads. Use promo code{' '}
                   <strong className="text-[#FF8516]">ROYAL50</strong> for 50% off!
                 </p>
-                <div className="flex flex-wrap gap-2 pt-2 text-xs font-bold">
-                  <span className="px-3 py-1 rounded-lg bg-white/10">⚡ 25-35 Min Delivery</span>
-                  <span className="px-3 py-1 rounded-lg bg-white/10">
+                <div className="flex flex-wrap gap-2 pt-2 text-[11px] sm:text-xs font-bold">
+                  <span className="px-3 py-1.5 rounded-lg bg-white/10">⚡ 25-35 Min Delivery</span>
+                  <span className="px-3 py-1.5 rounded-lg bg-white/10">
                     📦 Tamper-Sealed Packaging
                   </span>
-                  <span className="px-3 py-1 rounded-lg bg-white/10">⭐ 4.9 Rated</span>
+                  <span className="px-3 py-1.5 rounded-lg bg-white/10">⭐ 4.9 Rated</span>
                 </div>
               </div>
             </div>
 
             {/* Filter & Search Bar */}
             <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
-              <div className="flex items-center gap-2 overflow-x-auto w-full sm:w-auto pb-2 sm:pb-0">
+              <div className="flex items-center gap-2 overflow-x-auto w-full sm:w-auto pb-2 sm:pb-0 -mx-4 px-4 sm:mx-0 sm:px-0 touch-scroll scrollbar-none">
                 {(
                   ['All', 'Biryani', 'Curries', 'Breads', 'Desserts & Beverages'] as MenuCategory[]
                 ).map((cat) => (
                   <button
                     key={cat}
                     onClick={() => setSelectedCategory(cat)}
-                    className={`px-4 py-2 rounded-xl text-xs font-bold transition-all shrink-0 cursor-pointer ${
+                    className={`px-4 py-2.5 min-h-[44px] rounded-xl text-xs font-bold transition-all shrink-0 cursor-pointer ${
                       selectedCategory === cat
                         ? 'bg-[#FF5E00] text-white shadow-badge'
                         : 'bg-white text-neutral-700 border border-[#E8E5E0] hover:bg-neutral-50'
@@ -289,7 +359,7 @@ export default function CustomerPortalPage() {
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   placeholder="Search biryani, curries, naan..."
-                  className="w-full pl-10 pr-4 py-2 text-xs rounded-xl border border-[#E8E5E0] bg-white focus:outline-none focus:border-[#FF5E00]"
+                  className="w-full pl-10 pr-4 py-2.5 text-base sm:text-xs rounded-xl border border-[#E8E5E0] bg-white focus:outline-none focus:border-[#FF5E00]"
                 />
               </div>
             </div>
@@ -354,7 +424,7 @@ export default function CustomerPortalPage() {
                           });
                           toast.show(`Added ${item.name} to bag!`, 'success');
                         }}
-                        className="flex items-center gap-1.5 px-4 py-2 rounded-xl bg-[#FF5E00] hover:bg-[#e05200] text-white font-bold text-xs shadow-badge transition-colors"
+                        className="flex items-center gap-1.5 px-4 py-2.5 min-h-[44px] rounded-xl bg-[#FF5E00] hover:bg-[#e05200] text-white font-bold text-xs shadow-badge transition-colors cursor-pointer"
                       >
                         <Plus className="w-3.5 h-3.5" />
                         <span>Add to Bag</span>
@@ -375,7 +445,7 @@ export default function CustomerPortalPage() {
             {/* Phone Lookup Box */}
             <div className="p-6 sm:p-8 rounded-3xl bg-white border border-[#E8E5E0] shadow-card space-y-4">
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-2xl bg-[#FF5E00]/10 text-[#FF5E00] flex items-center justify-center">
+                <div className="w-10 h-10 rounded-2xl bg-[#FF5E00]/10 text-[#FF5E00] flex items-center justify-center shrink-0">
                   <Phone className="w-5 h-5" />
                 </div>
                 <div>
@@ -395,12 +465,12 @@ export default function CustomerPortalPage() {
                   value={lookupPhone}
                   onChange={(e) => setLookupPhone(e.target.value)}
                   placeholder="Enter 10-digit phone (e.g. 9123456780)"
-                  className="flex-1 px-4 py-3 rounded-xl border border-[#E8E5E0] text-sm focus:outline-none focus:border-[#FF5E00]"
+                  className="flex-1 px-4 py-3 rounded-xl border border-[#E8E5E0] text-base sm:text-sm focus:outline-none focus:border-[#FF5E00]"
                 />
                 <button
                   type="submit"
                   disabled={loadingOrders}
-                  className="px-6 py-3 rounded-xl bg-[#FF5E00] hover:bg-[#e05200] text-white font-bold text-sm shadow-badge transition-colors shrink-0 flex items-center justify-center gap-2"
+                  className="px-6 py-3 min-h-[48px] rounded-xl bg-[#FF5E00] hover:bg-[#e05200] text-white font-bold text-sm shadow-badge transition-colors shrink-0 flex items-center justify-center gap-2 cursor-pointer"
                 >
                   {loadingOrders ? (
                     <Loader2 className="w-4 h-4 animate-spin" />
@@ -422,7 +492,7 @@ export default function CustomerPortalPage() {
                   {customerOrders.map((order) => (
                     <div
                       key={order.id}
-                      className="p-6 rounded-3xl bg-white border border-[#E8E5E0] shadow-card space-y-4"
+                      className="p-5 sm:p-6 rounded-3xl bg-white border border-[#E8E5E0] shadow-card space-y-4"
                     >
                       {/* Top Bar */}
                       <div className="flex flex-wrap items-center justify-between gap-3 pb-3 border-b border-neutral-100">
@@ -440,7 +510,7 @@ export default function CustomerPortalPage() {
                       </div>
 
                       {/* 4-Stage Live Tracking Bar */}
-                      <div className="bg-[#FFFDF9] p-4 rounded-2xl border border-[#E8E5E0]">
+                      <div className="bg-[#FFFDF9] p-3 sm:p-4 rounded-2xl border border-[#E8E5E0]">
                         <div className="grid grid-cols-4 gap-1 text-center">
                           {[
                             { label: 'Confirmed', step: 1 },
@@ -461,7 +531,7 @@ export default function CustomerPortalPage() {
                                   {isDone ? '✓' : st.step}
                                 </div>
                                 <span
-                                  className={`text-[10px] sm:text-xs font-bold mt-1 ${
+                                  className={`text-[10px] sm:text-xs font-bold mt-1 leading-tight ${
                                     isDone ? 'text-[#FF5E00]' : 'text-neutral-400'
                                   }`}
                                 >
@@ -484,28 +554,28 @@ export default function CustomerPortalPage() {
                       </div>
 
                       {/* Footer Totals & View Ticket Action */}
-                      <div className="pt-2 flex items-center justify-between">
+                      <div className="pt-2 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                         <div>
                           <span className="text-xs text-neutral-400 block font-medium">
                             TOTAL PAID
                           </span>
-                          <span className="font-outfit font-black text-lg text-[#1A1311]">
+                          <span className="font-outfit font-black text-xl text-[#1A1311]">
                             {formatINR(order.pricing.grandTotal)}
                           </span>
                         </div>
-                        <div className="flex items-center gap-2">
+                        <div className="flex flex-wrap items-center gap-2 w-full sm:w-auto">
                           <Link
                             href={`/portal/track/${order.orderId}`}
-                            className="flex items-center gap-1.5 px-4 py-2 rounded-xl bg-[#FF5E00] hover:bg-[#e05200] text-white text-xs font-bold transition shadow-sm"
+                            className="flex-1 sm:flex-initial min-h-[44px] flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-xl bg-[#FF5E00] hover:bg-[#e05200] text-white text-xs font-bold transition shadow-sm"
                           >
-                            <Bike size={14} />
+                            <Bike size={16} />
                             <span>Live Map Tracking</span>
                           </Link>
                           <button
                             onClick={() => setSelectedOrderForReceipt(order)}
-                            className="px-4 py-2 rounded-xl border border-neutral-300 text-xs font-bold text-neutral-700 hover:bg-neutral-50 transition-colors"
+                            className="flex-1 sm:flex-initial min-h-[44px] px-4 py-2.5 rounded-xl border border-neutral-300 text-xs font-bold text-neutral-700 hover:bg-neutral-50 transition-colors cursor-pointer"
                           >
-                            View Receipt Ticket
+                            View Receipt
                           </button>
                         </div>
                       </div>
@@ -542,11 +612,11 @@ export default function CustomerPortalPage() {
                     value={newAddressInput}
                     onChange={(e) => setNewAddressInput(e.target.value)}
                     placeholder="e.g. Flat 302, Palm Heights, Indiranagar, Bengaluru"
-                    className="flex-1 px-4 py-3 rounded-xl border border-[#E8E5E0] text-sm focus:outline-none focus:border-[#FF5E00]"
+                    className="flex-1 px-4 py-3 rounded-xl border border-[#E8E5E0] text-base sm:text-sm focus:outline-none focus:border-[#FF5E00]"
                   />
                   <button
                     type="submit"
-                    className="px-6 py-3 rounded-xl bg-[#1A1311] hover:bg-black text-white font-bold text-sm transition-colors shrink-0"
+                    className="px-6 py-3 min-h-[48px] rounded-xl bg-[#1A1311] hover:bg-black text-white font-bold text-sm transition-colors shrink-0 cursor-pointer"
                   >
                     Save Address
                   </button>

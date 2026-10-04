@@ -10,6 +10,7 @@ export interface MenuItem {
   isVeg: boolean;
   spiceLevel: 1 | 2 | 3;
   tags: string[];
+  dietary?: ('Pure Veg' | 'Jain Friendly' | 'Keto Friendly' | 'Gluten Free' | 'Halal')[];
   calories?: number;
   rating?: number;
   reviewsCount?: number;

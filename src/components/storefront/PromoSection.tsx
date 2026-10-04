@@ -56,7 +56,7 @@ export function PromoSection() {
               <div className="pt-2">
                 <button
                   onClick={handleOrderCombo}
-                  className="px-8 py-4 rounded-2xl bg-[#1A1311] hover:bg-black text-white font-outfit font-black text-base shadow-2xl hover:scale-105 active:scale-95 transition-all cursor-pointer"
+                  className="w-full sm:w-auto min-h-[48px] px-6 sm:px-8 py-3.5 sm:py-4 rounded-2xl bg-[#1A1311] hover:bg-black text-white font-outfit font-black text-sm sm:text-base shadow-2xl hover:scale-105 active:scale-95 transition-all cursor-pointer text-center"
                 >
                   Order Royal Combo Deal (₹499)
                 </button>

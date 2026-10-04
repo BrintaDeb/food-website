@@ -1,5 +1,130 @@
 [
   {
+    "id": "CC-85264",
+    "orderId": "CC-85264",
+    "createdAt": "2026-10-03T22:39:37.349Z",
+    "formattedDate": "04 Oct 2026",
+    "formattedTime": "04:09 am",
+    "status": "Confirmed",
+    "statusStep": 1,
+    "estimatedTime": "25 - 35 mins",
+    "customer": {
+      "name": "Ananya Deshmukh",
+      "phone": "9812345678",
+      "alternatePhone": "",
+      "email": "",
+      "flat": "Skyline Villa 12",
+      "street": "Koramangala 4th Block",
+      "landmark": "",
+      "city": "Bengaluru",
+      "pincode": "560034",
+      "address": "Flat/House: Skyline Villa 12, Street/Building: Koramangala 4th Block, Bengaluru, PIN: 560034",
+      "deliveryType": "Home Delivery",
+      "paymentMethod": "UPI / QR",
+      "notes": ""
+    },
+    "items": [
+      {
+        "id": "kolkata-chicken-biryani",
+        "name": "Kolkata Chicken Biryani",
+        "price": 380,
+        "quantity": 2,
+        "image": "/images/kolkata-biryani.jpg",
+        "lineTotal": 760
+      },
+      {
+        "id": "burani-garlic-raita",
+        "name": "Burani Garlic Raita",
+        "price": 95,
+        "quantity": 1,
+        "image": "/images/kolkata-biryani.jpg",
+        "lineTotal": 95
+      },
+      {
+        "id": "kesari-phirni",
+        "name": "Kesari Phirni in Clay Kasora",
+        "price": 140,
+        "quantity": 2,
+        "image": "/images/kolkata-biryani.jpg",
+        "lineTotal": 280
+      }
+    ],
+    "pricing": {
+      "itemsSubtotal": 1135,
+      "discount": 567.5,
+      "discountLabel": "50% Royal Special (ROYAL50)",
+      "taxableAmount": 567.5,
+      "gst": 28.38,
+      "deliveryFee": 0,
+      "grandTotal": 595.88
+    },
+    "kitchenHub": {
+      "id": "koramangala-heritage",
+      "name": "Koramangala Heritage Hub",
+      "area": "Koramangala",
+      "address": "88, 5th Block, Industrial Layout, Koramangala",
+      "distanceKm": 1.8,
+      "etaMinutes": 22
+    },
+    "paymentDetails": {
+      "paymentMethod": "PhonePe (UPI)",
+      "utr": "UTR-8392174829",
+      "transactionId": "PAY-28491829",
+      "paidAt": "2026-10-03T22:39:37.304Z"
+    }
+  },
+  {
+    "id": "CC-30740",
+    "orderId": "CC-30740",
+    "createdAt": "2026-10-03T20:58:59.696Z",
+    "formattedDate": "04 Oct 2026",
+    "formattedTime": "02:28 am",
+    "status": "Preparing",
+    "statusStep": 2,
+    "estimatedTime": "25 - 35 mins",
+    "customer": {
+      "name": "Vikram Malhotra",
+      "phone": "9876543210",
+      "alternatePhone": "",
+      "email": "",
+      "flat": "Flat 402, Royal Palms",
+      "street": "Indiranagar 100ft Road",
+      "landmark": "Near Sony Signal",
+      "city": "Bengaluru",
+      "pincode": "560038",
+      "address": "Flat/House: Flat 402, Royal Palms, Street/Building: Indiranagar 100ft Road, Landmark: Near Sony Signal, Bengaluru, PIN: 560038",
+      "deliveryType": "Home Delivery",
+      "paymentMethod": "UPI / QR",
+      "notes": ""
+    },
+    "items": [
+      {
+        "id": "biryani-kolkata-dum",
+        "name": "Royal Kolkata Dum Biryani",
+        "price": 340,
+        "quantity": 2,
+        "image": "/images/kolkata-biryani.jpg",
+        "lineTotal": 680
+      }
+    ],
+    "pricing": {
+      "itemsSubtotal": 680,
+      "discount": 340,
+      "discountLabel": "50% Royal Special (ROYAL50)",
+      "taxableAmount": 340,
+      "gst": 17,
+      "deliveryFee": 0,
+      "grandTotal": 357
+    },
+    "paymentDetails": {
+      "paymentMethod": "Google Pay (UPI)",
+      "utr": "UTR-9823471829",
+      "transactionId": "PAY-89234812",
+      "paidAt": "2026-10-03T20:58:59.504Z"
+    },
+    "updatedAt": "2026-10-03T20:59:35.773Z"
+  },
+  {
     "id": "CC-54095",
     "orderId": "CC-54095",
     "createdAt": "2026-09-10T22:50:16.933Z",

@@ -40,6 +40,22 @@ export interface OrderPricing {
   grandTotal: number;
 }
 
+export interface OrderPaymentDetails {
+  paymentMethod: string;
+  utr: string;
+  transactionId: string;
+  paidAt: string;
+}
+
+export interface OrderKitchenHub {
+  id: string;
+  name: string;
+  area: string;
+  address?: string;
+  distanceKm?: number;
+  etaMinutes?: number;
+}
+
 export interface Order {
   id: string;
   orderId: string;
@@ -52,6 +68,8 @@ export interface Order {
   customer: OrderCustomerDetails;
   items: OrderItem[];
   pricing: OrderPricing;
+  kitchenHub?: OrderKitchenHub;
+  paymentDetails?: OrderPaymentDetails;
   updatedAt?: string;
 }
 
@@ -86,4 +104,6 @@ export interface CreateOrderPayload {
     image?: string;
   }>;
   promoCode?: string;
+  kitchenHub?: OrderKitchenHub;
+  paymentDetails?: OrderPaymentDetails;
 }

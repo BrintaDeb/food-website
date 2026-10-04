@@ -35,6 +35,7 @@ export default function AdminDashboardPage() {
 
   // Filter & Search State
   const [statusFilter, setStatusFilter] = useState<string>('All');
+  const [hubFilter, setHubFilter] = useState<string>('All');
   const [searchQuery, setSearchQuery] = useState('');
 
   const loadData = useCallback(async () => {
@@ -60,6 +61,72 @@ export default function AdminDashboardPage() {
     loadData();
   }, [loadData]);
 
+  // Real-time Kitchen Order Stream Sync via SSE
+  useEffect(() => {
+    let eventSource: EventSource | null = null;
+    try {
+      eventSource = new EventSource('/api/orders/stream?admin=true');
+
+      eventSource.addEventListener('order_created', (e) => {
+        try {
+          const newOrder = JSON.parse(e.data) as Order;
+          setOrders((prev) => {
+            if (prev.some((o) => o.orderId === newOrder.orderId)) return prev;
+            return [newOrder, ...prev];
+          });
+          setStats((prev) =>
+            prev
+              ? {
+                  ...prev,
+                  totalOrders: prev.totalOrders + 1,
+                  pendingOrders: prev.pendingOrders + 1,
+                  totalRevenue: +(prev.totalRevenue + newOrder.pricing.grandTotal).toFixed(2),
+                  todayRevenue: +(prev.todayRevenue + newOrder.pricing.grandTotal).toFixed(2)
+                }
+              : null
+          );
+          toast.show(
+            `🔔 New Order #${newOrder.orderId} received! (${formatINR(newOrder.pricing.grandTotal)})`,
+            'info'
+          );
+        } catch {
+          // ignore parse errors
+        }
+      });
+
+      eventSource.addEventListener('order_updated', (e) => {
+        try {
+          const payload = JSON.parse(e.data) as {
+            orderId: string;
+            status: OrderStatus;
+            statusStep: number;
+            updatedAt: string;
+          };
+          setOrders((prev) =>
+            prev.map((o) =>
+              o.orderId.toLowerCase() === payload.orderId.toLowerCase()
+                ? {
+                    ...o,
+                    status: payload.status,
+                    statusStep: payload.statusStep,
+                    updatedAt: payload.updatedAt
+                  }
+                : o
+            )
+          );
+        } catch {
+          // ignore parse errors
+        }
+      });
+    } catch {
+      // EventSource may not be supported in some environments
+    }
+
+    return () => {
+      eventSource?.close();
+    };
+  }, []);
+
   // Order Status Advancement Handler
   const handleAdvanceStatus = async (orderId: string, nextStatus: OrderStatus) => {
     try {
@@ -77,28 +144,32 @@ export default function AdminDashboardPage() {
   const filteredOrders = orders.filter((order) => {
     const matchesStatus =
       statusFilter === 'All' || (order.status || '').toLowerCase() === statusFilter.toLowerCase();
+    const matchesHub =
+      hubFilter === 'All' ||
+      (order.kitchenHub?.area || 'Indiranagar').toLowerCase() === hubFilter.toLowerCase() ||
+      (order.kitchenHub?.name || '').toLowerCase().includes(hubFilter.toLowerCase());
     const q = searchQuery.toLowerCase().trim();
     const matchesQuery =
       !q ||
       (order.orderId || '').toLowerCase().includes(q) ||
       (order.customer?.name || '').toLowerCase().includes(q) ||
       (order.customer?.phone || '').includes(q);
-    return matchesStatus && matchesQuery;
+    return matchesStatus && matchesHub && matchesQuery;
   });
 
   return (
     <div className="min-h-screen bg-[#FFFDF9] flex flex-col">
       {/* Top Admin Navbar */}
-      <header className="sticky top-0 z-40 bg-[#120B08] text-white border-b border-neutral-800 shadow-md">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <span className="text-3xl">🍛</span>
-            <div>
-              <span className="font-outfit font-black text-xl tracking-tight block leading-none text-white">
+      <header className="sticky top-0 z-40 bg-[#120B08] text-white border-b border-neutral-800 shadow-md pt-[env(safe-area-inset-top,0px)]">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-18 sm:h-20 flex items-center justify-between">
+          <div className="flex items-center gap-2.5 sm:gap-3 min-w-0">
+            <span className="text-2xl sm:text-3xl shrink-0">🍛</span>
+            <div className="min-w-0">
+              <span className="font-outfit font-black text-lg sm:text-xl tracking-tight block leading-none text-white truncate">
                 CurryCraft Admin
               </span>
-              <span className="text-xs text-[#FFB088] font-medium flex items-center gap-1 mt-0.5">
-                <ShieldCheck size={12} className="text-emerald-400" />
+              <span className="text-[11px] sm:text-xs text-[#FFB088] font-medium flex items-center gap-1 mt-0.5 truncate hidden xs:flex">
+                <ShieldCheck size={12} className="text-emerald-400 shrink-0" />
                 Executive Chef Operations
               </span>
             </div>
@@ -108,7 +179,7 @@ export default function AdminDashboardPage() {
           <div className="hidden md:flex items-center gap-2 bg-neutral-900/80 p-1.5 rounded-2xl border border-neutral-800">
             <button
               onClick={() => setActiveTab('orders')}
-              className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold transition-all ${
+              className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer ${
                 activeTab === 'orders'
                   ? 'bg-[#FF5E00] text-white shadow-badge'
                   : 'text-neutral-400 hover:text-white'
@@ -124,7 +195,7 @@ export default function AdminDashboardPage() {
             </button>
             <button
               onClick={() => setActiveTab('menu')}
-              className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold transition-all ${
+              className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer ${
                 activeTab === 'menu'
                   ? 'bg-[#FF5E00] text-white shadow-badge'
                   : 'text-neutral-400 hover:text-white'
@@ -135,7 +206,7 @@ export default function AdminDashboardPage() {
             </button>
             <button
               onClick={() => setActiveTab('analytics')}
-              className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold transition-all ${
+              className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer ${
                 activeTab === 'analytics'
                   ? 'bg-[#FF5E00] text-white shadow-badge'
                   : 'text-neutral-400 hover:text-white'
@@ -147,16 +218,16 @@ export default function AdminDashboardPage() {
           </div>
 
           {/* External Links, Admin Profile & Sign Out */}
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2 sm:gap-3">
             <Link
               href="/portal"
-              className="hidden sm:inline-block text-xs font-bold text-neutral-300 hover:text-[#FF8516] transition-colors"
+              className="hidden sm:inline-block text-xs font-bold text-neutral-300 hover:text-[#FF8516] transition-colors p-1"
             >
               Portal
             </Link>
             <Link
               href="/"
-              className="text-xs font-bold text-neutral-300 hover:text-[#FF8516] transition-colors"
+              className="text-xs font-bold text-neutral-300 hover:text-[#FF8516] transition-colors p-1"
             >
               Storefront
             </Link>
@@ -164,7 +235,7 @@ export default function AdminDashboardPage() {
             <button
               onClick={loadData}
               disabled={refreshing}
-              className="p-2 rounded-xl bg-neutral-800 hover:bg-neutral-700 text-neutral-200 transition-colors"
+              className="p-2.5 rounded-xl bg-neutral-800 hover:bg-neutral-700 text-neutral-200 transition-colors min-w-[36px] min-h-[36px] flex items-center justify-center cursor-pointer"
               aria-label="Refresh live data"
             >
               <RefreshCw className={`w-4 h-4 ${refreshing ? 'animate-spin' : ''}`} />
@@ -181,7 +252,7 @@ export default function AdminDashboardPage() {
 
             <button
               onClick={() => signOut({ callbackUrl: '/admin/login' })}
-              className="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-red-500/10 hover:bg-red-500/20 text-red-400 hover:text-red-300 font-bold text-xs transition"
+              className="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-red-500/10 hover:bg-red-500/20 text-red-400 hover:text-red-300 font-bold text-xs transition min-h-[36px] cursor-pointer"
               title="Sign Out of Admin"
             >
               <LogOut size={14} />
@@ -194,27 +265,44 @@ export default function AdminDashboardPage() {
         <div className="md:hidden flex border-t border-neutral-800 bg-neutral-900 text-xs font-bold divide-x divide-neutral-800">
           <button
             onClick={() => setActiveTab('orders')}
-            className={`flex-1 py-3 text-center ${activeTab === 'orders' ? 'text-[#FF5E00] font-black' : 'text-neutral-400'}`}
+            className={`flex-1 min-h-[48px] py-3 text-center flex items-center justify-center gap-1.5 transition-colors cursor-pointer ${
+              activeTab === 'orders'
+                ? 'text-[#FF5E00] font-black bg-neutral-800 border-b-2 border-[#FF5E00]'
+                : 'text-neutral-400 hover:text-white'
+            }`}
           >
-            📋 Orders ({stats?.pendingOrders || 0})
+            <span>📋 Orders</span>
+            {stats?.pendingOrders ? (
+              <span className="px-1.5 py-0.5 rounded-full bg-[#FF5E00] text-white text-[10px] font-black">
+                {stats.pendingOrders}
+              </span>
+            ) : null}
           </button>
           <button
             onClick={() => setActiveTab('menu')}
-            className={`flex-1 py-3 text-center ${activeTab === 'menu' ? 'text-[#FF5E00] font-black' : 'text-neutral-400'}`}
+            className={`flex-1 min-h-[48px] py-3 text-center flex items-center justify-center gap-1.5 transition-colors cursor-pointer ${
+              activeTab === 'menu'
+                ? 'text-[#FF5E00] font-black bg-neutral-800 border-b-2 border-[#FF5E00]'
+                : 'text-neutral-400 hover:text-white'
+            }`}
           >
-            🍛 Menu
+            <span>🍛 Menu</span>
           </button>
           <button
             onClick={() => setActiveTab('analytics')}
-            className={`flex-1 py-3 text-center ${activeTab === 'analytics' ? 'text-[#FF5E00] font-black' : 'text-neutral-400'}`}
+            className={`flex-1 min-h-[48px] py-3 text-center flex items-center justify-center gap-1.5 transition-colors cursor-pointer ${
+              activeTab === 'analytics'
+                ? 'text-[#FF5E00] font-black bg-neutral-800 border-b-2 border-[#FF5E00]'
+                : 'text-neutral-400 hover:text-white'
+            }`}
           >
-            📊 Stats
+            <span>📊 Stats</span>
           </button>
         </div>
       </header>
 
       {/* Main Admin Content */}
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-10 flex-1 w-full space-y-8">
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-10 flex-1 w-full space-y-8 pb-[max(2rem,calc(env(safe-area-inset-bottom,0px)+1.5rem))]">
         {/* =========================================================================
             TAB 1: LIVE ORDERS DASHBOARD
             ========================================================================= */}
@@ -268,14 +356,14 @@ export default function AdminDashboardPage() {
             </div>
 
             {/* Filter & Search Bar */}
-            <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
-              <div className="flex items-center gap-2 overflow-x-auto w-full sm:w-auto pb-2 sm:pb-0">
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4">
+              <div className="flex items-center gap-2 overflow-x-auto w-full sm:w-auto pb-2 sm:pb-0 -mx-4 px-4 sm:mx-0 sm:px-0 touch-scroll scrollbar-none">
                 {['All', 'Confirmed', 'Preparing', 'Out for Delivery', 'Delivered'].map(
                   (status) => (
                     <button
                       key={status}
                       onClick={() => setStatusFilter(status)}
-                      className={`px-4 py-2 rounded-xl text-xs font-bold transition-all shrink-0 ${
+                      className={`px-4 py-2.5 min-h-[42px] rounded-xl text-xs font-bold transition-all shrink-0 cursor-pointer ${
                         statusFilter === status
                           ? 'bg-[#1A1311] text-white'
                           : 'bg-white text-neutral-700 border border-[#E8E5E0] hover:bg-neutral-50'
@@ -287,15 +375,30 @@ export default function AdminDashboardPage() {
                 )}
               </div>
 
-              <div className="relative w-full sm:w-72">
-                <Search className="w-4 h-4 text-neutral-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
-                <input
-                  type="text"
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  placeholder="Search ID, customer, phone..."
-                  className="w-full pl-10 pr-4 py-2 text-xs rounded-xl border border-[#E8E5E0] bg-white focus:outline-none focus:border-[#FF5E00]"
-                />
+              <div className="flex flex-col xs:flex-row items-center gap-2 w-full sm:w-auto">
+                <select
+                  value={hubFilter}
+                  onChange={(e) => setHubFilter(e.target.value)}
+                  className="w-full xs:w-auto px-3.5 py-2.5 rounded-xl border border-[#E8E5E0] bg-white text-xs font-bold text-stone-700 min-h-[42px] focus:outline-none focus:border-[#FF5E00] cursor-pointer"
+                >
+                  <option value="All">All Kitchen Hubs (5)</option>
+                  <option value="Indiranagar">Indiranagar Flagship</option>
+                  <option value="Koramangala">Koramangala Hub</option>
+                  <option value="Whitefield">Whitefield Outpost</option>
+                  <option value="HSR Layout">HSR Layout Station</option>
+                  <option value="Malleshwaram">Malleshwaram Traditional</option>
+                </select>
+
+                <div className="relative w-full sm:w-64">
+                  <Search className="w-4 h-4 text-neutral-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
+                  <input
+                    type="text"
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    placeholder="Search ID, customer, phone..."
+                    className="w-full pl-10 pr-4 py-2.5 text-base sm:text-xs rounded-xl border border-[#E8E5E0] bg-white focus:outline-none focus:border-[#FF5E00]"
+                  />
+                </div>
               </div>
             </div>
 
@@ -317,12 +420,15 @@ export default function AdminDashboardPage() {
                     className="p-6 rounded-3xl bg-white border border-[#E8E5E0] shadow-card space-y-4"
                   >
                     <div className="flex flex-wrap items-center justify-between gap-3 pb-3 border-b border-neutral-100">
-                      <div>
+                      <div className="flex items-center gap-3 flex-wrap">
                         <span className="font-mono font-black text-base text-[#FF5E00]">
                           #{order.orderId}
                         </span>
-                        <span className="text-xs text-neutral-400 ml-3">
+                        <span className="text-xs text-neutral-400">
                           {order.formattedDate} at {order.formattedTime}
+                        </span>
+                        <span className="inline-flex items-center gap-1 text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-orange-50 text-[#FF5E00] border border-orange-200">
+                          📍 {order.kitchenHub?.name || 'Indiranagar Flagship'}
                         </span>
                       </div>
                       <span className="px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-700 text-xs font-bold">
@@ -377,11 +483,11 @@ export default function AdminDashboardPage() {
 
                     {/* Status Action Pipeline */}
                     <div className="pt-2 flex flex-wrap items-center justify-between gap-3">
-                      <div className="flex flex-wrap gap-2">
+                      <div className="flex flex-wrap gap-2 w-full sm:w-auto">
                         {order.status === 'Confirmed' && (
                           <button
                             onClick={() => handleAdvanceStatus(order.id, 'Preparing')}
-                            className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-amber-500 text-white font-bold text-xs shadow-xs hover:bg-amber-600 transition-colors"
+                            className="flex-1 sm:flex-initial min-h-[44px] inline-flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-xl bg-amber-500 text-white font-bold text-xs shadow-xs hover:bg-amber-600 transition-colors cursor-pointer"
                           >
                             <Flame className="w-3.5 h-3.5" />
                             <span>Advance to Kitchen (Preparing)</span>
@@ -390,7 +496,7 @@ export default function AdminDashboardPage() {
                         {order.status === 'Preparing' && (
                           <button
                             onClick={() => handleAdvanceStatus(order.id, 'Out for Delivery')}
-                            className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-blue-500 text-white font-bold text-xs shadow-xs hover:bg-blue-600 transition-colors"
+                            className="flex-1 sm:flex-initial min-h-[44px] inline-flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-xl bg-blue-500 text-white font-bold text-xs shadow-xs hover:bg-blue-600 transition-colors cursor-pointer"
                           >
                             <Truck className="w-3.5 h-3.5" />
                             <span>Advance to Out for Delivery</span>
@@ -399,7 +505,7 @@ export default function AdminDashboardPage() {
                         {order.status === 'Out for Delivery' && (
                           <button
                             onClick={() => handleAdvanceStatus(order.id, 'Delivered')}
-                            className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-emerald-600 text-white font-bold text-xs shadow-xs hover:bg-emerald-700 transition-colors"
+                            className="flex-1 sm:flex-initial min-h-[44px] inline-flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-xl bg-emerald-600 text-white font-bold text-xs shadow-xs hover:bg-emerald-700 transition-colors cursor-pointer"
                           >
                             <CheckCircle className="w-3.5 h-3.5" />
                             <span>Mark Delivered</span>
@@ -408,7 +514,7 @@ export default function AdminDashboardPage() {
                         {order.status !== 'Delivered' && order.status !== 'Cancelled' && (
                           <button
                             onClick={() => handleAdvanceStatus(order.id, 'Cancelled')}
-                            className="px-3 py-2 rounded-xl border border-red-200 text-red-600 hover:bg-red-50 text-xs font-bold transition-colors"
+                            className="min-h-[44px] px-4 py-2.5 rounded-xl border border-red-200 text-red-600 hover:bg-red-50 text-xs font-bold transition-colors cursor-pointer"
                           >
                             Cancel
                           </button>

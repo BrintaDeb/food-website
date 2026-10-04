@@ -27,7 +27,7 @@ export default function TrackOrderPage({ params }: TrackOrderPageProps) {
   const { telemetry, routeWaypoints, restartSimulation } = useRiderSimulation(orderId);
 
   return (
-    <div className="min-h-screen bg-[#FFFDF9] py-8 sm:py-12">
+    <div className="min-h-screen bg-[#FFFDF9] pt-[max(1.5rem,calc(env(safe-area-inset-top,0px)+1rem))] pb-[max(2rem,calc(env(safe-area-inset-bottom,0px)+1.5rem))]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
         {/* Navigation & Header */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">

@@ -1,5 +1,6 @@
 'use client';
 
+import { useEffect } from 'react';
 import Link from 'next/link';
 import { X, Printer, ShoppingBag, Bike } from 'lucide-react';
 import type { Order } from '@/types/order';
@@ -12,6 +13,18 @@ interface ReceiptModalProps {
 }
 
 export function ReceiptModal({ order, isOpen, onClose }: ReceiptModalProps) {
+  // Prevent background scroll while receipt modal is open
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [isOpen]);
+
   if (!isOpen || !order) return null;
 
   const handlePrint = () => {
@@ -30,20 +43,20 @@ export function ReceiptModal({ order, isOpen, onClose }: ReceiptModalProps) {
       role="dialog"
       aria-modal="true"
       aria-labelledby="receiptModalTitle"
-      className="fixed inset-0 z-50 overflow-y-auto bg-black/70 backdrop-blur-xs flex items-center justify-center p-4 sm:p-6"
+      className="fixed inset-0 z-50 overflow-y-auto bg-black/75 backdrop-blur-xs flex sm:items-center justify-center p-0 sm:p-4 md:p-6"
     >
-      <div className="relative w-full max-w-xl bg-white rounded-3xl shadow-2xl overflow-hidden border border-[#E8E5E0] animate-in zoom-in-95 duration-200">
+      <div className="relative w-full sm:max-w-xl bg-white sm:rounded-3xl rounded-none shadow-2xl overflow-hidden border-0 sm:border border-[#E8E5E0] animate-in zoom-in-95 duration-200 h-full sm:h-auto sm:max-h-[90dvh] flex flex-col pt-[env(safe-area-inset-top,0px)] pb-[env(safe-area-inset-bottom,0px)] sm:pt-0 sm:pb-0">
         {/* Modal Close Button */}
         <button
           onClick={onClose}
-          className="no-print absolute top-4 right-4 p-2 rounded-full text-neutral-400 hover:text-black hover:bg-neutral-100 transition-colors z-10"
+          className="no-print absolute top-4 right-4 min-w-[44px] min-h-[44px] flex items-center justify-center rounded-full text-neutral-400 hover:text-black hover:bg-neutral-100 active:scale-95 transition-all z-10"
           aria-label="Close receipt"
         >
           <X className="w-5 h-5" />
         </button>
 
         {/* Printable Ticket */}
-        <div id="printableReceipt" className="p-6 sm:p-8 space-y-6">
+        <div id="printableReceipt" className="p-5 sm:p-8 space-y-6 flex-1 overflow-y-auto touch-scroll overscroll-contain">
           {/* Brand Header */}
           <div className="flex items-center justify-between border-b border-dashed border-neutral-300 pb-5">
             <div>
@@ -114,12 +127,27 @@ export function ReceiptModal({ order, isOpen, onClose }: ReceiptModalProps) {
             </div>
             <div>
               <span className="text-neutral-400 block font-semibold">PAYMENT METHOD</span>
-              <span className="font-bold text-neutral-800">{order.customer.paymentMethod}</span>
+              <div className="flex items-center gap-1.5 flex-wrap">
+                <span className="font-bold text-neutral-800">{order.customer.paymentMethod}</span>
+                {order.paymentDetails?.utr && (
+                  <span className="inline-flex items-center gap-1 text-[10px] font-mono font-bold px-1.5 py-0.5 rounded bg-emerald-50 text-emerald-700 border border-emerald-200">
+                    ✓ {order.paymentDetails.utr}
+                  </span>
+                )}
+              </div>
             </div>
             <div className="col-span-2">
               <span className="text-neutral-400 block font-semibold">DELIVERY DESTINATION</span>
               <span className="font-medium text-neutral-700">{order.customer.address}</span>
             </div>
+            {order.kitchenHub && (
+              <div className="col-span-2 bg-orange-50/70 p-2 rounded-xl border border-orange-200/50 flex items-center justify-between text-[11px]">
+                <span className="text-stone-500 font-semibold">DISPATCH KITCHEN:</span>
+                <span className="font-bold text-[#FF5E00]">
+                  {order.kitchenHub.name} ({order.kitchenHub.area})
+                </span>
+              </div>
+            )}
           </div>
 
           {/* Itemized Order Table */}
@@ -187,25 +215,25 @@ export function ReceiptModal({ order, isOpen, onClose }: ReceiptModalProps) {
         </div>
 
         {/* Action Controls */}
-        <div className="no-print p-6 bg-neutral-50 border-t border-[#E8E5E0] flex flex-col sm:flex-row gap-3">
+        <div className="no-print p-4 sm:p-6 bg-neutral-50 border-t border-[#E8E5E0] flex flex-col sm:flex-row gap-2.5 sm:gap-3 shrink-0 pb-[max(1rem,calc(0.75rem+env(safe-area-inset-bottom,0px)))]">
           <Link
             href={`/portal/track/${order.orderId}`}
             onClick={onClose}
-            className="flex-1 flex items-center justify-center gap-2 py-3 px-4 rounded-xl bg-[#1A1311] text-white font-bold text-sm hover:bg-black transition-colors text-center"
+            className="flex-1 flex items-center justify-center gap-2 py-3 px-4 rounded-xl bg-[#1A1311] text-white font-bold text-sm hover:bg-black active:scale-[0.98] transition-all text-center min-h-[48px]"
           >
             <Bike className="w-4 h-4 text-[#FF8516]" />
             <span>Track Order Live 🛵</span>
           </Link>
           <button
             onClick={handlePrint}
-            className="flex-1 flex items-center justify-center gap-2 py-3 px-4 rounded-xl border border-neutral-300 bg-white text-neutral-700 font-bold text-sm hover:bg-neutral-100 transition-colors"
+            className="flex-1 flex items-center justify-center gap-2 py-3 px-4 rounded-xl border border-neutral-300 bg-white text-neutral-700 font-bold text-sm hover:bg-neutral-100 active:scale-[0.98] transition-all min-h-[48px]"
           >
             <Printer className="w-4 h-4" />
             <span>Print Receipt</span>
           </button>
           <button
             onClick={onClose}
-            className="flex-1 flex items-center justify-center gap-2 py-3 px-4 rounded-xl bg-[#FF5E00] text-white font-bold text-sm hover:bg-[#e05200] transition-colors shadow-float"
+            className="flex-1 flex items-center justify-center gap-2 py-3 px-4 rounded-xl bg-[#FF5E00] text-white font-bold text-sm hover:bg-[#e05200] active:scale-[0.98] transition-all shadow-float min-h-[48px]"
           >
             <ShoppingBag className="w-4 h-4" />
             <span>Order More</span>

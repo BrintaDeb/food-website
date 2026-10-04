@@ -29,6 +29,18 @@ export function SearchModal({ isOpen, onClose }: SearchModalProps) {
     }
   }, [isOpen]);
 
+  // Prevent background scroll while search modal is open
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [isOpen]);
+
   if (!isOpen) return null;
 
   const filteredItems = menu.filter((it) => {
@@ -46,23 +58,23 @@ export function SearchModal({ isOpen, onClose }: SearchModalProps) {
       role="dialog"
       aria-modal="true"
       aria-label="Search Indian menu"
-      className="fixed inset-0 z-50 bg-black/70 backdrop-blur-xs flex items-start justify-center pt-20 px-4 sm:px-6"
+      className="fixed inset-0 z-50 bg-black/70 backdrop-blur-xs flex items-start justify-center pt-[max(1rem,calc(env(safe-area-inset-top,0px)+0.75rem))] sm:pt-20 px-3 sm:px-6"
     >
       <div className="relative w-full max-w-xl bg-white rounded-3xl shadow-2xl overflow-hidden border border-[#E8E5E0] animate-in slide-in-from-top-4 duration-200">
         {/* Search Input Box */}
-        <div className="flex items-center gap-3 px-6 py-4 border-b border-[#E8E5E0]">
-          <Search className="w-5 h-5 text-[#FF5E00] shrink-0" />
+        <div className="flex items-center gap-3 px-4 sm:px-6 py-3.5 sm:py-4 border-b border-[#E8E5E0]">
+          <Search className="w-5 h-5 text-[#FF5E00] shrink-0 pointer-events-none" />
           <input
             type="text"
             autoFocus
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             placeholder="Search menu (e.g. Biryani, Sambar, Naan, Rabdi)..."
-            className="w-full text-base font-medium text-[#1A1311] placeholder:text-neutral-400 focus:outline-none"
+            className="w-full text-base font-medium text-[#1A1311] placeholder:text-neutral-400 focus:outline-none min-h-[44px]"
           />
           <button
             onClick={onClose}
-            className="p-1.5 rounded-full text-neutral-400 hover:text-black hover:bg-neutral-100 transition-colors"
+            className="min-w-[44px] min-h-[44px] flex items-center justify-center rounded-full text-neutral-400 hover:text-black hover:bg-neutral-100 active:scale-95 transition-all"
             aria-label="Close search"
           >
             <X className="w-5 h-5" />
@@ -70,7 +82,7 @@ export function SearchModal({ isOpen, onClose }: SearchModalProps) {
         </div>
 
         {/* Results List */}
-        <div className="max-h-96 overflow-y-auto p-4 space-y-2.5">
+        <div className="max-h-[60vh] sm:max-h-96 overflow-y-auto p-3 sm:p-4 space-y-2.5 touch-scroll overscroll-contain">
           {loading ? (
             <div className="py-8 text-center text-sm text-neutral-400">Loading menu items...</div>
           ) : filteredItems.length === 0 ? (
@@ -113,10 +125,10 @@ export function SearchModal({ isOpen, onClose }: SearchModalProps) {
                       image: item.image
                     });
                   }}
-                  className="p-2 rounded-xl bg-[#FF5E00]/10 text-[#FF5E00] hover:bg-[#FF5E00] hover:text-white transition-colors shrink-0"
+                  className="min-w-[44px] min-h-[44px] flex items-center justify-center rounded-xl bg-[#FF5E00]/10 text-[#FF5E00] hover:bg-[#FF5E00] hover:text-white active:scale-90 transition-all shrink-0"
                   aria-label={`Add ${item.name} to bag`}
                 >
-                  <Plus className="w-4 h-4" />
+                  <Plus className="w-5 h-5" />
                 </button>
               </div>
             ))

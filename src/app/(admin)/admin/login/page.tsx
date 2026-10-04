@@ -95,7 +95,7 @@ function AdminLoginForm() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="admin@currycraft.com"
-              className="w-full pl-10 pr-4 py-3 bg-white/[0.06] border border-white/15 rounded-xl text-white placeholder-white/30 text-sm focus:outline-none focus:border-[#FF5E00] focus:ring-1 focus:ring-[#FF5E00] transition"
+              className="w-full pl-10 pr-4 py-3 bg-white/[0.06] border border-white/15 rounded-xl text-white placeholder-white/30 text-base sm:text-sm focus:outline-none focus:border-[#FF5E00] focus:ring-1 focus:ring-[#FF5E00] transition"
             />
           </div>
         </div>
@@ -112,7 +112,7 @@ function AdminLoginForm() {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               placeholder="••••••••••••"
-              className="w-full pl-10 pr-4 py-3 bg-white/[0.06] border border-white/15 rounded-xl text-white placeholder-white/30 text-sm focus:outline-none focus:border-[#FF5E00] focus:ring-1 focus:ring-[#FF5E00] transition"
+              className="w-full pl-10 pr-4 py-3 bg-white/[0.06] border border-white/15 rounded-xl text-white placeholder-white/30 text-base sm:text-sm focus:outline-none focus:border-[#FF5E00] focus:ring-1 focus:ring-[#FF5E00] transition"
             />
           </div>
         </div>
@@ -120,7 +120,7 @@ function AdminLoginForm() {
         <button
           type="submit"
           disabled={isLoading}
-          className="w-full py-3.5 px-6 rounded-xl bg-gradient-to-r from-[#FF5E00] to-[#E04800] hover:from-[#FF7324] hover:to-[#EB5505] text-white font-bold text-sm tracking-wide shadow-lg shadow-[#FF5E00]/25 transition active:scale-[0.99] flex items-center justify-center gap-2 mt-2 disabled:opacity-60"
+          className="w-full min-h-[48px] py-3.5 px-6 rounded-xl bg-gradient-to-r from-[#FF5E00] to-[#E04800] hover:from-[#FF7324] hover:to-[#EB5505] text-white font-bold text-sm tracking-wide shadow-lg shadow-[#FF5E00]/25 transition active:scale-[0.99] flex items-center justify-center gap-2 mt-2 disabled:opacity-60 cursor-pointer"
         >
           {isLoading ? (
             <>
@@ -136,7 +136,7 @@ function AdminLoginForm() {
         <button
           type="button"
           onClick={handleFillDemo}
-          className="w-full py-2.5 px-4 rounded-xl bg-white/[0.05] hover:bg-white/[0.1] border border-white/10 text-white/80 hover:text-white text-xs font-medium transition flex items-center justify-center gap-2"
+          className="w-full min-h-[44px] py-2.5 px-4 rounded-xl bg-white/[0.05] hover:bg-white/[0.1] border border-white/10 text-white/80 hover:text-white text-xs font-medium transition flex items-center justify-center gap-2 cursor-pointer"
         >
           <Sparkles size={15} className="text-[#FFB088]" />
           Auto-fill Demo Admin Credentials
@@ -152,7 +152,7 @@ function AdminLoginForm() {
 
 export default function AdminLoginPage() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#120B08] via-[#1F120C] to-[#2B1408] text-[#FFF7EE] flex items-center justify-center p-4 relative overflow-hidden">
+    <div className="min-h-screen bg-gradient-to-br from-[#120B08] via-[#1F120C] to-[#2B1408] text-[#FFF7EE] flex items-center justify-center p-4 pt-[max(1rem,env(safe-area-inset-top,0px))] pb-[max(1rem,env(safe-area-inset-bottom,0px))] relative overflow-hidden">
       <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[550px] h-[550px] bg-[#FF5E00]/15 rounded-full blur-3xl pointer-events-none" />
 
       <Suspense

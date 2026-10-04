@@ -2,7 +2,7 @@
 
 import React from 'react';
 import Image from 'next/image';
-import { Leaf, Flame, Clock, Star, Plus, GripVertical } from 'lucide-react';
+import { Leaf, Flame, Clock, Star, Plus, Minus, GripVertical } from 'lucide-react';
 import { useDraggableItem } from '@/hooks/useDraggableCart';
 import { useCartStore } from '@/store/useCartStore';
 import { formatINR } from '@/lib/utils';
@@ -16,6 +16,9 @@ interface DraggableFoodCardProps {
 export function DraggableFoodCard({ item }: DraggableFoodCardProps) {
   const { cardRef } = useDraggableItem(item);
   const addItem = useCartStore((state) => state.addItem);
+  const updateQuantity = useCartStore((state) => state.updateQuantity);
+  const cartItem = useCartStore((state) => state.items.find((i) => i.id === item.id));
+  const quantity = cartItem?.quantity || 0;
 
   const handleManualAdd = (e: React.MouseEvent) => {
     e.stopPropagation();
@@ -71,7 +74,7 @@ export function DraggableFoodCard({ item }: DraggableFoodCardProps) {
 
           <div
             title="Drag this dish into the floating cart"
-            className="flex items-center gap-1 text-[11px] font-semibold text-stone-400 group-hover:text-[#FF5E00] bg-stone-50 group-hover:bg-orange-50 px-2 py-1 rounded-xl transition-colors cursor-grab active:cursor-grabbing"
+            className="drag-handle flex items-center gap-1 text-[11px] font-semibold text-stone-400 group-hover:text-[#FF5E00] bg-stone-50 group-hover:bg-orange-50 px-2 py-1 rounded-xl transition-colors cursor-grab active:cursor-grabbing touch-none select-none"
           >
             <GripVertical size={14} />
             <span className="hidden sm:inline">Drag to Cart</span>
@@ -153,14 +156,44 @@ export function DraggableFoodCard({ item }: DraggableFoodCardProps) {
           </span>
         </div>
 
-        <button
-          type="button"
-          onClick={handleManualAdd}
-          className="flex items-center gap-1.5 px-4 py-2.5 rounded-2xl bg-[#1A1311] hover:bg-[#FF5E00] text-white font-bold text-xs shadow-md transition-all active:scale-95"
-        >
-          <Plus size={14} />
-          <span>Add</span>
-        </button>
+        {quantity > 0 ? (
+          <div className="flex items-center border border-[#FF5E00]/30 rounded-2xl bg-[#FF5E00]/5 p-0.5 shadow-xs">
+            <button
+              type="button"
+              onClick={(e) => {
+                e.stopPropagation();
+                updateQuantity(item.id, quantity - 1);
+              }}
+              className="w-8 h-8 rounded-xl flex items-center justify-center text-[#FF5E00] hover:bg-[#FF5E00] hover:text-white transition active:scale-90"
+              aria-label={`Decrease ${item.name} quantity`}
+            >
+              <Minus size={14} />
+            </button>
+            <span className="w-7 text-center font-outfit font-black text-sm text-[#1A1311]">
+              {quantity}
+            </span>
+            <button
+              type="button"
+              onClick={(e) => {
+                e.stopPropagation();
+                updateQuantity(item.id, quantity + 1);
+              }}
+              className="w-8 h-8 rounded-xl flex items-center justify-center bg-[#FF5E00] text-white hover:bg-[#e05200] transition active:scale-90 shadow-xs"
+              aria-label={`Increase ${item.name} quantity`}
+            >
+              <Plus size={14} />
+            </button>
+          </div>
+        ) : (
+          <button
+            type="button"
+            onClick={handleManualAdd}
+            className="flex items-center gap-1.5 px-4 py-2.5 rounded-2xl bg-[#1A1311] hover:bg-[#FF5E00] text-white font-bold text-xs shadow-md transition-all active:scale-95 min-h-[40px]"
+          >
+            <Plus size={14} />
+            <span>Add</span>
+          </button>
+        )}
       </div>
     </div>
   );

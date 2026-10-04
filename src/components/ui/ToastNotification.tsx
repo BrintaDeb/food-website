@@ -44,10 +44,10 @@ export function ToastNotification() {
     <div
       role="status"
       aria-live="polite"
-      className={`fixed bottom-6 right-6 z-50 flex items-center gap-3 px-5 py-3.5 rounded-xl shadow-2xl transition-all duration-300 transform translate-y-0 opacity-100 ${bgStyles[toastData.type]}`}
+      className={`fixed top-4 left-1/2 -translate-x-1/2 sm:top-auto sm:left-auto sm:translate-x-0 sm:bottom-6 sm:right-6 z-50 flex items-center gap-3 px-5 py-3.5 rounded-2xl shadow-2xl transition-all duration-300 transform opacity-100 w-[92%] sm:w-auto max-w-md pt-[max(0.875rem,calc(env(safe-area-inset-top,0px)+0.5rem))] sm:pt-3.5 ${bgStyles[toastData.type]}`}
     >
       {icons[toastData.type]}
-      <span className="text-sm font-medium">{toastData.message}</span>
+      <span className="text-sm font-medium leading-snug">{toastData.message}</span>
     </div>
   );
 }

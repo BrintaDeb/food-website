@@ -17,7 +17,7 @@ export function Footer() {
   };
 
   return (
-    <footer className="bg-[#1A1311] text-white pt-16 pb-12 mt-auto">
+    <footer className="bg-[#1A1311] text-white pt-16 pb-[max(5.5rem,calc(4.5rem+env(safe-area-inset-bottom,0px)))] mt-auto">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-8 pb-12 border-b border-white/10">
           {/* Col 1: Brand & Contact Info */}
@@ -124,7 +124,7 @@ export function Footer() {
             </p>
             <form
               onSubmit={handleSubscribe}
-              className="flex items-center bg-white/10 rounded-xl p-1.5 border border-white/10 focus-within:border-[#FF5E00] transition-all"
+              className="flex items-center bg-white/10 rounded-2xl p-1.5 border border-white/10 focus-within:border-[#FF5E00] transition-all min-h-[48px]"
             >
               <input
                 type="email"
@@ -132,12 +132,12 @@ export function Footer() {
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="Enter your email..."
                 required
-                className="bg-transparent text-sm text-white px-3 py-1.5 focus:outline-none w-full placeholder:text-neutral-400"
+                className="bg-transparent text-base sm:text-sm text-white px-3 py-2 focus:outline-none w-full placeholder:text-neutral-400"
               />
               <button
                 type="submit"
                 aria-label="Subscribe"
-                className="bg-[#FF5E00] hover:bg-[#FF8516] text-white p-2 rounded-lg transition-colors shrink-0 cursor-pointer"
+                className="bg-[#FF5E00] hover:bg-[#FF8516] active:scale-95 text-white min-w-[40px] min-h-[40px] flex items-center justify-center rounded-xl transition-all shrink-0 cursor-pointer"
               >
                 <ArrowRight className="w-4 h-4" />
               </button>

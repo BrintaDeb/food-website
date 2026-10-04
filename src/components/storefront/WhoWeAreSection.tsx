@@ -59,7 +59,7 @@ export function WhoWeAreSection() {
             <div className="pt-2">
               <button
                 onClick={handleShare}
-                className="inline-flex items-center gap-2.5 px-6 py-3.5 rounded-2xl bg-[#1A1311] hover:bg-black text-white font-outfit font-bold text-sm shadow-card transition-all cursor-pointer"
+                className="w-full sm:w-auto min-h-[44px] inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-2xl bg-[#1A1311] hover:bg-black text-white font-outfit font-bold text-sm shadow-card transition-all cursor-pointer"
               >
                 <Share2 className="w-4 h-4 text-[#FF8516]" />
                 <span>Share With Friends</span>

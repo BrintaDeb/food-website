@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { getMenuItems } from '@/lib/api';
 import { IndianMenuGrid } from './IndianMenuGrid';
+import { SommelierFloatingButton } from '@/components/sommelier/SommelierFloatingButton';
 import { Loader2 } from 'lucide-react';
 import type { MenuItem } from '@/types/menu';
 
@@ -48,7 +49,10 @@ export function HotItemsSection() {
             </p>
           </div>
         ) : (
-          <IndianMenuGrid initialItems={items} />
+          <>
+            <IndianMenuGrid initialItems={items} />
+            <SommelierFloatingButton menuItems={items} />
+          </>
         )}
       </div>
     </section>

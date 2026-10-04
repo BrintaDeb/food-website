@@ -29,6 +29,7 @@ export function TestimonialsSection() {
   ];
 
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [touchStartX, setTouchStartX] = useState<number | null>(null);
 
   const prev = () => {
     setCurrentIndex((prevIdx) => (prevIdx === 0 ? reviews.length - 1 : prevIdx - 1));
@@ -36,6 +37,23 @@ export function TestimonialsSection() {
 
   const next = () => {
     setCurrentIndex((prevIdx) => (prevIdx === reviews.length - 1 ? 0 : prevIdx + 1));
+  };
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    setTouchStartX(e.touches[0].clientX);
+  };
+
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    if (touchStartX === null) return;
+    const diff = touchStartX - e.changedTouches[0].clientX;
+    if (Math.abs(diff) > 40) {
+      if (diff > 0) {
+        next();
+      } else {
+        prev();
+      }
+    }
+    setTouchStartX(null);
   };
 
   const current = reviews[currentIndex] || reviews[0]!;
@@ -50,13 +68,17 @@ export function TestimonialsSection() {
           Loved by Connoisseurs of Heritage Cuisine
         </h2>
 
-        {/* Center Card */}
-        <div className="relative p-8 sm:p-12 rounded-3xl bg-white border border-[#E8E5E0] shadow-card">
+        {/* Center Card with Touch Swipe Support */}
+        <div
+          onTouchStart={handleTouchStart}
+          onTouchEnd={handleTouchEnd}
+          className="relative p-6 sm:p-12 rounded-3xl bg-white border border-[#E8E5E0] shadow-card touch-pan-y select-none"
+        >
           <div className="w-12 h-12 rounded-2xl bg-[#FF5E00]/10 text-[#FF5E00] flex items-center justify-center mx-auto mb-6">
             <Quote className="w-6 h-6" />
           </div>
 
-          <p className="text-lg sm:text-2xl font-medium text-neutral-800 leading-relaxed max-w-2xl mx-auto mb-8">
+          <p className="text-base sm:text-2xl font-medium text-neutral-800 leading-relaxed max-w-2xl mx-auto mb-8">
             &ldquo;{current.quote}&rdquo;
           </p>
 
@@ -72,22 +94,22 @@ export function TestimonialsSection() {
           </div>
         </div>
 
-        {/* Carousel Controls */}
+        {/* Carousel Controls (44px touch targets) */}
         <div className="flex items-center justify-center gap-4 mt-8">
           <button
             onClick={prev}
-            className="p-3 rounded-2xl border border-[#E8E5E0] bg-white hover:bg-neutral-50 text-[#1A1311] transition-all shadow-xs"
+            className="min-w-[44px] min-h-[44px] flex items-center justify-center rounded-2xl border border-[#E8E5E0] bg-white hover:bg-neutral-50 active:scale-95 text-[#1A1311] transition-all shadow-xs"
             aria-label="Previous testimonial"
           >
             <ChevronLeft className="w-5 h-5" />
           </button>
-          <div className="flex gap-2">
+          <div className="flex gap-2 items-center">
             {reviews.map((_, idx) => (
               <button
                 key={idx}
                 onClick={() => setCurrentIndex(idx)}
-                className={`w-3 h-3 rounded-full transition-all ${
-                  currentIndex === idx ? 'w-8 bg-[#FF5E00]' : 'bg-neutral-300'
+                className={`min-h-[32px] flex items-center transition-all ${
+                  currentIndex === idx ? 'w-8 bg-[#FF5E00] h-3 rounded-full' : 'w-3 h-3 bg-neutral-300 rounded-full'
                 }`}
                 aria-label={`Go to slide ${idx + 1}`}
               />
@@ -95,7 +117,7 @@ export function TestimonialsSection() {
           </div>
           <button
             onClick={next}
-            className="p-3 rounded-2xl border border-[#E8E5E0] bg-white hover:bg-neutral-50 text-[#1A1311] transition-all shadow-xs"
+            className="min-w-[44px] min-h-[44px] flex items-center justify-center rounded-2xl border border-[#E8E5E0] bg-white hover:bg-neutral-50 active:scale-95 text-[#1A1311] transition-all shadow-xs"
             aria-label="Next testimonial"
           >
             <ChevronRight className="w-5 h-5" />

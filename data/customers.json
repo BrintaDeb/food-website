@@ -17,12 +17,13 @@
   },
   {
     "phone": "9876543210",
-    "name": "Shreyam Verification",
+    "name": "Vikram Malhotra",
     "email": "",
     "addresses": [
       "Bengaluru",
       "Kolkata",
-      "Flat/House: Suite 101, Street/Building: Park Street, Landmark: Near Victoria Memorial, Kolkata, PIN: 700016"
+      "Flat/House: Suite 101, Street/Building: Park Street, Landmark: Near Victoria Memorial, Kolkata, PIN: 700016",
+      "Flat/House: Flat 402, Royal Palms, Street/Building: Indiranagar 100ft Road, Landmark: Near Sony Signal, Bengaluru, PIN: 560038"
     ]
   },
   {
@@ -39,6 +40,14 @@
     "email": "",
     "addresses": [
       "Flat/House: Penthouse 12, Street/Building: Kolkata Park Street, Kolkata, PIN: 700016"
+    ]
+  },
+  {
+    "phone": "9812345678",
+    "name": "Ananya Deshmukh",
+    "email": "",
+    "addresses": [
+      "Flat/House: Skyline Villa 12, Street/Building: Koramangala 4th Block, Bengaluru, PIN: 560034"
     ]
   }
 ]

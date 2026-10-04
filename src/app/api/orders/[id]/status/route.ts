@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getOrders, saveOrders } from '@/lib/db';
 import { updateOrderStatusSchema } from '@/lib/validations';
+import { emitOrderUpdated } from '@/lib/orderEvents';
 
 interface RouteParams {
   params: Promise<{ id: string }>;
@@ -48,6 +49,15 @@ export async function PATCH(request: NextRequest, { params }: RouteParams) {
     order.updatedAt = new Date().toISOString();
 
     await saveOrders(orders);
+
+    // Broadcast real-time order status advancement event
+    emitOrderUpdated({
+      orderId: order.orderId,
+      status: order.status,
+      statusStep: order.statusStep,
+      updatedAt: order.updatedAt,
+      phone: order.customer?.phone
+    });
 
     return NextResponse.json({
       success: true,

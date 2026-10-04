@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import type { MenuItem } from '@/types/menu';
 import {
   Search,
@@ -34,6 +34,18 @@ export function MenuDataTable({ initialItems }: MenuDataTableProps) {
   const [editingItem, setEditingItem] = useState<MenuItem | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [itemToDelete, setItemToDelete] = useState<MenuItem | null>(null);
+
+  // Lock body scroll when delete confirmation is open
+  useEffect(() => {
+    if (itemToDelete) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [itemToDelete]);
 
   const categories = useMemo(() => {
     const cats = new Set(items.map((i) => i.category));
@@ -146,13 +158,13 @@ export function MenuDataTable({ initialItems }: MenuDataTableProps) {
   return (
     <div className="space-y-6">
       {/* Top action & filter bar */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 bg-white p-5 rounded-2xl border border-stone-200 shadow-sm">
-        <div className="flex flex-wrap items-center gap-2">
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 bg-white p-4 sm:p-5 rounded-2xl border border-stone-200 shadow-sm">
+        <div className="flex items-center gap-2 overflow-x-auto w-full md:w-auto pb-2 md:pb-0 -mx-2 px-2 md:mx-0 md:px-0 touch-scroll scrollbar-none">
           {categories.map((cat) => (
             <button
               key={cat}
               onClick={() => setSelectedCategory(cat)}
-              className={`px-3.5 py-1.5 rounded-xl text-xs font-semibold transition ${
+              className={`px-3.5 py-2 min-h-[40px] rounded-xl text-xs font-semibold transition shrink-0 cursor-pointer ${
                 selectedCategory === cat
                   ? 'bg-[#1A1311] text-white shadow'
                   : 'bg-stone-100 text-stone-600 hover:bg-stone-200'
@@ -163,7 +175,7 @@ export function MenuDataTable({ initialItems }: MenuDataTableProps) {
           ))}
         </div>
 
-        <div className="flex items-center gap-3">
+        <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
           <div className="relative flex-1 sm:w-64">
             <Search
               size={16}
@@ -174,7 +186,7 @@ export function MenuDataTable({ initialItems }: MenuDataTableProps) {
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               placeholder="Search dishes or tags (e.g. aloo, egg)..."
-              className="w-full pl-9 pr-3.5 py-2 bg-stone-50 border border-stone-200 rounded-xl text-xs text-stone-800 focus:outline-none focus:border-orange-500 focus:bg-white transition"
+              className="w-full pl-9 pr-3.5 py-2.5 bg-stone-50 border border-stone-200 rounded-xl text-base sm:text-xs text-stone-800 focus:outline-none focus:border-orange-500 focus:bg-white transition"
             />
           </div>
 
@@ -183,15 +195,142 @@ export function MenuDataTable({ initialItems }: MenuDataTableProps) {
               setEditingItem(null);
               setIsModalOpen(true);
             }}
-            className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-[#FF5E00] to-[#E04800] hover:from-[#FF7324] hover:to-[#EB5505] text-white font-bold text-xs rounded-xl shadow-sm transition active:scale-95 whitespace-nowrap"
+            className="min-h-[44px] flex items-center justify-center gap-2 px-4 py-2.5 bg-gradient-to-r from-[#FF5E00] to-[#E04800] hover:from-[#FF7324] hover:to-[#EB5505] text-white font-bold text-xs rounded-xl shadow-sm transition active:scale-95 whitespace-nowrap cursor-pointer"
           >
             <Plus size={16} /> Add New Dish
           </button>
         </div>
       </div>
 
-      {/* Main Table */}
-      <div className="bg-white rounded-2xl border border-stone-200 shadow-sm overflow-hidden">
+      {/* Mobile Card View (Screens < md) */}
+      <div className="block md:hidden space-y-3">
+        {filteredItems.length === 0 ? (
+          <div className="bg-white rounded-2xl border border-stone-200 p-8 text-center text-stone-400 text-xs">
+            No Indian cuisine items match your search or filter.
+          </div>
+        ) : (
+          filteredItems.map((item) => (
+            <div
+              key={item.id}
+              className="bg-white rounded-2xl border border-stone-200 p-4 shadow-sm space-y-3"
+            >
+              <div className="flex items-start justify-between gap-3">
+                <div className="flex items-start gap-2.5">
+                  <div className="mt-0.5 shrink-0">
+                    {item.isVeg ? (
+                      <span
+                        title="Vegetarian"
+                        className="inline-flex items-center justify-center w-5 h-5 rounded-md bg-emerald-100 text-emerald-700"
+                      >
+                        <Leaf size={12} />
+                      </span>
+                    ) : (
+                      <span
+                        title="Non-Vegetarian"
+                        className="inline-flex items-center justify-center w-5 h-5 rounded-md bg-red-100 text-red-700 font-black text-[10px]"
+                      >
+                        🍗
+                      </span>
+                    )}
+                  </div>
+                  <div>
+                    <div className="font-bold text-stone-900 text-sm flex items-center gap-1.5">
+                      <span>{item.name}</span>
+                      {item.spiceLevel && (
+                        <span className="text-orange-500 inline-flex">
+                          {Array.from({ length: item.spiceLevel }).map((_, i) => (
+                            <Flame key={i} size={11} className="fill-orange-500" />
+                          ))}
+                        </span>
+                      )}
+                    </div>
+                    <div className="flex items-center gap-2 mt-1">
+                      <span className="px-2 py-0.5 rounded-full bg-stone-100 text-stone-700 text-[10px] font-semibold">
+                        {item.category}
+                      </span>
+                      <span className="text-[11px] text-stone-500 flex items-center gap-1 font-medium">
+                        <Clock size={11} className="text-stone-400" />
+                        {item.prepTime}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
+                <span className="font-outfit font-black text-base text-stone-900 shrink-0">
+                  ₹{item.price}
+                </span>
+              </div>
+
+              {item.description && (
+                <p className="text-[11px] text-stone-500 line-clamp-2 leading-relaxed">
+                  {item.description}
+                </p>
+              )}
+
+              {item.tags && item.tags.length > 0 && (
+                <div className="flex flex-wrap gap-1">
+                  {item.tags.map((t) => (
+                    <span
+                      key={t}
+                      className="inline-flex items-center gap-0.5 px-2 py-0.5 rounded-md bg-stone-100 text-stone-600 text-[10px] font-medium"
+                    >
+                      <Tag size={9} className="text-stone-400" />
+                      {t}
+                    </span>
+                  ))}
+                </div>
+              )}
+
+              {/* Action Buttons for Mobile */}
+              <div className="pt-2 border-t border-stone-100 flex items-center justify-between gap-2">
+                <button
+                  onClick={() => handleToggleStock(item.id, item.inStock)}
+                  className={`flex-1 min-h-[44px] inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-xl text-xs font-semibold transition cursor-pointer ${
+                    item.inStock
+                      ? 'bg-emerald-50 text-emerald-700 hover:bg-emerald-100'
+                      : 'bg-stone-100 text-stone-500 hover:bg-stone-200'
+                  }`}
+                >
+                  {item.inStock ? (
+                    <>
+                      <CheckCircle2 size={14} className="text-emerald-600" />
+                      In Stock
+                    </>
+                  ) : (
+                    <>
+                      <XCircle size={14} className="text-stone-400" />
+                      Sold Out
+                    </>
+                  )}
+                </button>
+
+                <div className="flex items-center gap-1.5 shrink-0">
+                  <button
+                    onClick={() => {
+                      setEditingItem(item);
+                      setIsModalOpen(true);
+                    }}
+                    className="min-h-[44px] min-w-[44px] flex items-center justify-center rounded-xl border border-stone-200 text-stone-600 hover:bg-stone-50 transition cursor-pointer"
+                    title="Edit Dish"
+                  >
+                    <Edit2 size={16} />
+                  </button>
+                  <button
+                    onClick={() => setItemToDelete(item)}
+                    className="min-h-[44px] min-w-[44px] flex items-center justify-center rounded-xl border border-red-200 text-red-600 hover:bg-red-50 transition cursor-pointer"
+                    title="Delete Dish"
+                  >
+                    <Trash2 size={16} />
+                  </button>
+                </div>
+              </div>
+            </div>
+          ))
+        )}
+      </div>
+
+      {/* Main Table for iPad and Desktop (Screens >= md) */}
+      <div className="hidden md:block bg-white rounded-2xl border border-stone-200 shadow-sm overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full text-left text-xs text-stone-600">
             <thead className="bg-stone-50 border-b border-stone-200 text-[11px] uppercase tracking-wider text-stone-400 font-bold">
@@ -199,7 +338,7 @@ export function MenuDataTable({ initialItems }: MenuDataTableProps) {
                 <th className="py-3.5 px-6">
                   <button
                     onClick={() => toggleSort('name')}
-                    className="flex items-center gap-1.5 hover:text-stone-800 transition"
+                    className="flex items-center gap-1.5 hover:text-stone-800 transition cursor-pointer"
                   >
                     Culinary Dish
                     <ArrowUpDown size={12} />
@@ -209,7 +348,7 @@ export function MenuDataTable({ initialItems }: MenuDataTableProps) {
                 <th className="py-3.5 px-6">
                   <button
                     onClick={() => toggleSort('price')}
-                    className="flex items-center gap-1.5 hover:text-stone-800 transition"
+                    className="flex items-center gap-1.5 hover:text-stone-800 transition cursor-pointer"
                   >
                     Price
                     <ArrowUpDown size={12} />
@@ -301,7 +440,7 @@ export function MenuDataTable({ initialItems }: MenuDataTableProps) {
                     <td className="py-4 px-6">
                       <button
                         onClick={() => handleToggleStock(item.id, item.inStock)}
-                        className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-semibold transition ${
+                        className={`inline-flex items-center gap-1.5 px-3 py-1.5 min-h-[36px] rounded-full text-[11px] font-semibold transition cursor-pointer ${
                           item.inStock
                             ? 'bg-emerald-50 text-emerald-700 hover:bg-emerald-100'
                             : 'bg-stone-100 text-stone-500 hover:bg-stone-200'
@@ -328,14 +467,14 @@ export function MenuDataTable({ initialItems }: MenuDataTableProps) {
                             setEditingItem(item);
                             setIsModalOpen(true);
                           }}
-                          className="p-1.5 rounded-lg text-stone-400 hover:text-stone-800 hover:bg-stone-100 transition"
+                          className="p-2 min-h-[36px] min-w-[36px] flex items-center justify-center rounded-lg text-stone-400 hover:text-stone-800 hover:bg-stone-100 transition cursor-pointer"
                           title="Edit Dish"
                         >
                           <Edit2 size={15} />
                         </button>
                         <button
                           onClick={() => setItemToDelete(item)}
-                          className="p-1.5 rounded-lg text-stone-400 hover:text-red-600 hover:bg-red-50 transition"
+                          className="p-2 min-h-[36px] min-w-[36px] flex items-center justify-center rounded-lg text-stone-400 hover:text-red-600 hover:bg-red-50 transition cursor-pointer"
                           title="Delete Dish"
                         >
                           <Trash2 size={15} />
@@ -377,13 +516,13 @@ export function MenuDataTable({ initialItems }: MenuDataTableProps) {
             <div className="flex items-center justify-center gap-3">
               <button
                 onClick={() => setItemToDelete(null)}
-                className="px-4 py-2 rounded-xl border border-stone-200 text-stone-600 hover:bg-stone-50 font-semibold text-xs transition"
+                className="flex-1 min-h-[44px] px-4 py-2.5 rounded-xl border border-stone-200 text-stone-600 hover:bg-stone-50 font-semibold text-xs transition cursor-pointer"
               >
                 Cancel
               </button>
               <button
                 onClick={() => handleDeleteItem(itemToDelete.id)}
-                className="px-4 py-2 rounded-xl bg-red-600 hover:bg-red-700 text-white font-bold text-xs transition shadow-sm"
+                className="flex-1 min-h-[44px] px-4 py-2.5 rounded-xl bg-red-600 hover:bg-red-700 text-white font-bold text-xs transition shadow-sm cursor-pointer"
               >
                 Confirm Delete
               </button>

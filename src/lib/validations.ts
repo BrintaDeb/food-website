@@ -49,10 +49,32 @@ export const orderCustomerSchema = z.object({
     .optional()
 });
 
+export const paymentDetailsSchema = z
+  .object({
+    paymentMethod: z.string(),
+    utr: z.string(),
+    transactionId: z.string(),
+    paidAt: z.string()
+  })
+  .optional();
+
+export const kitchenHubSchema = z
+  .object({
+    id: z.string(),
+    name: z.string(),
+    area: z.string(),
+    address: z.string().optional(),
+    distanceKm: z.number().optional(),
+    etaMinutes: z.number().optional()
+  })
+  .optional();
+
 export const createOrderSchema = z.object({
   customer: orderCustomerSchema,
   items: z.array(orderItemSchema).min(1, 'Cart cannot be empty'),
-  promoCode: z.string().optional().default('')
+  promoCode: z.string().optional().default(''),
+  kitchenHub: kitchenHubSchema,
+  paymentDetails: paymentDetailsSchema
 });
 
 export const updateOrderStatusSchema = z.object({

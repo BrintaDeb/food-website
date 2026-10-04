@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getOrders, saveOrders, getCustomers, saveCustomers } from '@/lib/db';
 import { createOrderSchema } from '@/lib/validations';
+import { emitOrderCreated } from '@/lib/orderEvents';
 import type { Order, OrderItem } from '@/types/order';
 
 export const dynamic = 'force-dynamic';
@@ -60,7 +61,7 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const { customer, items, promoCode } = validated.data;
+    const { customer, items, promoCode, kitchenHub, paymentDetails } = validated.data;
 
     // Address formatting
     const addrDetails = customer.addressDetails || {};
@@ -186,12 +187,17 @@ export async function POST(request: NextRequest) {
         gst,
         deliveryFee,
         grandTotal
-      }
+      },
+      kitchenHub,
+      paymentDetails
     };
 
     const orders = await getOrders();
     orders.unshift(newOrder);
     await saveOrders(orders);
+
+    // Broadcast real-time order creation event
+    emitOrderCreated(newOrder);
 
     // Sync Customer Profile
     if (customer.phone) {

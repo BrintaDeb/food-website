@@ -68,10 +68,10 @@ export function RiderTelemetryCard({ telemetry, onRestart }: RiderTelemetryCardP
           </div>
         </div>
 
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2 w-full sm:w-auto">
           <button
             onClick={handleCallRider}
-            className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-stone-900 hover:bg-[#FF5E00] text-white font-bold text-xs shadow-sm transition active:scale-95"
+            className="flex-1 sm:flex-initial min-h-[44px] flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-stone-900 hover:bg-[#FF5E00] text-white font-bold text-xs shadow-sm transition active:scale-95 cursor-pointer"
           >
             <Phone size={14} />
             <span>Call Delivery Partner</span>
@@ -79,7 +79,7 @@ export function RiderTelemetryCard({ telemetry, onRestart }: RiderTelemetryCardP
           <button
             onClick={onRestart}
             title="Restart GPS Simulation"
-            className="p-2.5 rounded-xl border border-stone-200 text-stone-600 hover:bg-stone-50 transition"
+            className="min-h-[44px] min-w-[44px] flex items-center justify-center rounded-xl border border-stone-200 text-stone-600 hover:bg-stone-50 transition cursor-pointer shrink-0"
           >
             <RefreshCw size={14} />
           </button>
@@ -87,37 +87,37 @@ export function RiderTelemetryCard({ telemetry, onRestart }: RiderTelemetryCardP
       </div>
 
       {/* Live Telemetry Stats */}
-      <div className="grid grid-cols-3 gap-4">
-        <div className="p-4 rounded-2xl bg-[#FFFDF9] border border-stone-200 text-center">
-          <span className="text-[11px] font-bold text-stone-400 uppercase tracking-wider block flex items-center justify-center gap-1">
-            <Clock size={12} className="text-[#FF5E00]" /> Estimated ETA
+      <div className="grid grid-cols-3 gap-2 sm:gap-4">
+        <div className="p-2.5 sm:p-4 rounded-2xl bg-[#FFFDF9] border border-stone-200 text-center">
+          <span className="text-[9px] xs:text-[10px] sm:text-[11px] font-bold text-stone-400 uppercase tracking-wider block flex items-center justify-center gap-0.5 sm:gap-1">
+            <Clock size={11} className="text-[#FF5E00] shrink-0" /> <span className="truncate">ETA</span>
           </span>
-          <p className="font-outfit font-black text-2xl sm:text-3xl text-stone-900 mt-1">
-            {telemetry?.status === 'DELIVERED' ? 'Arrived!' : `${telemetry?.etaMinutes || 12} mins`}
+          <p className="font-outfit font-black text-lg xs:text-xl sm:text-2xl lg:text-3xl text-stone-900 mt-1">
+            {telemetry?.status === 'DELIVERED' ? 'Arrived!' : `${telemetry?.etaMinutes || 12}m`}
           </p>
-          <span className="text-[10px] text-stone-400">Live Traffic Calc</span>
+          <span className="text-[9px] xs:text-[10px] text-stone-400 truncate block">Live Traffic</span>
         </div>
 
-        <div className="p-4 rounded-2xl bg-[#FFFDF9] border border-stone-200 text-center">
-          <span className="text-[11px] font-bold text-stone-400 uppercase tracking-wider block flex items-center justify-center gap-1">
-            <Gauge size={12} className="text-blue-500" /> Current Speed
+        <div className="p-2.5 sm:p-4 rounded-2xl bg-[#FFFDF9] border border-stone-200 text-center">
+          <span className="text-[9px] xs:text-[10px] sm:text-[11px] font-bold text-stone-400 uppercase tracking-wider block flex items-center justify-center gap-0.5 sm:gap-1">
+            <Gauge size={11} className="text-blue-500 shrink-0" /> <span className="truncate">Speed</span>
           </span>
-          <p className="font-outfit font-black text-2xl sm:text-3xl text-stone-900 mt-1">
+          <p className="font-outfit font-black text-lg xs:text-xl sm:text-2xl lg:text-3xl text-stone-900 mt-1">
             {telemetry?.speedKmH || 0}{' '}
-            <span className="text-xs font-bold text-stone-400">km/h</span>
+            <span className="text-[10px] xs:text-xs font-bold text-stone-400">km/h</span>
           </p>
-          <span className="text-[10px] text-stone-400">Scooter Velocity</span>
+          <span className="text-[9px] xs:text-[10px] text-stone-400 truncate block">Velocity</span>
         </div>
 
-        <div className="p-4 rounded-2xl bg-[#FFFDF9] border border-stone-200 text-center">
-          <span className="text-[11px] font-bold text-stone-400 uppercase tracking-wider block flex items-center justify-center gap-1">
-            <MapPin size={12} className="text-emerald-500" /> Distance Left
+        <div className="p-2.5 sm:p-4 rounded-2xl bg-[#FFFDF9] border border-stone-200 text-center">
+          <span className="text-[9px] xs:text-[10px] sm:text-[11px] font-bold text-stone-400 uppercase tracking-wider block flex items-center justify-center gap-0.5 sm:gap-1">
+            <MapPin size={11} className="text-emerald-500 shrink-0" /> <span className="truncate">Distance</span>
           </span>
-          <p className="font-outfit font-black text-2xl sm:text-3xl text-stone-900 mt-1">
+          <p className="font-outfit font-black text-lg xs:text-xl sm:text-2xl lg:text-3xl text-stone-900 mt-1">
             {telemetry?.distanceRemainingKm ?? 3.4}{' '}
-            <span className="text-xs font-bold text-stone-400">km</span>
+            <span className="text-[10px] xs:text-xs font-bold text-stone-400">km</span>
           </p>
-          <span className="text-[10px] text-stone-400">Road Path Distance</span>
+          <span className="text-[9px] xs:text-[10px] text-stone-400 truncate block">Remaining</span>
         </div>
       </div>
 
@@ -145,16 +145,16 @@ export function RiderTelemetryCard({ telemetry, onRestart }: RiderTelemetryCardP
             return (
               <div key={s.stage} className="text-center space-y-1">
                 <div
-                  className={`w-7 h-7 mx-auto rounded-full flex items-center justify-center text-xs font-bold transition-all ${
+                  className={`w-6 h-6 sm:w-7 sm:h-7 mx-auto rounded-full flex items-center justify-center text-[10px] sm:text-xs font-bold transition-all ${
                     isCompleted
                       ? 'bg-[#FF5E00] text-white shadow-sm'
                       : 'bg-stone-100 text-stone-400'
-                  } ${isCurrent ? 'ring-4 ring-[#FF5E00]/20 scale-110' : ''}`}
+                  } ${isCurrent ? 'ring-3 sm:ring-4 ring-[#FF5E00]/20 scale-105 sm:scale-110' : ''}`}
                 >
-                  {isCompleted ? <CheckCircle2 size={14} /> : s.icon}
+                  {isCompleted ? <CheckCircle2 size={13} /> : s.icon}
                 </div>
                 <p
-                  className={`text-[10px] font-bold leading-tight ${
+                  className={`text-[8px] xs:text-[9px] sm:text-[10px] font-bold leading-tight line-clamp-2 ${
                     isCurrent ? 'text-[#FF5E00]' : isCompleted ? 'text-stone-800' : 'text-stone-400'
                   }`}
                 >

@@ -19,8 +19,10 @@ export function useDraggableItem(item: MenuItem) {
 
     const el = cardRef.current;
     const cartTarget = document.getElementById('floating-cart-zone');
+    const dragTrigger = el.querySelector('.drag-handle') || el;
 
     const draggableInstance = Draggable.create(el, {
+      trigger: dragTrigger,
       type: 'x,y',
       edgeResistance: 0.65,
       cursor: 'grab',
@@ -29,6 +31,7 @@ export function useDraggableItem(item: MenuItem) {
       dragClickables: false,
       allowContextMenu: false,
       force3D: true,
+      allowEventDefault: true,
       onPress() {
         gsap.to(el, {
           scale: 1.03,
